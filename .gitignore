@@ -1,1 +1,7 @@
+.godot/
+.tmp/
+.references/
 *.har
+build/
+dist/
+
