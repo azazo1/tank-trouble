@@ -23,6 +23,7 @@ func _run():
 	root.add_child(application)
 	application.set_process(false)
 	JS.clock_milliseconds = 1788609600000.0
+	seed(41)
 	_advance(application, 60)
 	application._select_players(3)
 	application.controls.set_process(false)
@@ -38,7 +39,7 @@ func _run():
 		assert(content.get_center().distance_to(Vector2(dimensions) * 0.5) < 1.0)
 		assert(Rect2(Vector2.ZERO, Vector2(dimensions)).encloses(content))
 		for button in [application.menu.onePlayerButton, application.menu.twoPlayerButton, application.menu.threePlayerButton]:
-			assert(Rect2(Vector2.ZERO, Vector2(dimensions)).encloses(_display_rect(button)))
+			assert(Rect2(Vector2.ZERO, Vector2(dimensions)).encloses(_display_rect(button)), JSON.stringify({"viewport": str(dimensions), "density": application.host.pixel_ratio, "button": str(_display_rect(button))}))
 	var click = InputEventMouseButton.new()
 	click.button_index = MOUSE_BUTTON_LEFT
 	click.position = application.controls.options.mouse.get_global_rect().get_center()
@@ -51,8 +52,20 @@ func _run():
 	assert(application.controls.selected == "mouse")
 	application._cancel_controls()
 	application._start_battle(["WASDKeys", "arrowKeys", "mouse"])
-	_advance(application, 180)
 	var battle = application.battle
+	assert(battle.countDownGroup.view.global_position.distance_to(Vector2(root.size) * 0.5) < 0.001)
+	var countdown_samples = []
+	for frame in range(360):
+		_advance(application, 1)
+		for countdown in battle.countDownGroup.children:
+			if not countdown.exists or countdown.scale.x <= 0: continue
+			var rendered = _display_rect(countdown)
+			var expected = Vector2(application.host.width, application.host.height) * 0.5
+			var sample = {"frame": frame, "image": countdown.frameName, "center": str(rendered.get_center()), "expected": str(expected), "group": str(battle.countDownGroup.position.value()), "overlay": str(battle.overlayGroup.position.value())}
+			assert(rendered.get_center().distance_to(expected) < 0.001, JSON.stringify(sample))
+			countdown_samples.append(sample)
+	assert(not countdown_samples.is_empty())
+	assert(countdown_samples.any(func(sample): return sample.image == "countdown0"))
 	var bounds_before = battle.gameGroup.getLocalBounds()
 	var hidden_projectile = battle.projectileGroup.children.filter(func(child): return not child.visible)[0]
 	var projectile_position = hidden_projectile.position.value()
@@ -60,7 +73,7 @@ func _run():
 	assert(battle.gameGroup.getLocalBounds() == bounds_before)
 	hidden_projectile.position.setTo(projectile_position.x, projectile_position.y)
 	var battle_samples = []
-	for dimensions in [Vector2i(1000, 760), Vector2i(2048, 1246), Vector2i(800, 600), Vector2i(640, 480)]:
+	for dimensions in [Vector2i(1000, 760), Vector2i(2048, 1246), Vector2i(800, 600), Vector2i(640, 480), Vector2i(480, 360)]:
 		root.size = dimensions
 		for frame in range(3): await process_frame
 		var host = application.host
@@ -69,22 +82,34 @@ func _run():
 		var panel = application.panel
 		battle_samples.append({"viewport": [root.size.x, root.size.y], "maze": [maze.position.x, maze.position.y, maze.size.x, maze.size.y], "panel": [panel.panel_node.position.y, panel.game.width, panel.game.height], "icons": panel.localTankIcons.values().map(func(item): return str(_display_rect(item.icon))), "names": str(_display_rect(panel.tankNameGroup)), "scores": str(_display_rect(panel.tankScoreGroup))})
 		assert(Rect2(0, 0, host.width, host.height).grow(1.0).encloses(maze), JSON.stringify(battle_samples.back()))
-		assert(panel.panel_node.position.y == host.height)
+		assert(battle.gameGroup.scale.x > 0 and maze.size.x > 1 and maze.size.y > 1, JSON.stringify(battle_samples.back()))
+		assert(host.height == root.size.y)
 		assert(panel.game.width == host.width)
-		assert(panel.game.height + host.height == root.size.y)
+		assert(panel.panel_node.position.y + panel.game.height == root.size.y)
+		var viewport = Rect2(Vector2.ZERO, Vector2(dimensions)).grow(1.0)
+		for item in panel.localTankIcons.values(): assert(viewport.encloses(_display_rect(item.icon)))
+		assert(viewport.encloses(_display_rect(panel.tankNameGroup)))
+		assert(viewport.encloses(_display_rect(panel.tankScoreGroup)))
 		assert(absf(battle.countDownGroup.x - host.width * 0.5) < 0.001)
 		assert(absf(battle.countDownGroup.y - host.height * 0.5) < 0.001)
+		battle.countDownGroup.callAll("retire")
+		battle.original__spawnCountDown(0)
+		_advance(application, 1)
+		var go = battle.countDownGroup.getFirstExists(true)
+		assert(go != null)
+		assert(_display_rect(go).get_center().distance_to(Vector2(dimensions) * 0.5) < 0.001)
 		var leave_position = battle.leaveGameGroup.view.global_position
 		host.world.setBounds(8, 6, host.width + 8, host.height + 6)
 		host.camera.original_update()
 		host.world.original_postUpdate()
 		host.world.sync_view()
 		assert(battle.leaveGameGroup.view.global_position.distance_to(leave_position) < 0.001)
+		assert(_display_rect(go).get_center().distance_to(Vector2(dimensions) * 0.5) < 0.001)
 		host.camera.reset()
 		host.world.original_postUpdate()
 		host.world.sync_view()
 	var output = FileAccess.open("res://.tmp/resize-layout.actual.json", FileAccess.WRITE)
-	output.store_string(JSON.stringify({"controls": samples, "battle": battle_samples, "density": application.host.pixel_ratio}))
+	output.store_string(JSON.stringify({"controls": samples, "battle": battle_samples, "countdown_frames": countdown_samples.size(), "density": application.host.pixel_ratio}))
 	application.queue_free()
 	await process_frame
 	quit(0)

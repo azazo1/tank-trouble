@@ -252,16 +252,17 @@ func original_shutdown():
 
 func original__onSizeChangeHandler():
 	var _scope5: Dictionary = {"localBounds": null, "unscaledMazeWidth": null, "unscaledMazeHeight": null, "unscaledMazeOffsetX": null, "unscaledMazeOffsetY": null, "gameScale": null}
-	JS.invoke_method(JS.get_property(self, "log"), "debug", ["SIZE CHANGE!"])
-	_scope5["localBounds"] = JS.invoke_method(JS.get_property(self, "gameGroup"), "getLocalBounds", [])
-	_scope5["unscaledMazeWidth"] = JS.get_property(_scope5["localBounds"], "width")
-	_scope5["unscaledMazeHeight"] = JS.get_property(_scope5["localBounds"], "height")
-	_scope5["unscaledMazeOffsetX"] = -(JS.get_property(_scope5["localBounds"], "x"))
-	_scope5["unscaledMazeOffsetY"] = -(JS.get_property(_scope5["localBounds"], "y"))
-	_scope5["gameScale"] = JS.invoke_method("@Math", "min", [2, JS.invoke_method("@Math", "min", [(JS.number((JS.number(JS.get_property(JS.get_property(self, "game"), "width")) - JS.number(JS.get_property(JS.module("UIConstants"), "MAZE_SIDE_MARGIN")))) / JS.number(_scope5["unscaledMazeWidth"])), (JS.number((JS.number((JS.number(JS.get_property(JS.get_property(self, "game"), "height")) - JS.number(JS.get_property(JS.module("UIConstants"), "MAZE_BOTTOM_MARGIN")))) - JS.number(JS.get_property(JS.module("UIConstants"), "MAZE_TOP_MARGIN")))) / JS.number(_scope5["unscaledMazeHeight"]))])])
-	JS.set_property(_scope5, "gameScale", (JS.number(JS.invoke_method("@Math", "floor", [(JS.number(_scope5["gameScale"]) * JS.number(100))])) / JS.number(100)))
-	JS.invoke_method(JS.get_property(JS.get_property(self, "gameGroup"), "scale"), "set", [_scope5["gameScale"], _scope5["gameScale"]])
-	JS.invoke_method(JS.get_property(JS.get_property(self, "gameGroup"), "position"), "set", [JS.invoke_method("@Math", "ceil", [JS.add((JS.number((JS.number(JS.get_property(JS.get_property(self, "game"), "width")) - JS.number(JS.get_property(JS.get_property(self, "gameGroup"), "width")))) * JS.number(0.5)), (JS.number(_scope5["unscaledMazeOffsetX"]) * JS.number(_scope5["gameScale"])))]), JS.invoke_method("@Math", "ceil", [JS.add(JS.get_property(JS.module("UIConstants"), "MAZE_TOP_MARGIN"), (JS.number(_scope5["unscaledMazeOffsetY"]) * JS.number(_scope5["gameScale"])))])])
+	if JS.truthy(JS.get_property(self, "maze")):
+		JS.invoke_method(JS.get_property(self, "log"), "debug", ["SIZE CHANGE!"])
+		_scope5["localBounds"] = JS.invoke_method(JS.get_property(self, "gameGroup"), "getLocalBounds", [])
+		_scope5["unscaledMazeWidth"] = JS.get_property(_scope5["localBounds"], "width")
+		_scope5["unscaledMazeHeight"] = JS.get_property(_scope5["localBounds"], "height")
+		_scope5["unscaledMazeOffsetX"] = -(JS.get_property(_scope5["localBounds"], "x"))
+		_scope5["unscaledMazeOffsetY"] = -(JS.get_property(_scope5["localBounds"], "y"))
+		_scope5["gameScale"] = JS.invoke_method("@Math", "min", [2, JS.invoke_method("@Math", "min", [(JS.number((JS.number(JS.get_property(JS.get_property(self, "game"), "width")) - JS.number(JS.get_property(JS.module("UIConstants"), "MAZE_SIDE_MARGIN")))) / JS.number(_scope5["unscaledMazeWidth"])), (JS.number((JS.number((JS.number(JS.get_property(JS.get_property(self, "game"), "height")) - JS.number(JS.get_property(JS.module("UIConstants"), "MAZE_BOTTOM_MARGIN")))) - JS.number(JS.get_property(JS.module("UIConstants"), "MAZE_TOP_MARGIN")))) / JS.number(_scope5["unscaledMazeHeight"]))])])
+		JS.set_property(_scope5, "gameScale", (JS.number(JS.invoke_method("@Math", "floor", [(JS.number(_scope5["gameScale"]) * JS.number(100))])) / JS.number(100)))
+		JS.invoke_method(JS.get_property(JS.get_property(self, "gameGroup"), "scale"), "set", [_scope5["gameScale"], _scope5["gameScale"]])
+		JS.invoke_method(JS.get_property(JS.get_property(self, "gameGroup"), "position"), "set", [JS.invoke_method("@Math", "ceil", [JS.add((JS.number((JS.number(JS.get_property(JS.get_property(self, "game"), "width")) - JS.number(JS.get_property(JS.get_property(self, "gameGroup"), "width")))) * JS.number(0.5)), (JS.number(_scope5["unscaledMazeOffsetX"]) * JS.number(_scope5["gameScale"])))]), JS.invoke_method("@Math", "ceil", [JS.add(JS.get_property(JS.module("UIConstants"), "MAZE_TOP_MARGIN"), (JS.number(_scope5["unscaledMazeOffsetY"]) * JS.number(_scope5["gameScale"])))])])
 	JS.invoke_method(JS.get_property(JS.get_property(self, "roundTitleGroup"), "position"), "set", [(JS.number(JS.get_property(JS.get_property(self, "game"), "width")) / JS.number(2)), JS.add((JS.number(JS.get_property(JS.get_property(self, "game"), "height")) / JS.number(2)), JS.get_property(JS.module("UIConstants"), "ROUND_TITLE_OFFSET"))])
 	JS.invoke_method(JS.get_property(JS.get_property(self, "countDownGroup"), "position"), "set", [(JS.number(JS.get_property(JS.get_property(self, "game"), "width")) / JS.number(2)), (JS.number(JS.get_property(JS.get_property(self, "game"), "height")) / JS.number(2))])
 	JS.set_property(JS.get_property(JS.get_property(self, "leaveGameGroup"), "position"), "x", (JS.number(JS.get_property(JS.get_property(self, "game"), "width")) - JS.number(JS.get_property(JS.module("UIConstants"), "LEAVE_GAME_MARGIN"))))

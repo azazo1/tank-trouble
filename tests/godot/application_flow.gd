@@ -78,9 +78,17 @@ func _run():
 		assert(application.battle != null)
 		assert(application.session.human_ids.size() == count)
 		assert(application.panel.localTankIcons.size() == count)
+		var go_frames = 0
 		for frame in range(360):
 			JS.clock_milliseconds += 1000.0 / 60.0
 			application._process(1.0 / 60.0)
+			for countdown in application.battle.countDownGroup.children:
+				if not countdown.exists or countdown.frameName != "countdown0" or countdown.scale.x <= 0: continue
+				var center = countdown.view.global_position
+				var expected = Vector2(application.host.width, application.host.height) * 0.5
+				assert(center.distance_to(expected) < 0.001, JSON.stringify({"humans": count, "frame": frame, "center": str(center), "expected": str(expected)}))
+				go_frames += 1
+		assert(go_frames > 0)
 		assert(application.battle.maze != null)
 		if count == 3: _check_input_pause(application)
 		if count == 1:
@@ -99,7 +107,7 @@ func _run():
 			assert(float(item.displayObject.text) == float(target))
 			assert(score_group.fragmentGroup.children.any(func(fragment): return fragment.exists))
 			break
-		scenarios.append({"humans": count, "tanks": application.battle.tankSprites.size(), "round": application.session.controller.original_getRoundId()})
+		scenarios.append({"humans": count, "tanks": application.battle.tankSprites.size(), "round": application.session.controller.original_getRoundId(), "go_frames": go_frames})
 		application._leave_battle()
 		await process_frame
 		assert(application.battle == null)

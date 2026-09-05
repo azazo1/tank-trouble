@@ -95,9 +95,15 @@ check-flow:
 check-application:
     bun tools/port/check-godot.ts application
 
+# just check-resize --headed
 # 校验窗口缩放后的菜单, 操作选择, 战斗布局和玩家面板.
-check-resize:
-    bun tools/port/check-godot.ts resize
+check-resize *args:
+    bun tools/port/check-godot.ts resize {{args}}
+
+# just check-shield --headed
+# 校验拾取护盾的跟随位置, 缩放及对象复用.
+check-shield *args:
+    bun tools/port/check-godot.ts shield {{args}}
 
 # 校验原版发射点, 粒子坐标和 Godot 绘制坐标的对应关系.
 check-particles:

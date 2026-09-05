@@ -299,7 +299,8 @@
       "destination": "game/ported/presentation/battle/uilocalbattlestate.gd",
       "sha256": "d9320ebe1df500b504559f5a3e77410f1af90e35f760062835628685f3faad3a",
       "changes": [
-        "按对象表现和对局生命周期划分原函数, 排除 BootCamp 不可达的在线模式, 奖励和账号调用"
+        "按对象表现和对局生命周期划分原函数, 排除 BootCamp 不可达的在线模式, 奖励和账号调用",
+        "迷宫布局增加存在性判断, 允许场景创建时独立定位倒计时和 HUD"
       ]
     },
     {

@@ -34,6 +34,7 @@ just check-frame
 just check-camera
 just check-local
 just check-application
+just check-resize --headed
 just check-battle-weapons
 just check-flow
 just check-settings

@@ -1,8 +1,10 @@
 import { mkdir, unlink } from "node:fs/promises";
 import { resolve } from "node:path";
+import { parseArgs } from "node:util";
 import { log } from "../shared/log";
 
 const name = process.argv[2];
+const { values: options } = parseArgs({ args: process.argv.slice(3), options: { headed: { type: "boolean" }, verbose: { type: "boolean" } } });
 const scripts: Record<string, { script: string; result: string }> = {
   menu: { script: "menu_port", result: "menu-port" },
   local: { script: "local_session", result: "local-session" },
@@ -16,14 +18,15 @@ const scripts: Record<string, { script: string; result: string }> = {
   camera: { script: "camera_port", result: "camera" },
   frame: { script: "frame_order", result: "frame" },
   resize: { script: "resize_layout", result: "resize-layout" },
+  shield: { script: "shield_follow", result: "shield-follow" },
 };
 if (!scripts[name]) throw new Error(`未知检查: ${name}`);
 await mkdir(".tmp", { recursive: true });
 const output = resolve(`.tmp/${scripts[name].result}.actual.json`);
 await unlink(output).catch(error => { if (error.code !== "ENOENT") throw error; });
 const started = performance.now();
-log.info({ check: name }, "开始 Godot 集成检查");
-const processHandle = Bun.spawn(["godot", "--headless", "--path", ".", "--script", `tests/godot/${scripts[name].script}.gd`, "--quit-after", "120"], { stdout: "pipe", stderr: "pipe" });
+log.info({ check: name, headed: !!options.headed }, "开始 Godot 集成检查");
+const processHandle = Bun.spawn(["godot", ...(!options.headed ? ["--headless"] : []), ...(options.verbose ? ["--verbose"] : []), "--path", ".", "--script", `tests/godot/${scripts[name].script}.gd`, "--quit-after", "120"], { stdout: "pipe", stderr: "pipe" });
 const progress = setInterval(() => log.info({ check: name, seconds: Math.round((performance.now() - started) / 1000) }, "Godot 检查进行中"), 10000);
 const [code, stdout, stderr] = await Promise.all([processHandle.exited, new Response(processHandle.stdout).text(), new Response(processHandle.stderr).text()]);
 clearInterval(progress);

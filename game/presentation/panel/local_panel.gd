@@ -2,7 +2,6 @@ extends "res://game/ported/presentation/panel/uilocalpanellayout.gd"
 
 var panel_node: Node2D
 var primary: WeakRef
-var panel_height = 180.0
 
 func initialize(host, session):
 	primary = weakref(host)
@@ -12,7 +11,7 @@ func initialize(host, session):
 	fields["panel_host"] = panel_host
 	game = panel_host
 	game.assets = host.assets
-	game.canvas_size = Vector2(host.width, panel_height)
+	_resize_canvas()
 	_init_physics()
 	tankIconGroup = game.add.group()
 	tankNameGroup = game.add.group()
@@ -57,12 +56,17 @@ func _init_physics():
 	physics.addBody(floor_body)
 
 func resize():
-	var host = primary.get_ref()
-	game.canvas_size.x = host.width
-	panel_node.position.y = host.height
+	_resize_canvas()
 	original__onSizeChangeHandler()
 	game.camera.resize()
 	game.world.sync_view()
+
+func _resize_canvas():
+	var host = primary.get_ref()
+	# 原版 ResizeManager 按宽度的 1/4 设置面板高度, 面板覆盖在完整游戏画布底部.
+	var height = minf(JS.get_property(JS.module("UIConstants"), "TANK_PANEL_MAX_HEIGHT"), floorf(host.width / host.pixel_ratio * 0.25) * host.pixel_ratio)
+	game.canvas_size = Vector2(host.width, height)
+	panel_node.position.y = host.height - height
 
 func advance(delta):
 	game.advance(delta)

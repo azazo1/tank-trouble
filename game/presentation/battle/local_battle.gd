@@ -10,9 +10,11 @@ func initialize(host, controller):
 		JS.module("QualityManager").original_setQuality("high")
 	var previous = host.world.children.duplicate()
 	original_create()
+	original__onSizeChangeHandler()
 	for child in host.world.children:
 		if not previous.has(child): owned_groups.append(child)
 	host.active_state = self
+	host.world.sync_view()
 
 func original__leaveState():
 	leave_requested.emit()

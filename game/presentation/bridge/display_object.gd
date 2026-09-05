@@ -10,7 +10,10 @@ var game_reference: WeakRef
 var position = Point.new()
 var scale = Point.new(null, "", Vector2.ONE)
 var anchor = Point.new()
-var exists = true
+var exists = true:
+	set(value):
+		exists = value
+		_exists_changed(value)
 var visible = true
 var alive = true
 var alpha = 1.0
@@ -49,6 +52,8 @@ func _position_x(): return position.x
 func _position_y(): return position.y
 func _set_position_x(value): position.x = value
 func _set_position_y(value): position.y = value
+
+func _exists_changed(_value): pass
 
 func _set(key, value):
 	fields[key] = JS.weak(value) if key in ["context", "parent", "gameController"] else value

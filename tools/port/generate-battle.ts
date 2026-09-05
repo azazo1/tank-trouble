@@ -60,7 +60,7 @@ for (const definition of [entities, flow]) {
   const destination = `game/ported/presentation/battle/${definition.name.toLowerCase()}.gd`;
   index[definition.name] = `res://${destination}`;
   definitions.push({ definition, destination });
-  mapping.push({ module: "UIGameState", source, destination, sha256: sha256(text), changes: ["按对象表现和对局生命周期划分原函数, 排除 BootCamp 不可达的在线模式, 奖励和账号调用"] });
+  mapping.push({ module: "UIGameState", source, destination, sha256: sha256(text), changes: ["按对象表现和对局生命周期划分原函数, 排除 BootCamp 不可达的在线模式, 奖励和账号调用", ...(definition.name === "UILocalBattleState" ? ["迷宫布局增加存在性判断, 允许场景创建时独立定位倒计时和 HUD"] : [])] });
 }
 const maze = classDefinition(text);
 maze.name = "UIMazeView";

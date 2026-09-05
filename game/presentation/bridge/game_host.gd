@@ -18,13 +18,12 @@ var input = {"enabled": true, "mousePointer": {"leftButton": {"isDown": false, "
 var scale = {"bounds": {"x": 0, "y": 0}, "scaleFactor": {"x": 1, "y": 1}}
 var active_state
 var canvas_size = Vector2.ZERO
-var bottom_inset = 0.0
 var state
 var pressed_button: WeakRef
 var width:
 	get: return canvas_size.x if canvas_size.x > 0 else root.get_ref().get_viewport_rect().size.x
 var height:
-	get: return canvas_size.y if canvas_size.y > 0 else root.get_ref().get_viewport_rect().size.y - bottom_inset
+	get: return canvas_size.y if canvas_size.y > 0 else root.get_ref().get_viewport_rect().size.y
 
 func _init(node = null, primary = true):
 	if node == null: return

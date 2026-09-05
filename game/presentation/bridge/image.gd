@@ -47,6 +47,13 @@ func _set_texture(texture):
 	sprite.texture = texture
 	intrinsic_size = texture.get_size()
 
+func _exists_changed(value):
+	# Phaser.Component.Core.exists 同步可见性和 P2 物理体的世界登记.
+	visible = value
+	if body != null:
+		if value: body.addToWorld()
+		else: body.removeFromWorld()
+
 func getLocalBounds():
 	return {"x": -anchor.x * intrinsic_size.x, "y": -anchor.y * intrinsic_size.y, "width": intrinsic_size.x, "height": intrinsic_size.y}
 
@@ -62,12 +69,7 @@ func original_reset(horizontal, vertical, _health = null):
 	original_revive()
 	if body != null:
 		body.reset(x, y)
-		body.addToWorld()
 	return self
-
-func original_kill():
-	if body != null: body.removeFromWorld()
-	return super.original_kill()
 
 func pre_update(milliseconds):
 	if exists: animations.advance(milliseconds)

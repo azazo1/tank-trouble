@@ -1,3 +1,4 @@
+import { parse } from "acorn";
 import { classDefinition } from "./compiler";
 
 // BootCamp 不会产生在线奖励, 聊天, 区域, 加时或奖杯事件.
@@ -38,5 +39,12 @@ export function localBattle(source: string) {
     return node;
   };
   definition.methods.forEach(method => transform(method.value.body));
+  // HUD 在迷宫创建前也需要定位, 避免首次显示倒计时使用默认原点.
+  const resize = definition.methods.find(method => method.key.name === "_onSizeChangeHandler")!.value.body;
+  const overlayStart = resize.body.findIndex((statement: any) => statement.expression?.callee?.object?.object?.property?.name === "roundTitleGroup");
+  if (overlayStart < 0) throw new Error("未找到原版倒计时图层的布局起点");
+  const mazeGuard = (parse("if (this.maze) {}", { ecmaVersion: "latest" }) as any).body[0];
+  mazeGuard.consequent.body = resize.body.slice(0, overlayStart);
+  resize.body = [mazeGuard, ...resize.body.slice(overlayStart)];
   return definition;
 }

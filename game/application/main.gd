@@ -56,7 +56,7 @@ func _notification(what):
 
 func _resize():
 	if menu != null: menu.original__onSizeChangeHandler()
-	if battle != null and battle.maze != null: battle.original__onSizeChangeHandler()
+	if battle != null: battle.original__onSizeChangeHandler()
 	if panel != null: panel.resize()
 	if host != null:
 		host.camera.resize()
@@ -119,7 +119,6 @@ func _start_battle(assignments):
 	session.initialize(assignments)
 	settings.set_assignments(assignments)
 	settings.save_settings()
-	host.bottom_inset = 180.0
 	battle = preload("res://game/presentation/battle/local_battle.gd").new()
 	battle.leave_requested.connect(_leave_battle, CONNECT_DEFERRED)
 	battle.initialize(host, session.controller)
@@ -136,7 +135,6 @@ func _leave_battle():
 	battle = null
 	session.shutdown()
 	session = null
-	host.bottom_inset = 0.0
 	_show_menu()
 
 func _exit_tree():
