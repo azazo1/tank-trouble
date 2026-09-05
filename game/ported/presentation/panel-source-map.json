@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "modules": [
+    {
+      "module": "UIPool",
+      "source": "vendor/original/js/tt/ui/uipool.js",
+      "destination": "game/ported/presentation/panel/uipool.gd",
+      "sha256": "0c363d1d7e48da418961db76be16b1cc65f429af7d07c27f02619a8baf61ab0c",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UITankIconImage",
+      "source": "vendor/original/js/tt/ui/uitankiconimage.js",
+      "destination": "game/ported/presentation/panel/uitankiconimage.gd",
+      "sha256": "4bbfe9fc3ca6c5fae6983cb88403e50b1c8a9f9665c9cece7f192b71b624f92d",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UITankIconNameGroup",
+      "source": "vendor/original/js/tt/ui/uitankiconnamegroup.js",
+      "destination": "game/ported/presentation/panel/uitankiconnamegroup.gd",
+      "sha256": "26a7de677a0d92cc3e503b0167bd14c0a122fd9b3a756022bc4d249b17448d98",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UITankAvatarGroup",
+      "source": "vendor/original/js/tt/ui/playerpanel/uitankavatargroup.js",
+      "destination": "game/ported/presentation/panel/uitankavatargroup.gd",
+      "sha256": "9a995b489b2fdde7d4d8329ec874ae36e9e0faefd9e2bee5ad2af5935e265df1",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UITankIconScoreGroup",
+      "source": "vendor/original/js/tt/ui/playerpanel/uitankiconscoregroup.js",
+      "destination": "game/ported/presentation/panel/uitankiconscoregroup.gd",
+      "sha256": "df1637c777bccd982ece0eccf02caf9ac75a7a5b01a9622172f0b7c5198ad6af",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UIScoreExplosionEmitter",
+      "source": "vendor/original/js/tt/ui/playerpanel/uiscoreexplosionemitter.js",
+      "destination": "game/ported/presentation/panel/uiscoreexplosionemitter.gd",
+      "sha256": "0279a0013a0dadfb6fd72c8df1f189593d0866221ef6d0efbdb421a3afc8907e",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UIScoreExplosionParticle",
+      "source": "vendor/original/js/tt/ui/playerpanel/uiscoreexplosionparticle.js",
+      "destination": "game/ported/presentation/panel/uiscoreexplosionparticle.gd",
+      "sha256": "f33db48b4a7cc0c4e45697428deb659cda07f870bda85786d01852cf13ef6c81",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UIScoreExplosionFragmentSprite",
+      "source": "vendor/original/js/tt/ui/playerpanel/uiscoreexplosionfragmentsprite.js",
+      "destination": "game/ported/presentation/panel/uiscoreexplosionfragmentsprite.gd",
+      "sha256": "21a6d59f3203827470d95cdd14cfb2cd4ea83405c9f666ec3acbf2be07108c02",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    },
+    {
+      "module": "UILocalPanelLayout",
+      "source": "vendor/original/js/tt/ui/playerpanel/uimainstate.js",
+      "destination": "game/ported/presentation/panel/uilocalpanellayout.gd",
+      "sha256": "c668960bdea59935454138b37d41e0cdac462150e8863e5c93580a3cad7fcad5",
+      "changes": [
+        "原版布局和计分动画, 排除账号详情, 排名和好友状态"
+      ]
+    }
+  ]
+}

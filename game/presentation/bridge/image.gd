@@ -4,6 +4,7 @@ var sprite = Sprite2D.new()
 var key
 var body
 var animations
+var outlines: Array = []
 var tint = 0xffffff
 var frameName:
 	get: return fields.get("frameName", "")
@@ -29,6 +30,16 @@ func initialize(host, horizontal, vertical, texture):
 	sprite.centered = false
 	_set_texture(texture)
 	animations = preload("res://game/presentation/animation/frame_animation.gd").new(self)
+	if key is Object:
+		var width = JS.get_property(JS.module("UIConstants"), "TANK_ICON_OUTLINE_WIDTH")
+		var diagonal = sqrt(width * width / 2.0)
+		for offset in [Vector2(-width, 0), Vector2(-diagonal, -diagonal), Vector2(-diagonal, diagonal), Vector2(0, width), Vector2(0, -width), Vector2(diagonal, -diagonal), Vector2(diagonal, diagonal), Vector2(width, 0)]:
+			var outline = Sprite2D.new()
+			outline.centered = false
+			outline.texture = texture
+			outline.self_modulate = Color(0.2, 0.2, 0.2, 1)
+			outlines.append({"sprite": outline, "offset": offset})
+			view.add_child(outline)
 	view.add_child(sprite)
 	return self
 
@@ -39,6 +50,7 @@ func _set_texture(texture):
 func sync_view():
 	super.sync_view()
 	sprite.position = -anchor.value() * intrinsic_size
+	for outline in outlines: outline.sprite.position = sprite.position + outline.offset
 	sprite.self_modulate = Color.hex((int(tint) << 8) | 0xff)
 
 func original_reset(horizontal, vertical, _health = null):

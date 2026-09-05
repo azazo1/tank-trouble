@@ -18,6 +18,7 @@ port:
     bun tools/port/generate-ui.ts
     bun tools/port/generate-input.ts
     bun tools/port/generate-battle.ts
+    bun tools/port/generate-panel.ts
 
 # 编译 HAR 中的 Box2D, Spine 和 P2 原函数.
 native:
@@ -63,4 +64,12 @@ check-menu:
 
 # 校验原图集地图, 坦克分层和履带动画.
 check-battle:
-    godot --headless --path . --script tests/godot/battle_view.gd --quit-after 120
+    bun tools/port/check-godot.ts battle
+
+# 校验原版战斗事件, 动画, 音效和连续回合.
+check-flow:
+    bun tools/port/check-godot.ts flow
+
+# 校验人数菜单, 三种操作分配, 本地对局和返回菜单.
+check-application:
+    bun tools/port/check-godot.ts application

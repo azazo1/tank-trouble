@@ -321,15 +321,16 @@ export class Compiler {
         if (n.callee.property?.name === "call" && n.arguments[0]?.type === "ThisExpression") {
           const called = referenceName(n.callee.object);
           const parent = this.definition.base;
-          if (parent && (called === parent || called?.startsWith(parent + ".prototype."))) {
-            const method = called === parent ? "_construct_create" : `original_${called!.slice(parent.length + 11)}`;
+          const sourceParent = this.definition.name === "PhaserEmitter" ? "X.Group" : parent;
+          if (parent && (called === sourceParent || called?.startsWith(sourceParent + ".prototype."))) {
+            const method = called === sourceParent ? "_construct_create" : `original_${called!.slice(sourceParent!.length + 11)}`;
             return `super.${method}(${n.arguments.slice(1).map((a: Node) => this.expr(a)).join(", ")})`;
           }
         }
         if (n.callee.type === "MemberExpression" && n.callee.object.type === "ThisExpression" && n.callee.property.name === "_super") return `super.${this.methodName.startsWith("_construct_") ? this.methodName : `original_${this.methodName}`}(${args})`;
         if (this.initializingStatic && n.callee.type === "MemberExpression" && n.callee.object.name === this.definition.name && n.callee.property.name === "create") return `create(${args})`;
         if (n.callee.type === "MemberExpression") return `JS.invoke_method(${this.expr(n.callee.object)}, ${this.property(n.callee)}, [${args}])`;
-        if (n.callee.type === "Identifier" && ["parseInt", "parseFloat", "isNaN"].includes(n.callee.name)) return `JS.global_call(${JSON.stringify(n.callee.name)}, [${args}])`;
+        if (n.callee.type === "Identifier" && ["parseInt", "parseFloat", "isNaN", "setTimeout", "clearTimeout"].includes(n.callee.name)) return `JS.global_call(${JSON.stringify(n.callee.name)}, [${args}])`;
         return `JS.invoke(${this.expr(n.callee)}, [${args}])`;
       }
       case "NewExpression": return `JS.construct(${this.expr(n.callee)}, [${n.arguments.map((a: Node) => this.expr(a)).join(", ")}])`;
@@ -339,7 +340,8 @@ export class Compiler {
         if (n.operator === "typeof") return `JS.type_of(${e})`;
         if (n.operator === "delete" && n.argument.type === "MemberExpression") return `JS.delete_property(${this.expr(n.argument.object)}, ${this.property(n.argument)})`;
         if (n.operator === "void") return "null";
-        if (["-", "+", "~"].includes(n.operator)) return `${n.operator}(${e})`;
+        if (n.operator === "~") return `JS.bitwise("^", ${e}, -1)`;
+        if (["-", "+"].includes(n.operator)) return `${n.operator}(${e})`;
         throw new Error(`不支持的一元运算: ${n.operator}`);
       }
       case "BinaryExpression": {

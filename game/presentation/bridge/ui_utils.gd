@@ -11,6 +11,9 @@ static func original_mpx(value):
 static func original_pxm(value):
 	return value * load("res://game/runtime/js_support.gd").module("Constants").original_static_get("METERS_PER_PIXEL")
 
+static func original_easingCubicBezier(a, b, c, d):
+	return func(k): return a * (1 - k) * (1 - k) * (1 - k) + b * 3 * k * (1 - k) * (1 - k) + c * 3 * k * k * (1 - k) + d * k * k * k
+
 static func original_initUIGamePhysics(game):
 	game.physics.p2 = load("res://game/presentation/physics/p2_world.gd").new(game)
 	for key in ["wall", "tank", "fragment", "crate", "puff", "ray", "shield", "spawn"]:

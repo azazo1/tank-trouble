@@ -7,42 +7,52 @@ var assets = preload("res://game/presentation/assets/library.gd").new()
 var pixel_ratio = 1.0
 var add
 var sound
-var physics = {}
+var physics = {"arcade": preload("res://game/presentation/particles/arcade_world.gd").new()}
+var particles = {"ID": 0}
+var rnd
 var buttons: Array = []
 var tweens: Array = []
-var time = {"delta": 0.0, "elapsed": 0.0, "events": preload("res://game/presentation/bridge/timer_events.gd").new()}
+var time = {"delta": 0.0, "elapsed": 0.0, "deltaTotal": 0.0, "desiredFps": 60, "events": preload("res://game/presentation/bridge/timer_events.gd").new()}
 var input = {"enabled": true, "mousePointer": {"leftButton": {"isDown": false, "reset": func(): return null}}, "keyboard": preload("res://game/presentation/bridge/keyboard.gd").new()}
 var scale = {"bounds": {"x": 0, "y": 0}, "scaleFactor": {"x": 1, "y": 1}}
 var active_state
+var canvas_size = Vector2.ZERO
+var bottom_inset = 0.0
 var state
 var pressed_button: WeakRef
 var width:
-	get: return root.get_ref().get_viewport_rect().size.x
+	get: return canvas_size.x if canvas_size.x > 0 else root.get_ref().get_viewport_rect().size.x
 var height:
-	get: return root.get_ref().get_viewport_rect().size.y
+	get: return canvas_size.y if canvas_size.y > 0 else root.get_ref().get_viewport_rect().size.y - bottom_inset
 
-func _init(node = null):
+func _init(node = null, primary = true):
 	if node == null: return
 	root = weakref(node)
 	state = preload("res://game/presentation/bridge/state_access.gd").new(self)
-	JS.module("GameManager").host = weakref(self)
+	if primary: JS.module("GameManager").host = weakref(self)
 	pixel_ratio = maxf(1.0, DisplayServer.screen_get_scale()) if DisplayServer.get_name() != "headless" else 1.0
 	assets.resolution = 2 if pixel_ratio > 1.0 else 1
-	JS.module("UIConstants").original_scaleForHighDensity(pixel_ratio)
+	if primary: JS.module("UIConstants").original_scaleForHighDensity(pixel_ratio)
 	world = preload("res://game/presentation/bridge/group.gd").create(self)
 	node.add_child(world.view)
 	add = preload("res://game/presentation/bridge/factory.gd").new(self)
 	sound = preload("res://game/presentation/audio/sound_bank.gd").new(node)
+	rnd = JS.module("PhaserRandom").create([str(Time.get_ticks_usec())])
 
 func advance(delta):
 	time.delta = delta * 1000.0
 	time.elapsed = time.delta
+	time.deltaTotal += time.delta
 	world.pre_update(time.delta)
+	if physics.has("p2"): physics.p2.advance()
 	time.events.advance(time.delta)
 	for tween in tweens.duplicate():
 		tween.advance(time.delta)
 		if not tween.active: tweens.erase(tween)
+	if active_state != null: active_state.original_update()
 	world.original_update()
+	world.original_postUpdate()
+	if physics.has("p2"): physics.p2.post_update()
 	world.sync_view()
 
 func handle_input(event):

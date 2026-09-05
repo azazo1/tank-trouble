@@ -33,6 +33,7 @@ func initialize(input_sets: Array):
 		var ai = data.ais[0]
 		ai_manager = JS.module("AIManager").create(ai.id, ai, controller)
 		controller.original_addPlayer(ai.id)
+	JS.module("AIs").manager = weakref(ai_manager) if ai_manager != null else null
 	JS.module("GameManager").original_setGameController(controller)
 	controller.original_addGameEventListener(_game_event, self)
 	controller.original_addRoundEventListener(_round_event, self)
@@ -63,5 +64,6 @@ func shutdown():
 	human_ids.clear()
 	if ai_manager != null: ai_manager.original_shutdown()
 	ai_manager = null
+	JS.module("AIs").manager = null
 	controller = null
 	log.info("离线对局已释放")

@@ -11,7 +11,9 @@ func _init(host):
 	game = weakref(host)
 	engine = ClassDB.instantiate("TTOriginalP2")
 	assert(engine.initialize())
-	world = engine.create_object("World", [{"gravity": [0, 0]}])
+	var native_world = engine.create_object("World", [{"gravity": [0, 0]}])
+	world = preload("res://game/presentation/physics/p2_object.gd").from_native(self, native_world)
+	call_native(world, "on", ["beginContact", _begin_contact])
 
 func createCollisionGroup():
 	var result = {"mask": 1 << collision_id}
@@ -27,7 +29,8 @@ func createContactMaterial(first, second):
 	return material
 
 func call_native(object, method, arguments = []):
-	return engine.invoke_object(object["$p2"], method, arguments)
+	var reference = object.data if object is Object else object
+	return engine.invoke_object(reference["$p2"], method, arguments)
 
 func set_native(object, key, value):
 	engine.write_property(object["$p2"], key, value)
@@ -55,8 +58,24 @@ func removeBody(body):
 func advance():
 	if paused: return
 	call_native(world, "step", [1.0 / 60.0])
-	for body in bodies: body.sync_sprite()
 	engine.collect()
+
+func post_update():
+	for body in bodies: body.sync_sprite()
+
+func getBodies():
+	return bodies.duplicate()
+
+func _begin_contact(event):
+	var first = get_native(event, "bodyA")
+	var second = get_native(event, "bodyB")
+	var body_a
+	var body_b
+	for body in bodies:
+		if body.data == first: body_a = body
+		if body.data == second: body_b = body
+	if body_a != null: body_a.onBeginContact.dispatch([body_b, second, get_native(event, "shapeA"), get_native(event, "shapeB"), get_native(event, "contactEquations")])
+	if body_b != null: body_b.onBeginContact.dispatch([body_a, first, get_native(event, "shapeB"), get_native(event, "shapeA"), get_native(event, "contactEquations")])
 
 func clear():
 	for body in bodies.duplicate(): removeBody(body)

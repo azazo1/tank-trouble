@@ -26,13 +26,15 @@ func load_texture(path):
 	return texture
 
 func texture(key, frame = null):
+	if key is Object: return key.texture
 	if key == null:
 		if not textures.has("@empty"):
 			textures["@empty"] = ImageTexture.create_from_image(Image.create_empty(1, 1, false, Image.FORMAT_RGBA8))
 		return textures["@empty"]
-	if key == "game": return atlas_frame(key, frame)
+	if key in ["game", "playerpanel"]: return atlas_frame(key, frame)
 	var path = ""
 	if key == "menuBackground": path = "images/menu/background.png"
+	elif key.begins_with("tankiconplaceholder-"): path = "images/tankIcon/placeholder-%d.png" % [{"small": 140, "medium": 200, "large": 320}[key.trim_prefix("tankiconplaceholder-")]]
 	elif key.begins_with("button"):
 		var part = key.trim_prefix("button")
 		if part.begins_with("Warning"): part = "warning" + part.trim_prefix("Warning")
@@ -43,6 +45,7 @@ func texture(key, frame = null):
 	return load_texture("res://assets/original/" + path)
 
 func atlas_frame(key, frame):
+	if key == "playerpanel": key = "playerPanel"
 	var atlas_key = key + ("@2x" if resolution == 2 else "")
 	var frame_key = atlas_key + ":" + str(frame)
 	if frames.has(frame_key): return frames[frame_key]

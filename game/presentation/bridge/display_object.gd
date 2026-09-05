@@ -20,18 +20,35 @@ var game:
 	get: return game_reference.get_ref() if game_reference else null
 	set(value): game_reference = weakref(value) if value != null else null
 var x:
-	get: return position.x
-	set(value): position.x = value
+	get: return _position_x()
+	set(value): _set_position_x(value)
 var y:
-	get: return position.y
-	set(value): position.y = value
+	get: return _position_y()
+	set(value): _set_position_y(value)
+var angle:
+	get: return rad_to_deg(rotation)
+	set(value): rotation = deg_to_rad(value)
+var worldScale:
+	get: return Point.create(view.global_scale.x, view.global_scale.y)
 var width:
-	get: return getLocalBounds().width * abs(scale.x)
+	get: return _display_width()
+	set(value): _set_width(value)
 var height:
-	get: return getLocalBounds().height * abs(scale.y)
+	get: return _display_height()
+	set(value): _set_height(value)
+
+func _display_width(): return getLocalBounds().width * abs(scale.x)
+func _display_height(): return getLocalBounds().height * abs(scale.y)
+func _set_width(value): scale.x = value / maxf(getLocalBounds().width, 0.000001)
+func _set_height(value): scale.y = value / maxf(getLocalBounds().height, 0.000001)
 
 func _get(key):
 	return JS.dereference(fields.get(key))
+
+func _position_x(): return position.x
+func _position_y(): return position.y
+func _set_position_x(value): position.x = value
+func _set_position_y(value): position.y = value
 
 func _set(key, value):
 	fields[key] = JS.weak(value) if key in ["context", "parent", "gameController"] else value
@@ -85,7 +102,16 @@ func pre_update(milliseconds):
 		if child.exists: child.pre_update(milliseconds)
 
 func original_postUpdate():
+	for child in children:
+		if child.exists: JS.invoke_method(child, "postUpdate", [])
 	return null
+
+func original_preUpdate():
+	return exists
+
+func toGlobal(point):
+	var result = view.to_global(Vector2(point.x, point.y))
+	return Point.create(result.x, result.y)
 
 func toLocal(point):
 	var local = view.to_local(Vector2(point.x, point.y))

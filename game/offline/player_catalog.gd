@@ -22,6 +22,9 @@ static func original_getInstance():
 static func original_getPlayerDetailsCache():
 	return profiles
 
+static func original_maskUnapprovedUsername(details):
+	return details.original_getUsername()
+
 func original_getPlayerDetails(success, _failure, complete, id, _cache):
 	var js = load("res://game/runtime/js_support.gd")
 	assert(profiles.has(id), "缺少离线玩家公开外观: " + str(id))

@@ -8,3 +8,10 @@ func initialize(host):
 
 func original__addGuests(count):
 	players_selected.emit(int(count))
+
+func shutdown():
+	original_shutdown()
+	for item in [backgroundGroup, onePlayerButton, twoPlayerButton, threePlayerButton]:
+		game.world.removeChild(item)
+		item.original_destroy()
+	original_destroy()

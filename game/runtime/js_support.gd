@@ -208,6 +208,7 @@ static func invoke(callable, args: Array):
 	return null
 
 static func invoke_method(object, method, args: Array):
+	if object is Object and object.has_method("native_invoke"): return object.native_invoke(method, args)
 	if object is Callable and method == "call": return invoke_context(object, args[0], args.slice(1))
 	if object is Callable and method == "apply": return invoke_context(object, args[0], args[1] if args.size() > 1 else [])
 	if object is String and object.begins_with("@"):
@@ -224,6 +225,7 @@ static func invoke_method(object, method, args: Array):
 		return text(object)
 	if object is String:
 		match method:
+			"charCodeAt": return object.unicode_at(int(args[0]))
 			"indexOf": return object.find(str(args[0]))
 			"substr", "substring": return object.substr(int(args[0]), int(args[1]) if args.size() > 1 else -1)
 			"split": return Array(object.split(str(args[0])))
@@ -238,6 +240,11 @@ static func invoke_method(object, method, args: Array):
 
 static func array_call(array: Array, method, args: Array):
 	match method:
+		"removeAll":
+			for item in array:
+				if item is Object and item.has_method("original_stop"): item.original_stop()
+			array.clear()
+			return null
 		"map", "filter", "some", "every", "forEach":
 			var result := []
 			for i in range(array.size()):
@@ -345,6 +352,8 @@ static func instance_of(object, type):
 
 static func global_call(name, args: Array):
 	match name:
+		"setTimeout": return module("GameManager").original_getGame().time.events.original_add(args[1], args[0])
+		"clearTimeout": return module("GameManager").original_getGame().time.events.original_remove(args[0])
 		"parseFloat": return number(args[0])
 		"parseInt": return str(args[0]).hex_to_int() if args.size() > 1 and args[1] == 16 else int(number(args[0]))
 		"isNaN": return is_nan(number(args[0]))

@@ -113,7 +113,16 @@ Variant TTOriginalP2::invoke_object(int64_t handle, const String &method, const 
         Arguments args;
         for (int i = 0; i < arguments.size(); ++i) args.push_back(from_variant(arguments[i]));
         auto receiver = handles.at(handle);
-        return to_variant(runtime.invoke(runtime.get(receiver, utf8(method)), receiver, args));
+        auto result = runtime.invoke(runtime.get(receiver, utf8(method)), receiver, args);
+        // 原版射线等接口通过数组参数返回结果, 必须保留调用方的数组身份.
+        for (int i = 0; i < arguments.size(); ++i) {
+            if (arguments[i].get_type() != Variant::ARRAY) continue;
+            Array target = arguments[i];
+            Array source = to_variant(args[i]);
+            target.resize(source.size());
+            for (int j = 0; j < source.size(); ++j) target[j] = source[j];
+        }
+        return to_variant(result);
     } catch (const std::exception &error) {
         UtilityFunctions::push_error(String("P2 调用 ") + method + ": " + error.what());
         return Variant();

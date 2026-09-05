@@ -38,7 +38,6 @@ func _run():
 		session.controller.original_setInputState(JS.module("InputState").withState(session.human_ids[0], true, false, true, false, false))
 		JS.clock_milliseconds += 1000.0 / 60.0
 		session.advance(1000.0 / 60.0)
-		host.physics.p2.advance()
 		host.advance(1.0 / 60.0)
 	var states = []
 	for sprite in sprites:

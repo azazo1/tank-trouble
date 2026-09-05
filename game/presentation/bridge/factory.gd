@@ -23,6 +23,9 @@ func tween(target):
 func audio(key, volume = 1.0, loop = false):
 	return host.get_ref().sound.create(key, volume, loop)
 
+func bitmapData(width, height):
+	return preload("res://game/presentation/assets/bitmap.gd").new(width, height)
+
 func group(parent = null):
 	var game = host.get_ref()
 	var result = preload("res://game/presentation/bridge/group.gd").create(game)

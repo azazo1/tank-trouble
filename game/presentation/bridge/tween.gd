@@ -25,18 +25,26 @@ func original_stop():
 	active = false
 	return self
 
+func original_start():
+	active = true
+	elapsed = 0.0
+	return self
+
 func advance(milliseconds):
 	if not active: return
 	elapsed += milliseconds
 	if elapsed < delay: return
 	var progress = minf((elapsed - delay) / duration, 1.0)
 	var value = progress
-	if easing == "Back.Out":
+	if easing is Callable: value = easing.call(progress)
+	elif easing == "Back.Out":
 		var k = progress - 1.0
 		value = k * k * (2.70158 * k + 1.70158) + 1.0
 	elif easing == "Quadratic.InOut":
 		var k = progress * 2.0
 		value = 0.5 * k * k if k < 1 else -0.5 * ((k - 1) * (k - 3) - 1)
+	elif easing == "Cubic.Out": value = pow(progress - 1.0, 3) + 1.0
+	elif easing == "Quadratic.Out": value = progress * (2.0 - progress)
 	for key in destination: JS.set_property(target, key, start[key] + (destination[key] - start[key]) * value)
 	if progress == 1.0:
 		active = false

@@ -3,6 +3,42 @@
   "release": "RELEASE-2026-08-31-01",
   "files": [
     {
+      "path": "assets/original/images/accessories/front7-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/accessories/front7-140.png",
+      "sha256": "61f89158a6e8d653004a7ed91059dc7f03493109c3e41b25b36eae62862f6d1b",
+      "bytes": 1895
+    },
+    {
+      "path": "assets/original/images/accessories/front7-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/accessories/front7-140@2x.png",
+      "sha256": "e52837c3b49d20148b350ddc714c4e65bdef897856c194d26d568554ad5cd47c",
+      "bytes": 5249
+    },
+    {
+      "path": "assets/original/images/accessories/front7-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/accessories/front7-200.png",
+      "sha256": "edb36292559b307e5f6d48c2e80efcb4ce6595c72bfa1e8778ec628dc4fb2786",
+      "bytes": 3192
+    },
+    {
+      "path": "assets/original/images/accessories/front7-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/accessories/front7-200@2x.png",
+      "sha256": "db7446905b6c6ee9079cf81f158b2dd177afb5bb87d026d285b8389d29f5b1a1",
+      "bytes": 8842
+    },
+    {
+      "path": "assets/original/images/accessories/front7-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/accessories/front7-320.png",
+      "sha256": "a320f3d9ba7ad73311b866dc21b2363c3ad0ed371a00fbbbce75a39de76eccb5",
+      "bytes": 6420
+    },
+    {
+      "path": "assets/original/images/accessories/front7-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/accessories/front7-320@2x.png",
+      "sha256": "0300641434503929f9c3aa6acd31df4fb3b2959044e91517b2d35a00576dc24d",
+      "bytes": 17399
+    },
+    {
       "path": "assets/original/images/buttons/24Disabled.png",
       "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/24Disabled.png",
       "sha256": "13f8bbd4ec4e2aa5404f3695124e1f92d20d5eb987c935fe046d65b1d29d5477",

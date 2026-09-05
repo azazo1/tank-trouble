@@ -27,3 +27,17 @@ func value():
 
 func getMagnitude():
 	return sqrt(x * x + y * y)
+
+func copyFrom(point):
+	return setTo(point.x, point.y)
+
+func dot(point):
+	return x * point.x + y * point.y
+
+func normalize():
+	var magnitude = getMagnitude()
+	if magnitude > 0: setTo(x / magnitude, y / magnitude)
+	return self
+
+static func subtract(first, second):
+	return create(first.x - second.x, first.y - second.y)

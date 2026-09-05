@@ -65,6 +65,236 @@
       "changes": []
     },
     {
+      "module": "UIAimerGraphics",
+      "source": "vendor/original/js/tt/ui/game/uiaimergraphics.js",
+      "destination": "game/ported/presentation/game/uiaimergraphics.gd",
+      "sha256": "3f8929d4f40d92c4072ffdd983170b7396e746332510cad4643a0d24fa69365e",
+      "changes": []
+    },
+    {
+      "module": "UILaserGraphics",
+      "source": "vendor/original/js/tt/ui/game/uilasergraphics.js",
+      "destination": "game/ported/presentation/game/uilasergraphics.gd",
+      "sha256": "b20f5a5427aa0f3c7210afa3e975c409f6dbeea4a583425621227c135123c4dc",
+      "changes": []
+    },
+    {
+      "module": "UIDustParticle",
+      "source": "vendor/original/js/tt/ui/game/uidustparticle.js",
+      "destination": "game/ported/presentation/game/uidustparticle.gd",
+      "sha256": "85527c934738d1e007a822740e7a1354d5c7b1d23cc1493135993971144671d4",
+      "changes": []
+    },
+    {
+      "module": "UISmokeParticle",
+      "source": "vendor/original/js/tt/ui/game/uismokeparticle.js",
+      "destination": "game/ported/presentation/game/uismokeparticle.gd",
+      "sha256": "df2122916fdd156b29bffd43cd3b57630815c16040f7fd2cc1c9230d10335c38",
+      "changes": []
+    },
+    {
+      "module": "UIColouredSmokeParticle",
+      "source": "vendor/original/js/tt/ui/game/uicolouredsmokeparticle.js",
+      "destination": "game/ported/presentation/game/uicolouredsmokeparticle.gd",
+      "sha256": "a1f7cfb82f7926b19e7e9c612bea9122485e35134d4ab6318ccb071bd6fd9b7a",
+      "changes": []
+    },
+    {
+      "module": "UIExplosionParticle",
+      "source": "vendor/original/js/tt/ui/game/uiexplosionparticle.js",
+      "destination": "game/ported/presentation/game/uiexplosionparticle.gd",
+      "sha256": "22949bc25e81298237a87ae7761ed9ceb468ef54116527d2bc0df9b84a579e13",
+      "changes": []
+    },
+    {
+      "module": "UISparkParticle",
+      "source": "vendor/original/js/tt/ui/game/uisparkparticle.js",
+      "destination": "game/ported/presentation/game/uisparkparticle.gd",
+      "sha256": "1097948b5922731b4d607ace1432cdb0945426f5a66ae78adba6b1761ff913a3",
+      "changes": []
+    },
+    {
+      "module": "UIDustEmitter",
+      "source": "vendor/original/js/tt/ui/game/uidustemitter.js",
+      "destination": "game/ported/presentation/game/uidustemitter.gd",
+      "sha256": "b38ba333c90906086c786bdf892667f37cdebdac84836d570aeec8b78f6f5f4e",
+      "changes": []
+    },
+    {
+      "module": "UISmokeEmitter",
+      "source": "vendor/original/js/tt/ui/game/uismokeemitter.js",
+      "destination": "game/ported/presentation/game/uismokeemitter.gd",
+      "sha256": "c8e985426280295cf5d528eb4204e8a2b8f9bf25da1c31b5225aebe54b2240fd",
+      "changes": []
+    },
+    {
+      "module": "UIColouredSmokeEmitter",
+      "source": "vendor/original/js/tt/ui/game/uicolouredsmokeemitter.js",
+      "destination": "game/ported/presentation/game/uicolouredsmokeemitter.gd",
+      "sha256": "1296b8a0dd72702f1fc426fa906d03443a37c76764aa3750e02af61f70702b1c",
+      "changes": []
+    },
+    {
+      "module": "UIExplosionEmitter",
+      "source": "vendor/original/js/tt/ui/game/uiexplosionemitter.js",
+      "destination": "game/ported/presentation/game/uiexplosionemitter.gd",
+      "sha256": "1b86e1e89819423fdf0f3b8b9294ee68b09b79304c0ea95ad14284849152e9b0",
+      "changes": []
+    },
+    {
+      "module": "UIMissileLaunchEmitter",
+      "source": "vendor/original/js/tt/ui/game/uimissilelaunchemitter.js",
+      "destination": "game/ported/presentation/game/uimissilelaunchemitter.gd",
+      "sha256": "5b8eeea82cb8d1ffe249dd7d89fbc3f026d34c1d1a16507c8fdf32ef2fd0bbde",
+      "changes": []
+    },
+    {
+      "module": "UIRubbleEmitter",
+      "source": "vendor/original/js/tt/ui/game/uirubbleemitter.js",
+      "destination": "game/ported/presentation/game/uirubbleemitter.gd",
+      "sha256": "0a5ab50b5e3ab4d5ea8acb0a5ce93ef27dc08f3e7fa2465a275c8915fc583915",
+      "changes": []
+    },
+    {
+      "module": "UIRubbleFragmentSprite",
+      "source": "vendor/original/js/tt/ui/game/uirubblefragmentsprite.js",
+      "destination": "game/ported/presentation/game/uirubblefragmentsprite.gd",
+      "sha256": "8a4b1ccb6f5bfed6bce3732dcce69cfab2c5d482e79a68075a900164ded84538",
+      "changes": []
+    },
+    {
+      "module": "UIRubbleGroup",
+      "source": "vendor/original/js/tt/ui/game/uirubblegroup.js",
+      "destination": "game/ported/presentation/game/uirubblegroup.gd",
+      "sha256": "ba306577583bd729e75b7084ddc12e591f1ccb154c776e212dc9276e0c9a9fe0",
+      "changes": []
+    },
+    {
+      "module": "UIExplosionFragmentSprite",
+      "source": "vendor/original/js/tt/ui/game/uiexplosionfragmentsprite.js",
+      "destination": "game/ported/presentation/game/uiexplosionfragmentsprite.gd",
+      "sha256": "e7579848c11462a1b3dadf11e9cfe3edcd75536f87a60bf8be4fb344ec6b580e",
+      "changes": []
+    },
+    {
+      "module": "UITankExplosionGroup",
+      "source": "vendor/original/js/tt/ui/game/uitankexplosiongroup.js",
+      "destination": "game/ported/presentation/game/uitankexplosiongroup.gd",
+      "sha256": "cdee28b800fd775929dab8b2b10577001cd611d87de772502fb6b7a38d197114",
+      "changes": []
+    },
+    {
+      "module": "UIExplosionGroup",
+      "source": "vendor/original/js/tt/ui/game/uiexplosiongroup.js",
+      "destination": "game/ported/presentation/game/uiexplosiongroup.gd",
+      "sha256": "06dea5b6fcd405b854f52f73211082e5d00548873879f618c2d28721b90d90a7",
+      "changes": []
+    },
+    {
+      "module": "UIPuffSprite",
+      "source": "vendor/original/js/tt/ui/game/uipuffsprite.js",
+      "destination": "game/ported/presentation/game/uipuffsprite.gd",
+      "sha256": "ad5316f82c6d71f8f5637f45b634ad889b748db891392c6b36324fbb7a12a125",
+      "changes": []
+    },
+    {
+      "module": "UIShieldSparkGroup",
+      "source": "vendor/original/js/tt/ui/game/uishieldsparkgroup.js",
+      "destination": "game/ported/presentation/game/uishieldsparkgroup.gd",
+      "sha256": "e781f94a247955c72f1a1c97833536ff579bc137def37906f926aa0115012bfc",
+      "changes": []
+    },
+    {
+      "module": "UIShieldSparkEmitter",
+      "source": "vendor/original/js/tt/ui/game/uishieldsparkemitter.js",
+      "destination": "game/ported/presentation/game/uishieldsparkemitter.gd",
+      "sha256": "1e115a319fb8a7d59e988853a965798ae47fa9987cde4fa93cb51682459230b1",
+      "changes": []
+    },
+    {
+      "module": "UIShieldSparkBoltImage",
+      "source": "vendor/original/js/tt/ui/game/uishieldsparkboltimage.js",
+      "destination": "game/ported/presentation/game/uishieldsparkboltimage.gd",
+      "sha256": "9079e63852fc3c276772dccf70ce772cdcb39cdd60c459ae7f58a53aa3e3f290",
+      "changes": []
+    },
+    {
+      "module": "UITankFeatherSprite",
+      "source": "vendor/original/js/tt/ui/game/uitankfeathersprite.js",
+      "destination": "game/ported/presentation/game/uitankfeathersprite.gd",
+      "sha256": "b39f4b08cd10891bcc948ffd7bbaf5b5a8ebb90a6fe6586505ab5d099b949dd5",
+      "changes": []
+    },
+    {
+      "module": "UITankNameGroup",
+      "source": "vendor/original/js/tt/ui/game/uitanknamegroup.js",
+      "destination": "game/ported/presentation/game/uitanknamegroup.gd",
+      "sha256": "297a536058f9d521669ef59cc88f57a77d5e15d1e82423900945f6d76fa7f628",
+      "changes": []
+    },
+    {
+      "module": "UIWeaponSymbolGroup",
+      "source": "vendor/original/js/tt/ui/game/uiweaponsymbolgroup.js",
+      "destination": "game/ported/presentation/game/uiweaponsymbolgroup.gd",
+      "sha256": "796550dc53618fd5e9e6fcaf0fd7a6399458dfbb049432171e9cc7ea9d2a4880",
+      "changes": []
+    },
+    {
+      "module": "UIWeaponIconImage",
+      "source": "vendor/original/js/tt/ui/game/uiweaponiconimage.js",
+      "destination": "game/ported/presentation/game/uiweaponiconimage.gd",
+      "sha256": "8d942467fbeea08a0145b7a10dcd135bad23c5fc482418b2ef799e26724eda30",
+      "changes": []
+    },
+    {
+      "module": "UICountDownImage",
+      "source": "vendor/original/js/tt/ui/game/uicountdownimage.js",
+      "destination": "game/ported/presentation/game/uicountdownimage.gd",
+      "sha256": "0083eaac0dea978ee73d30ad3b128ff0632c72055c36733bd51bc4e07368ddb8",
+      "changes": []
+    },
+    {
+      "module": "UIRoundTitleGroup",
+      "source": "vendor/original/js/tt/ui/game/uiroundtitlegroup.js",
+      "destination": "game/ported/presentation/game/uiroundtitlegroup.gd",
+      "sha256": "c7dc96b1d7cc8f8d333984b27e920ca3ffa607743d312be36da80918ba318e21",
+      "changes": []
+    },
+    {
+      "module": "PhaserEmitter",
+      "source": "vendor/original/js/phaser/phaser.min.js",
+      "destination": "game/ported/presentation/engine/phaseremitter.gd",
+      "changes": [
+        "仅提取原版表现使用的引擎方法, 绘制和场景管理由 Godot 接入"
+      ]
+    },
+    {
+      "module": "PhaserRandom",
+      "source": "vendor/original/js/phaser/phaser.min.js",
+      "destination": "game/ported/presentation/engine/phaserrandom.gd",
+      "changes": [
+        "仅提取原版表现使用的引擎方法, 绘制和场景管理由 Godot 接入"
+      ]
+    },
+    {
+      "module": "UIGameState",
+      "source": "vendor/original/js/tt/ui/game/uigamestate.js",
+      "destination": "game/ported/presentation/battle/uibattleentities.gd",
+      "sha256": "d9320ebe1df500b504559f5a3e77410f1af90e35f760062835628685f3faad3a",
+      "changes": [
+        "按对象表现和对局生命周期划分原函数, 排除 BootCamp 不可达的在线模式, 奖励和账号调用"
+      ]
+    },
+    {
+      "module": "UIGameState",
+      "source": "vendor/original/js/tt/ui/game/uigamestate.js",
+      "destination": "game/ported/presentation/battle/uilocalbattlestate.gd",
+      "sha256": "d9320ebe1df500b504559f5a3e77410f1af90e35f760062835628685f3faad3a",
+      "changes": [
+        "按对象表现和对局生命周期划分原函数, 排除 BootCamp 不可达的在线模式, 奖励和账号调用"
+      ]
+    },
+    {
       "module": "UIGameState",
       "source": "vendor/original/js/tt/ui/game/uigamestate.js",
       "destination": "game/ported/presentation/world/uimazeview.gd",
