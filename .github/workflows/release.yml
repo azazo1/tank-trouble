@@ -36,7 +36,7 @@ jobs:
       build_version: ${{ steps.build_version.outputs.build_version }}
     steps:
       - name: 检出仓库
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -138,7 +138,7 @@ jobs:
             suffix: zip
     steps:
       - name: 检出目标提交
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ needs.version.outputs.source_ref }}
           fetch-depth: 0
@@ -164,6 +164,7 @@ jobs:
           mkdir -p "$godot_dir/bin"
           mv "$godot_dir/Godot.app" "$godot_dir/bin/Godot.app"
           ln -s "$godot_dir/bin/Godot.app/Contents/MacOS/Godot" "$godot_dir/bin/godot"
+          export PATH="$godot_dir/bin:$PATH"
           echo "$godot_dir/bin" >> "$GITHUB_PATH"
 
           curl --fail --location --retry 3 \
@@ -188,6 +189,7 @@ jobs:
           unzip -q "$RUNNER_TEMP/godot-editor.zip" -d "$godot_dir/bin"
           mv "$godot_dir/bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64" "$godot_dir/bin/godot"
           chmod +x "$godot_dir/bin/godot"
+          export PATH="$godot_dir/bin:$PATH"
           echo "$godot_dir/bin" >> "$GITHUB_PATH"
           curl --fail --location --retry 3 \
             "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" \
@@ -205,7 +207,11 @@ jobs:
           $ErrorActionPreference = 'Stop'
           $godotDir = Join-Path $env:RUNNER_TEMP 'godot'
           New-Item -ItemType Directory -Force -Path $godotDir | Out-Null
-          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/$env:GODOT_VERSION-stable/Godot_v$env:GODOT_VERSION-stable_win64.exe" -OutFile (Join-Path $godotDir 'godot.exe')
+          $editorArchive = Join-Path $env:RUNNER_TEMP 'godot-editor.zip'
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/$env:GODOT_VERSION-stable/Godot_v$env:GODOT_VERSION-stable_win64.exe.zip" -OutFile $editorArchive
+          $editorExtract = Join-Path $env:RUNNER_TEMP 'godot-editor'
+          Expand-Archive -LiteralPath $editorArchive -DestinationPath $editorExtract -Force
+          Copy-Item -LiteralPath (Join-Path $editorExtract "Godot_v$env:GODOT_VERSION-stable_win64.exe") -Destination (Join-Path $godotDir 'godot.exe')
           $godotDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
           $templateDir = Join-Path $env:APPDATA "Godot/export_templates/$env:GODOT_VERSION.stable"
           New-Item -ItemType Directory -Force -Path $templateDir | Out-Null
@@ -326,7 +332,7 @@ jobs:
       contents: write
     steps:
       - name: 检出目标 tag
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           ref: ${{ needs.version.outputs.source_ref }}
           fetch-depth: 0
