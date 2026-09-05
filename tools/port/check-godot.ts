@@ -9,6 +9,7 @@ const scripts: Record<string, { script: string; result: string }> = {
   battle: { script: "battle_view", result: "battle-view" },
   flow: { script: "battle_flow", result: "battle-flow" },
   application: { script: "application_flow", result: "application-flow" },
+  particles: { script: "emitter_coordinates", result: "emitter-coordinates" },
 };
 if (!scripts[name]) throw new Error(`未知检查: ${name}`);
 await mkdir(".tmp", { recursive: true });

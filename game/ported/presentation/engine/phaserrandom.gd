@@ -2,6 +2,10 @@
 extends "res://game/runtime/original_object.gd"
 const JS = preload("res://game/runtime/js_support.gd")
 
+var c = 0
+var s0 = 0
+var s1 = 0
+var s2 = 0
 static var _static_PhaserRandom: Dictionary = {}
 static var _initialized_PhaserRandom = false
 static func initialize_original_static():
@@ -16,7 +20,7 @@ static func original_static_set(key, value):
 	_static_PhaserRandom[key] = value
 	return value
 func original_own_fields():
-	return []
+	return ["c","s0","s1","s2"]
 
 func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var _scope0: Dictionary = {"t": _arg0}

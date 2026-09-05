@@ -73,3 +73,8 @@ check-flow:
 # 校验人数菜单, 三种操作分配, 本地对局和返回菜单.
 check-application:
     bun tools/port/check-godot.ts application
+
+# 校验原版发射点, 粒子坐标和 Godot 绘制坐标的对应关系.
+check-particles:
+    bun tools/oracle/export-particles.ts
+    bun tools/port/check-godot.ts particles

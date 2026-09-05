@@ -561,6 +561,42 @@
       "bytes": 4622
     },
     {
+      "path": "assets/original/images/tankIcon/placeholder-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/placeholder-140.png",
+      "sha256": "8fafe7529f5e35aef54a781281a71699c403184b0d0e30b255f8f080280ac9e4",
+      "bytes": 3153
+    },
+    {
+      "path": "assets/original/images/tankIcon/placeholder-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/placeholder-140@2x.png",
+      "sha256": "1fa71fc7e471c15cfd4bbe9bbd4fdacb461a0e16b0996a037fbaf31df8ab3508",
+      "bytes": 8471
+    },
+    {
+      "path": "assets/original/images/tankIcon/placeholder-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/placeholder-200.png",
+      "sha256": "cd6792ebfcb8467017c79b394c41f0583d8b9ecaa401e8f332690ce7a4b29966",
+      "bytes": 4676
+    },
+    {
+      "path": "assets/original/images/tankIcon/placeholder-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/placeholder-200@2x.png",
+      "sha256": "c12cb16913432baf08725b9cb0e743be7373fa1bf8eeca1de5ba0a53a28225e5",
+      "bytes": 12220
+    },
+    {
+      "path": "assets/original/images/tankIcon/placeholder-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/placeholder-320.png",
+      "sha256": "629ea7be39730d07c4539908223241030ebec38dc3e81b8786310ae05c19129d",
+      "bytes": 7890
+    },
+    {
+      "path": "assets/original/images/tankIcon/placeholder-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/placeholder-320@2x.png",
+      "sha256": "e947d867944913f4b83da79be37ac329e0e66b38a8ccc635ee444b8ebb2983e7",
+      "bytes": 20902
+    },
+    {
       "path": "assets/original/images/tankIcon/rightTread-140.png",
       "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-140.png",
       "sha256": "1ed01616788ff4fd9e46efc45a31b58e0730540694b278a0606a7595230b47fb",

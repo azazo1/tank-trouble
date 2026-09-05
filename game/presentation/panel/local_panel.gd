@@ -8,8 +8,9 @@ func initialize(host, session):
 	primary = weakref(host)
 	panel_node = Node2D.new()
 	host.root.get_ref().add_child(panel_node)
-	game = preload("res://game/presentation/bridge/game_host.gd").new(panel_node, false)
-	fields["panel_host"] = game
+	var panel_host = preload("res://game/presentation/bridge/game_host.gd").new(panel_node, false)
+	fields["panel_host"] = panel_host
+	game = panel_host
 	game.assets = host.assets
 	game.canvas_size = Vector2(host.width, panel_height)
 	_init_physics()

@@ -13,7 +13,7 @@ for (const controls of ["WASDKeys", "arrowKeys", "mouse"]) for (const state of [
 for (const file of manifest.files) {
   if (/assets\/original\/images\/(game|menu|playerPanel|ranks|buttons|laika|dimitri)\//.test(file.path) && file.path.includes("@2x")) paths.add(file.path.replace("@2x", ""));
 }
-for (const size of [140, 200, 320]) for (const part of ["turret", "barrel", "leftTread", "rightTread", "base", "turretShade", "barrelShade", "leftTreadShade", "rightTreadShade", "baseShade"]) {
+for (const size of [140, 200, 320]) for (const part of ["placeholder", "turret", "barrel", "leftTread", "rightTread", "base", "turretShade", "barrelShade", "leftTreadShade", "rightTreadShade", "baseShade"]) {
   for (const suffix of ["", "@2x"]) paths.add(`assets/original/images/tankIcon/${part}-${size}${suffix}.png`);
 }
 const queue = [...paths];

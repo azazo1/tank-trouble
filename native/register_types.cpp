@@ -1,6 +1,7 @@
 #include "physics/legacy_world.h"
 #include "physics/original_p2.h"
 #include "animation/original_spine.h"
+#include "source/javascript_values.h"
 #include <godot_cpp/godot.hpp>
 
 static void initialize(godot::ModuleInitializationLevel level) {
@@ -8,6 +9,7 @@ static void initialize(godot::ModuleInitializationLevel level) {
         godot::ClassDB::register_class<tank_trouble::TTLegacyWorld>();
         godot::ClassDB::register_class<tank_trouble::TTOriginalP2>();
         godot::ClassDB::register_class<tank_trouble::TTOriginalSpine>();
+        godot::ClassDB::register_class<tank_trouble::TTJavaScriptValues>();
     }
 }
 

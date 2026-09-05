@@ -30,5 +30,6 @@ export async function phaserCore() {
   const emitter = extract("PhaserEmitter", "X.Particles.Arcade.Emitter", "X.Group", ["update", "makeParticles", "explode", "start", "emitParticle", "resetParticle", "getNextParticle", "setRotation", "setAlpha"]);
   emitter.base = "PhaserEmitterBase";
   const random = extract("PhaserRandom", "X.RandomDataGenerator", null, ["sow", "hash", "rnd", "frac", "integer", "integerInRange", "realInRange", "between", "pick"]);
+  random.fields = ["c", "s0", "s1", "s2"].map(name => ({ key: { type: "Identifier", name }, value: { type: "Literal", value: 0 } }));
   return [emitter, random];
 }

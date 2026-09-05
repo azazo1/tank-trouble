@@ -27,7 +27,7 @@ add_library(original_box2d STATIC ${BOX2D_SOURCES} ${SPINE_SOURCES} ${P2_SOURCES
 target_include_directories(original_box2d PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/source")
 target_compile_options(original_box2d PRIVATE -ffp-contract=off -O1)
 
-add_library(tank_trouble_native SHARED physics/legacy_world.cpp physics/original_p2.cpp animation/original_spine.cpp register_types.cpp)
+add_library(tank_trouble_native SHARED physics/legacy_world.cpp physics/original_p2.cpp animation/original_spine.cpp source/javascript_values.cpp register_types.cpp)
 target_link_libraries(tank_trouble_native PRIVATE godot::cpp original_box2d)
 target_compile_options(tank_trouble_native PRIVATE -ffp-contract=off)
 set_target_properties(tank_trouble_native PROPERTIES

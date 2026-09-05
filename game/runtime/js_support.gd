@@ -8,6 +8,7 @@ static var strict_random := false
 static var global_fields: Dictionary = {}
 static var clock_milliseconds = null
 static var callback_receivers: Array = []
+static var scalar_bridge
 
 static func callback_receiver(fallback):
 	return callback_receivers.back() if not callback_receivers.is_empty() else fallback
@@ -81,7 +82,9 @@ static func text(value):
 	if value is bool: return "true" if value else "false"
 	if value is Array: return ",".join(value.map(func(item): return "" if item == null else text(item)))
 	if value is Dictionary: return "[object Object]"
-	if value is float and is_finite(value) and value == floor(value): return str(int(value))
+	if value is float:
+		if scalar_bridge == null: scalar_bridge = ClassDB.instantiate("TTJavaScriptValues")
+		return scalar_bridge.number_to_string(value)
 	return str(value)
 
 static func equal(a, b, strict = false):
