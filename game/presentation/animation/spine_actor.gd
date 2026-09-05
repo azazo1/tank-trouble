@@ -4,7 +4,7 @@ var native_player
 var mesh_view = preload("res://game/presentation/animation/spine_mesh.gd").new()
 var setup_bounds: Rect2
 
-func _construct_create(host = null, horizontal = null, vertical = null, key = null, _premultiplied = null, flip_x = null, _g = null, _h = null, _i = null, _j = null, _k = null, _l = null, _m = null, _n = null, _o = null, _p = null):
+func _construct_create(host = null, horizontal = null, vertical = null, key = null, _premultiplied = null, flip_x = null, _g = null, _h = null, _i = null, _j = null, _k = null, _l = null, _m = null, _n = null, _o = null, _p = null, _q = null, _r = null, _s = null, _t = null, _u = null, _v = null, _w = null, _x = null):
 	game = host
 	x = horizontal
 	y = vertical

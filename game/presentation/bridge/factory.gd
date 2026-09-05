@@ -8,9 +8,9 @@ func _init(game = null):
 func existing(object):
 	return host.get_ref().world.addChild(object)
 
-func image(x, y, key, _frame = null, parent = null):
+func image(x, y, key, frame = null, parent = null):
 	var game = host.get_ref()
-	var sprite = preload("res://game/presentation/bridge/image.gd").new().initialize(game, x, y, game.assets.texture(key))
+	var sprite = preload("res://game/presentation/bridge/image.gd").create(game, x, y, key, frame)
 	return (parent if parent != null else game.world).addChild(sprite)
 
 func tween(target):
@@ -19,6 +19,9 @@ func tween(target):
 	result.host = host
 	host.get_ref().tweens.append(result)
 	return result
+
+func audio(key, volume = 1.0, loop = false):
+	return host.get_ref().sound.create(key, volume, loop)
 
 func group(parent = null):
 	var game = host.get_ref()

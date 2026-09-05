@@ -7,6 +7,16 @@ static var random_index := 0
 static var strict_random := false
 static var global_fields: Dictionary = {}
 static var clock_milliseconds = null
+static var callback_receivers: Array = []
+
+static func callback_receiver(fallback):
+	return callback_receivers.back() if not callback_receivers.is_empty() else fallback
+
+static func invoke_context(callback, receiver, arguments):
+	callback_receivers.append(receiver)
+	var result = invoke(callback, arguments)
+	callback_receivers.pop_back()
+	return result
 
 static func module(name):
 	if loaded_modules.has(name): return loaded_modules[name]
@@ -198,8 +208,8 @@ static func invoke(callable, args: Array):
 	return null
 
 static func invoke_method(object, method, args: Array):
-	if object is Callable and method == "call": return invoke(object, args.slice(1))
-	if object is Callable and method == "apply": return invoke(object, args[1] if args.size() > 1 else [])
+	if object is Callable and method == "call": return invoke_context(object, args[0], args.slice(1))
+	if object is Callable and method == "apply": return invoke_context(object, args[0], args[1] if args.size() > 1 else [])
 	if object is String and object.begins_with("@"):
 		return builtin_call(object, method, args)
 	if object is Array: return array_call(object, method, args)

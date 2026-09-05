@@ -80,8 +80,16 @@ func original_update():
 		if child.exists: JS.invoke_method(child, "update", [])
 	return null
 
+func pre_update(milliseconds):
+	for child in children:
+		if child.exists: child.pre_update(milliseconds)
+
 func original_postUpdate():
 	return null
+
+func toLocal(point):
+	var local = view.to_local(Vector2(point.x, point.y))
+	return Point.create(local.x, local.y)
 
 func original_kill():
 	exists = false

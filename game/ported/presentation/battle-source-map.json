@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "modules": [
+    {
+      "module": "QualityManager",
+      "source": "vendor/original/js/qualitymanager.js",
+      "destination": "game/ported/presentation/game/qualitymanager.gd",
+      "sha256": "7a58edec2f507a6e53e6c405ff2e7a6a7dbe75aeb2d9081141deeb976fae53fc",
+      "changes": []
+    },
+    {
+      "module": "PlayerDetails",
+      "source": "vendor/original/js/tt/playerdetails.js",
+      "destination": "game/ported/states/playerdetails.gd",
+      "sha256": "d24083d1d4c1bfd2b1e186a3fc22c2a37bc4f265961727ee36b88e3e1aa15473",
+      "changes": []
+    },
+    {
+      "module": "UITankSprite",
+      "source": "vendor/original/js/tt/ui/game/uitanksprite.js",
+      "destination": "game/ported/presentation/game/uitanksprite.gd",
+      "sha256": "ffa3b141aa6b060ae79fab086c3eb3c7e3dd2c0bac72d1850637cde311444eba",
+      "changes": []
+    },
+    {
+      "module": "UIProjectileImage",
+      "source": "vendor/original/js/tt/ui/game/uiprojectileimage.js",
+      "destination": "game/ported/presentation/game/uiprojectileimage.gd",
+      "sha256": "5abafb836b0ae893c80e410b30593142d57f6db702d0ea555aab22d4fb381d3f",
+      "changes": []
+    },
+    {
+      "module": "UICrateSprite",
+      "source": "vendor/original/js/tt/ui/game/uicratesprite.js",
+      "destination": "game/ported/presentation/game/uicratesprite.gd",
+      "sha256": "fefcc49ef63adb0c442c9f0d22287c19493e0f3043b4e1e6597486c47b56cc86",
+      "changes": []
+    },
+    {
+      "module": "UIMineSprite",
+      "source": "vendor/original/js/tt/ui/game/uiminesprite.js",
+      "destination": "game/ported/presentation/game/uiminesprite.gd",
+      "sha256": "1f98fffd7190abe631cfbf1b8394cd2325e4db88ec78be32037e9799d10b6579",
+      "changes": []
+    },
+    {
+      "module": "UIShieldSprite",
+      "source": "vendor/original/js/tt/ui/game/uishieldsprite.js",
+      "destination": "game/ported/presentation/game/uishieldsprite.gd",
+      "sha256": "b76134729215957f72668d9f418d250d7f511049d93ddce1f43608b242d8a715",
+      "changes": []
+    },
+    {
+      "module": "UIShrapnelImage",
+      "source": "vendor/original/js/tt/ui/game/uishrapnelimage.js",
+      "destination": "game/ported/presentation/game/uishrapnelimage.gd",
+      "sha256": "e24fa3b0682bff661a050206d367a8d10cd0e26d340913680bbf76640c42adb2",
+      "changes": []
+    },
+    {
+      "module": "UIMissileImage",
+      "source": "vendor/original/js/tt/ui/game/uimissileimage.js",
+      "destination": "game/ported/presentation/game/uimissileimage.gd",
+      "sha256": "6c2136f39a48a9f8db12d7a522108a0d561459fcf782b15bd03d438f1772c68f",
+      "changes": []
+    },
+    {
+      "module": "UIGameState",
+      "source": "vendor/original/js/tt/ui/game/uigamestate.js",
+      "destination": "game/ported/presentation/world/uimazeview.gd",
+      "sha256": "d9320ebe1df500b504559f5a3e77410f1af90e35f760062835628685f3faad3a",
+      "changes": [
+        "将 _createMaze 和 _getMazeLocalBounds 原函数分离到地图表现模块"
+      ]
+    }
+  ]
+}

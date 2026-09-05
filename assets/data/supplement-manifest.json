@@ -117,6 +117,150 @@
       "bytes": 287960
     },
     {
+      "path": "assets/original/images/inputs/arrowKeys.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeys.png",
+      "sha256": "0878095e9f3f757e102f5e915db6fb665262f4cd0a81ed41d788fc9b36310103",
+      "bytes": 14793
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeys@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeys@2x.png",
+      "sha256": "e76a22afc567ff84a58c27a53b7d6706f452c64c3699cc14bd430ff0c4f1eb34",
+      "bytes": 33804
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeysActive.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeysActive.png",
+      "sha256": "d7e41856f16700927469a4e560bb6c65170ab570d9e0ecbb9798b22d0cf45224",
+      "bytes": 14750
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeysActive@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeysActive@2x.png",
+      "sha256": "a5e38b2e609ccf5fd42541e6a6e4f8e5d5d7693ca0856c5bd8169eb117656300",
+      "bytes": 34000
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeysDown.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeysDown.png",
+      "sha256": "84b2d0c1f5720129bb2bbaf2feed78c4038bd3f071b9020c34afa543d3076597",
+      "bytes": 14722
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeysDown@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeysDown@2x.png",
+      "sha256": "6c1493550c6947dc7464128e05455da71594e6c1c6a1310e8abed1f9ea58a08f",
+      "bytes": 34023
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeysSelected.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeysSelected.png",
+      "sha256": "d214e63217791b89ffd8e68488f34f03a2ad279521def75b52932143774a1898",
+      "bytes": 15764
+    },
+    {
+      "path": "assets/original/images/inputs/arrowKeysSelected@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/arrowKeysSelected@2x.png",
+      "sha256": "429d7415fa2d872e1479cc81510d4efabc0c396d995d7af143b8302679912bf0",
+      "bytes": 35659
+    },
+    {
+      "path": "assets/original/images/inputs/mouse.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouse.png",
+      "sha256": "3da2dd963bf4aaba9e0f8815ad0941c6b51fad45942ac922a469cd650b44c30b",
+      "bytes": 11928
+    },
+    {
+      "path": "assets/original/images/inputs/mouse@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouse@2x.png",
+      "sha256": "37eb144b001147d179d6426dd56502f814b39228c6eccb252441e012ff90a248",
+      "bytes": 28220
+    },
+    {
+      "path": "assets/original/images/inputs/mouseActive.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouseActive.png",
+      "sha256": "421359f2e5153db41fc78c94e763b65639342533320fe5384abf56dc35f730da",
+      "bytes": 12271
+    },
+    {
+      "path": "assets/original/images/inputs/mouseActive@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouseActive@2x.png",
+      "sha256": "831b750a1e4a1f2dc058410a83e577b88ae03f1e3330a4d7413edbdd39008a05",
+      "bytes": 28715
+    },
+    {
+      "path": "assets/original/images/inputs/mouseDown.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouseDown.png",
+      "sha256": "d1692dea8332d9219bb63b8f6f317875cf61a9760ee9b737e6d2d94abbd6f42a",
+      "bytes": 12176
+    },
+    {
+      "path": "assets/original/images/inputs/mouseDown@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouseDown@2x.png",
+      "sha256": "eb2b69b1945e9e57175081c57dd184f257ab2274d9708e49ec53ddca4fa06fd9",
+      "bytes": 28736
+    },
+    {
+      "path": "assets/original/images/inputs/mouseSelected.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouseSelected.png",
+      "sha256": "806fa19807b6ae1954507b17da9a952f052b40e69d9089a27f01b0db5fe36f83",
+      "bytes": 13759
+    },
+    {
+      "path": "assets/original/images/inputs/mouseSelected@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/mouseSelected@2x.png",
+      "sha256": "5bf8408cf24cac3f6b16992ed47f1987de2a603a88958805b8ac11f157e748c6",
+      "bytes": 32170
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeys.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeys.png",
+      "sha256": "42f4f2da4db69c60191e0cd66d06ec2478ad9781dc3e834d218178dc10f4f7b3",
+      "bytes": 13310
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeys@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeys@2x.png",
+      "sha256": "d536c1ecaae41297b11ca0dfe8164df5da62b6e256f6849546d8fc973708a7a5",
+      "bytes": 30776
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeysActive.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeysActive.png",
+      "sha256": "74a94c1eac66cc4ec5e540616058c40277a94dcf79801da1db4948b36b5bcfcd",
+      "bytes": 13290
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeysActive@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeysActive@2x.png",
+      "sha256": "79954f45e45bfe5d108a2e4fe243b13df4e226d328416d68c0e74ad8236d68fb",
+      "bytes": 30483
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeysDown.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeysDown.png",
+      "sha256": "c937e04f75e517b9204ffb1e5fb8f6eb3a7f6b165e70efbe2b427a07d5f43e84",
+      "bytes": 13178
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeysDown@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeysDown@2x.png",
+      "sha256": "9c2e6b624f101a8258dc3804a02945299bb333f98e7e6ee4be8e750584e274fb",
+      "bytes": 30383
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeysSelected.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeysSelected.png",
+      "sha256": "d0c8b397842c48dde39f53894959360668cd3d23cbe1f228aaaf489e4a8dbb57",
+      "bytes": 14397
+    },
+    {
+      "path": "assets/original/images/inputs/WASDKeysSelected@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/inputs/WASDKeysSelected@2x.png",
+      "sha256": "8b0cdf25cb410b8a9bd0290d9e574499f3cb1227f7d2e19141b11bfa5810932e",
+      "bytes": 32752
+    },
+    {
       "path": "assets/original/images/laika/laika.atlas",
       "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/laika/laika.atlas",
       "sha256": "6fb64b84030db4caaa3c80af565121039fba2024f9eaea917e17ac6a94c360fa",

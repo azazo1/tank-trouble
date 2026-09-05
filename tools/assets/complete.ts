@@ -6,6 +6,9 @@ import { RELEASE, sha256 } from "./har";
 const root = join(import.meta.dir, "../..");
 const manifest = await Bun.file(join(root, "assets/data/source-manifest.json")).json();
 const paths = new Set<string>();
+for (const controls of ["WASDKeys", "arrowKeys", "mouse"]) for (const state of ["", "Down", "Active", "Selected"]) {
+  for (const suffix of ["", "@2x"]) paths.add(`assets/original/images/inputs/${controls}${state}${suffix}.png`);
+}
 for (const file of manifest.files) {
   if (/assets\/original\/images\/(game|menu|playerPanel|ranks|buttons|laika|dimitri)\//.test(file.path) && file.path.includes("@2x")) paths.add(file.path.replace("@2x", ""));
 }

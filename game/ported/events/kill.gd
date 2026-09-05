@@ -23,7 +23,7 @@ static func original_static_set(key, value):
 func original_own_fields():
 	return ["victimPlayerId","killerPlayerId","experience","deadlyId","deadlyType"]
 
-func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var _scope0: Dictionary = {"victimPlayerId": _arg0, "killerPlayerId": _arg1, "experience": _arg2, "deadlyId": _arg3, "deadlyType": _arg4}
 	JS.set_property(self, "victimPlayerId", _scope0["victimPlayerId"])
 	JS.set_property(self, "killerPlayerId", _scope0["killerPlayerId"])
@@ -31,7 +31,7 @@ func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _
 	JS.set_property(self, "deadlyId", _scope0["deadlyId"])
 	JS.set_property(self, "deadlyType", _scope0["deadlyType"])
 	return null
-static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var instance = load("res://game/ported/events/kill.gd").new()
 	instance._construct_create(_arg0, _arg1, _arg2, _arg3, _arg4)
 	return instance

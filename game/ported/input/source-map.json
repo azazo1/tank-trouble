@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "modules": [
+    {
+      "module": "InputManager",
+      "source": "vendor/original/js/inputmanager.js",
+      "sha256": "aa030e215af2dde4ed110c7ec4dc746bb36a75177bfba2fe4dc1d0907eee595e",
+      "destination": "game/ported/input/inputmanager.gd",
+      "changes": [
+        "排除网站聊天框, 子类的输入状态和发送顺序保持原版"
+      ]
+    },
+    {
+      "module": "KeyboardInputManager",
+      "source": "vendor/original/js/keyboardinputmanager.js",
+      "sha256": "a809de18f1595a747c4a968007f6b670ae0038d4a27a07567746eee3e2d7c4ca",
+      "destination": "game/ported/input/keyboardinputmanager.gd",
+      "changes": []
+    },
+    {
+      "module": "MouseInputManager",
+      "source": "vendor/original/js/mouseinputmanager.js",
+      "sha256": "9bb4bff8d7add6b5e0f06c2ccf68e4cf646a187be9969012986c3524850a214f",
+      "destination": "game/ported/input/mouseinputmanager.gd",
+      "changes": [
+        "DOM 事件由 Godot 输入事件写入原版静态鼠标字段"
+      ]
+    },
+    {
+      "module": "Inputs",
+      "source": "vendor/original/js/inputs.js",
+      "sha256": "212cec96ea012338a630da9ecf287deed1866a22c540dacac04cad222dbd8d9f",
+      "destination": "game/ported/input/inputs.gd",
+      "changes": [
+        "排除账号事件和 Cookie 存储, 离线会话负责操作分配和版本化持久化"
+      ]
+    }
+  ]
+}

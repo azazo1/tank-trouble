@@ -4,8 +4,8 @@ const JS = preload("res://game/runtime/js_support.gd")
 var pending: Array = []
 var now = 0.0
 
-func original_add(delay, callback, _context = null):
-	var event = {"at": now + delay, "callback": callback, "cancelled": false}
+func original_add(delay, callback, context = null):
+	var event = {"at": now + delay, "callback": callback, "context": weakref(context) if context is Object else null, "cancelled": false}
 	pending.append(event)
 	return event
 
@@ -18,4 +18,4 @@ func advance(milliseconds):
 		if event.cancelled: pending.erase(event)
 		elif event.at <= now:
 			pending.erase(event)
-			JS.invoke(event.callback, [])
+			JS.invoke_context(event.callback, event.context.get_ref() if event.context != null else null, [])

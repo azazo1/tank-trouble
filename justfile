@@ -16,6 +16,8 @@ complete-assets:
 port:
     bun tools/port/generate.ts
     bun tools/port/generate-ui.ts
+    bun tools/port/generate-input.ts
+    bun tools/port/generate-battle.ts
 
 # 编译 HAR 中的 Box2D, Spine 和 P2 原函数.
 native:
@@ -50,3 +52,15 @@ check-spine:
 # 对照原版 P2 的碎片轨迹, 摩擦和接触事件.
 check-p2:
     bun tools/port/check-p2.ts
+
+# 校验一至三名玩家的输入和多回合生命周期.
+check-local:
+    godot --headless --path . --script tests/godot/local_session.gd --quit-after 120
+
+# 校验原版菜单布局与鼠标点击.
+check-menu:
+    godot --headless --path . --script tests/godot/menu_port.gd --quit-after 120
+
+# 校验原图集地图, 坦克分层和履带动画.
+check-battle:
+    godot --headless --path . --script tests/godot/battle_view.gd --quit-after 120

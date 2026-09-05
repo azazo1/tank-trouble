@@ -34,7 +34,7 @@ static func original_static_set(key, value):
 func original_own_fields():
 	return ["queuedPlayers","activePlayers","mode","maxActivePlayerCount","theme","scores","emblems","playerIdScoreIds","eventListeners","addedActivePlayerIds","addedQueuedPlayerIds","removedPlayerIds","state","gameStarted","log"]
 
-func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var _scope0: Dictionary = {"controllerId": _arg0, "mode": _arg1, "maxActivePlayerCount": _arg2, "theme": _arg3}
 	JS.set_property(self, "log", JS.invoke_method(JS.module("Log"), "create", [JS.add("GameModel ", _scope0["controllerId"])]))
 	JS.set_property(self, "mode", _scope0["mode"])
@@ -42,7 +42,7 @@ func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _
 	JS.set_property(self, "theme", _scope0["theme"])
 	JS.set_property(self, "state", JS.get_property(JS.get_property(JS.module("GameModel"), "_STATES"), "BETWEEN_ROUNDS"))
 	return null
-static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var instance = load("res://game/ported/match/gamemodel.gd").new()
 	instance._construct_create(_arg0, _arg1, _arg2, _arg3)
 	return instance

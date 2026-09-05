@@ -1,17 +1,65 @@
 extends "res://game/presentation/bridge/display_object.gd"
 
 var sprite = Sprite2D.new()
+var key
+var body
+var animations
+var tint = 0xffffff
+var frameName:
+	get: return fields.get("frameName", "")
+	set(value):
+		fields["frameName"] = value
+		if key != null: _set_texture(game.assets.texture(key, value))
+
+func _construct_create(host = null, horizontal = null, vertical = null, texture_key = null, frame = null, _f = null, _g = null, _h = null, _i = null, _j = null, _k = null, _l = null, _m = null, _n = null, _o = null, _p = null, _q = null, _r = null, _s = null, _t = null, _u = null, _v = null, _w = null, _x = null):
+	key = texture_key
+	fields["frameName"] = frame
+	initialize(host, horizontal, vertical, host.assets.texture(key, frame))
+	return null
+
+static func create(host, horizontal, vertical, texture_key, frame = null):
+	var instance = load("res://game/presentation/bridge/image.gd").new()
+	instance._construct_create(host, horizontal, vertical, texture_key, frame)
+	return instance
 
 func initialize(host, horizontal, vertical, texture):
 	game = host
 	x = horizontal
 	y = vertical
-	sprite.texture = texture
 	sprite.centered = false
-	intrinsic_size = texture.get_size()
+	_set_texture(texture)
+	animations = preload("res://game/presentation/animation/frame_animation.gd").new(self)
 	view.add_child(sprite)
 	return self
+
+func _set_texture(texture):
+	sprite.texture = texture
+	intrinsic_size = texture.get_size()
 
 func sync_view():
 	super.sync_view()
 	sprite.position = -anchor.value() * intrinsic_size
+	sprite.self_modulate = Color.hex((int(tint) << 8) | 0xff)
+
+func original_reset(horizontal, vertical, _health = null):
+	x = horizontal
+	y = vertical
+	original_revive()
+	if body != null:
+		body.reset(x, y)
+		body.addToWorld()
+	return self
+
+func original_kill():
+	if body != null: body.removeFromWorld()
+	return super.original_kill()
+
+func pre_update(milliseconds):
+	if exists: animations.advance(milliseconds)
+	super.pre_update(milliseconds)
+
+func original_destroy(destroy_children = null):
+	if body != null: body.removeFromWorld()
+	body = null
+	if animations != null: animations.clear()
+	return super.original_destroy(destroy_children)

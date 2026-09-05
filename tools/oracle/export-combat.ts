@@ -38,7 +38,7 @@ for (const scenario of scenarios) {
     inputs.push(states);
     for (const state of states) game.setInputState(InputState.withState(...state));
     runtime.advance(1000 / 60);
-    manager?.update(1 / 60);
+    manager?.update(1000 / 60);
     game.update();
     frames.push(JSON.parse(JSON.stringify(game.getRoundState(true).toObj())));
     if (manager) decisions.push(JSON.parse(JSON.stringify({ input: manager.ai.getInputState().toObj(), goal: manager.ai.goal, actions: manager.ai.actions })));

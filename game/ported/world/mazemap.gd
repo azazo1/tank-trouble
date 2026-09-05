@@ -21,7 +21,7 @@ static func original_static_set(key, value):
 func original_own_fields():
 	return ["width","height","values"]
 
-func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var _scope0: Dictionary = {"width": _arg0, "height": _arg1, "initialValue": _arg2, "values": _arg3, "i": null, "j": null}
 	JS.set_property(self, "width", _scope0["width"])
 	JS.set_property(self, "height", _scope0["height"])
@@ -39,7 +39,7 @@ func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _
 				JS.increment(_scope0, "j", 1, false)
 			JS.increment(_scope0, "i", 1, false)
 	return null
-static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var instance = load("res://game/ported/world/mazemap.gd").new()
 	instance._construct_create(_arg0, _arg1, _arg2, _arg3)
 	return instance

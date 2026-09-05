@@ -3,6 +3,15 @@ extends SceneTree
 func _initialize():
 	call_deferred("_run")
 
+func _snapshot(value):
+	if value is Array: return value.map(_snapshot)
+	if value is Dictionary:
+		var result = {}
+		for key in value: result[key] = _snapshot(value[key])
+		return result
+	if value is Object and value.has_method("to_data"): return _snapshot(value.to_data())
+	return value
+
 func _run():
 	GDExtensionManager.load_extension("res://game/native/tank_trouble.gdextension")
 	var support = load("res://game/runtime/js_support.gd")
@@ -34,10 +43,10 @@ func _run():
 		for state in inputs:
 			game.original_setInputState(support.invoke_method(support.module("InputState"), "withState", state))
 		support.clock_milliseconds += 1000.0 / 60.0
-		if manager != null: manager.original_update(1.0 / 60.0)
+		if manager != null: manager.original_update(1000.0 / 60.0)
 		game.original_update()
 		frames.append(JSON.parse_string(JSON.stringify(game.original_getRoundState(true).original_toObj(), "", false, true)))
-		if manager != null: decisions.append(JSON.parse_string(JSON.stringify({"input": manager.ai.original_getInputState().original_toObj(), "goal": manager.ai.goal, "actions": manager.ai.actions}, "", false, true)))
+		if manager != null: decisions.append(_snapshot({"input": manager.ai.original_getInputState().original_toObj(), "goal": manager.ai.goal, "actions": manager.ai.actions}))
 	var output = FileAccess.open("res://.tmp/%s.actual.json" % fixture_name, FileAccess.WRITE)
 	output.store_string(JSON.stringify({"frames": frames, "decisions": decisions, "random_count": support.random_index}, "", false, true))
 	quit(0)

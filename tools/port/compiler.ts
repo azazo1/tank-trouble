@@ -82,6 +82,7 @@ export class Compiler {
   private loops: (Node | null)[] = [];
   private staticContext = false;
   private initializingStatic = false;
+  private dynamicReceiver = false;
   private methodName = "_construct_create";
   private implicitGlobals = new Set<string>();
   private lines: string[] = [];
@@ -90,7 +91,7 @@ export class Compiler {
   constructor(private readonly definition: PortClass, private readonly modules: Record<string, string>, private readonly arities: Record<string, number> = {}) {}
 
   private parameters(name: string, count: number): string[] {
-    const arity = name === "create" || name === "_construct_create" ? 16 : Math.max(count, this.arities[name] ?? 0);
+    const arity = name === "create" || name === "_construct_create" ? Math.max(24, count) : Math.max(count, this.arities[name] ?? 0);
     return Array.from({ length: arity }, (_, i) => `_arg${i}`);
   }
 
@@ -305,7 +306,10 @@ export class Compiler {
         if (typeof n.value === "boolean") return String(n.value);
         return JSON.stringify(n.value);
       case "Identifier": return this.variable(n.name);
-      case "ThisExpression": return this.staticContext ? `JS.module(${JSON.stringify(this.definition.name)})` : "self";
+      case "ThisExpression": {
+        const receiver = this.staticContext ? `JS.module(${JSON.stringify(this.definition.name)})` : "self";
+        return this.dynamicReceiver ? `JS.callback_receiver(${receiver})` : receiver;
+      }
       case "ArrayExpression": return `[${n.elements.map((v: Node) => v ? this.expr(v) : "null").join(", ")}]`;
       case "ObjectExpression": return `{${n.properties.map((p: Node) => `${JSON.stringify(this.key(p))}: ${this.key(p) === "ctxt" ? `JS.weak(${this.expr(p.value)})` : this.expr(p.value)}`).join(", ")}}`;
       case "MemberExpression":
@@ -351,7 +355,7 @@ export class Compiler {
         return `(${a} ${n.operator} ${b})`;
       }
       case "LogicalExpression": {
-        const thunk = (value: Node) => this.expr({ type: "FunctionExpression", params: [], body: { type: "BlockStatement", body: [{ type: "ReturnStatement", argument: value }] } });
+        const thunk = (value: Node) => this.expr({ type: "FunctionExpression", lexicalReceiver: true, params: [], body: { type: "BlockStatement", body: [{ type: "ReturnStatement", argument: value }] } });
         return `JS.logical(${JSON.stringify(n.operator)}, ${thunk(n.left)}, ${thunk(n.right)})`;
       }
       case "ConditionalExpression": return `(${this.expr(n.consequent)} if JS.truthy(${this.expr(n.test)}) else ${this.expr(n.alternate)})`;
@@ -375,6 +379,8 @@ export class Compiler {
         const savedLines = this.lines;
         const savedScope = this.scope;
         const savedIndent = this.indentation;
+        const savedReceiver = this.dynamicReceiver;
+        if (!n.lexicalReceiver) this.dynamicReceiver = true;
         this.lines = [];
         this.scope = this.localScope(n);
         this.line(`func(${n.params.map((_: Node, i: number) => `_arg${i} = null`).join(", ")}):`);
@@ -384,6 +390,7 @@ export class Compiler {
         this.lines = savedLines;
         this.scope = savedScope;
         this.indentation = savedIndent;
+        this.dynamicReceiver = savedReceiver;
         return result;
       }
       default: throw new Error(`不支持的表达式: ${n.type}`);

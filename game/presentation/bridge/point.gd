@@ -5,6 +5,9 @@ var y = 0.0
 var owner: WeakRef
 var kind: String
 
+static func create(horizontal = 0.0, vertical = 0.0):
+	return load("res://game/presentation/bridge/point.gd").new(null, "", Vector2(horizontal, vertical))
+
 func _init(target = null, property_name = "", initial = Vector2.ZERO):
 	if target != null: owner = weakref(target)
 	kind = property_name
@@ -21,3 +24,6 @@ func original_set(horizontal = 0, vertical = null):
 
 func value():
 	return Vector2(float(x), float(y))
+
+func getMagnitude():
+	return sqrt(x * x + y * y)

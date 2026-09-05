@@ -37,6 +37,10 @@ Value Runtime::regexp(const std::string &pattern, const std::string &flags) {
 }
 
 void Runtime::install_spine_builtins() {
+    set(global("Array"), "isArray", host([](Runtime &, Value, const Arguments &args) {
+        auto value = arg(args, 0);
+        return Value(value.kind == Value::OBJECT && value.node->array && value.node->array_type == 0);
+    }));
     object_prototype->fields["toString"] = host([](Runtime &, Value self, const Arguments &) {
         if (self.kind == Value::OBJECT && self.node->array) return Value("[object Array]");
         return Value("[object Object]");

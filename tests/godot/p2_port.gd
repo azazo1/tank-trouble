@@ -23,8 +23,13 @@ func _run():
 		var expected = JSON.parse_string(FileAccess.get_file_as_string("res://.tmp/p2-%s.expected.json" % name))
 		var scenario = expected.scenario
 		engine = ClassDB.instantiate("TTOriginalP2")
-		assert(engine.initialize())
+		if not engine.initialize():
+			quit(1)
+			return
 		var world = engine.create_object("World", [{"gravity": scenario.gravity}])
+		if world.is_empty():
+			quit(1)
+			return
 		var material_a = engine.create_object("Material", [])
 		var material_b = engine.create_object("Material", [])
 		var contact = engine.create_object("ContactMaterial", [material_a, material_b, {"restitution": 0.35, "friction": 1, "relaxation": 10}])

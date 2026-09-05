@@ -39,7 +39,7 @@ static func original_static_set(key, value):
 func original_own_fields():
 	return ["model","roundController","roundEventListeners","gameEventListeners","id","localPlayerIds","log","ranked","symmetric","storm","crateTypes","premium","gameMode","betweenRoundsDuration","celebrationDuration","celebrationStarted","celebrationEnded","playerAdded","lastUpdate","countDownValue","countDownDuration"]
 
-func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var _scope0: Dictionary = {"gameMode": _arg0, "ranked": _arg1, "symmetric": _arg2, "storm": _arg3, "maxActivePlayerCount": _arg4, "crateTypes": _arg5, "premium": _arg6, "theme": _arg7}
 	JS.set_property(self, "id", JS.invoke_method(JS.get_property(JS.module("IdGenerator"), "instance"), "gen", ["gc"]))
 	JS.set_property(self, "gameMode", _scope0["gameMode"])
@@ -51,7 +51,7 @@ func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _
 	JS.invoke_method(JS.get_property(self, "gameMode"), "setGameController", [self])
 	JS.invoke_method(self, "_init", [JS.invoke_method(JS.get_property(self, "gameMode"), "getMode", []), _scope0["maxActivePlayerCount"], _scope0["theme"]])
 	return null
-static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var instance = load("res://game/ported/match/gamecontroller.gd").new()
 	instance._construct_create(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6, _arg7)
 	return instance

@@ -29,6 +29,7 @@ public:
     godot::Variant invoke_object(int64_t handle, const godot::String &method, const godot::Array &arguments);
     godot::Variant read_property(int64_t handle, const godot::String &key);
     void write_property(int64_t handle, const godot::String &key, const godot::Variant &value);
+    void write_component(int64_t handle, const godot::String &key, int64_t index, double value);
     void collect();
 };
 

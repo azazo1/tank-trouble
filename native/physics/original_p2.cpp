@@ -17,6 +17,7 @@ void TTOriginalP2::_bind_methods() {
     ClassDB::bind_method(D_METHOD("invoke_object", "handle", "method", "arguments"), &TTOriginalP2::invoke_object);
     ClassDB::bind_method(D_METHOD("read_property", "handle", "key"), &TTOriginalP2::read_property);
     ClassDB::bind_method(D_METHOD("write_property", "handle", "key", "value"), &TTOriginalP2::write_property);
+    ClassDB::bind_method(D_METHOD("write_component", "handle", "key", "index", "value"), &TTOriginalP2::write_component);
     ClassDB::bind_method(D_METHOD("collect"), &TTOriginalP2::collect);
 }
 
@@ -133,6 +134,11 @@ void TTOriginalP2::collect() {
     Arguments roots = {p2};
     for (const auto &entry : handles) roots.push_back(entry.second);
     runtime.collect(roots);
+}
+
+void TTOriginalP2::write_component(int64_t handle, const String &key, int64_t index, double value) {
+    try { runtime.set(runtime.get(handles.at(handle), utf8(key)), Value(static_cast<double>(index)), Value(value)); }
+    catch (const std::exception &error) { UtilityFunctions::push_error(String::utf8(error.what())); }
 }
 
 }

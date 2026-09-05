@@ -10,9 +10,7 @@ var delay = 0.0
 var elapsed = 0.0
 var easing = "Linear.None"
 var active = false
-var completions: Array = []
-var onComplete:
-	get: return {"add": func(callback, _context = null): completions.append(callback)}
+var onComplete = preload("res://game/presentation/bridge/event_signal.gd").new()
 
 func original_to(values, milliseconds, curve, auto_start = false, wait = 0.0):
 	destination = values
@@ -42,5 +40,5 @@ func advance(milliseconds):
 	for key in destination: JS.set_property(target, key, start[key] + (destination[key] - start[key]) * value)
 	if progress == 1.0:
 		active = false
-		for callback in completions: JS.invoke(callback, [])
-		completions.clear()
+		onComplete.dispatch()
+		onComplete.removeAll()

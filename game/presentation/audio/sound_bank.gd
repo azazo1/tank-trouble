@@ -3,6 +3,7 @@ extends RefCounted
 var parent: WeakRef
 var streams: Dictionary = {}
 var paths: Dictionary = {}
+var sounds: Array = []
 var log = preload("res://game/runtime/original_log.gd").create("Audio")
 
 func _init(node = null):
@@ -25,3 +26,20 @@ func original_play(key, volume = 1.0, loop = false):
 	player.play()
 	log.debug("播放原版音效", {"sound": key})
 	return player
+
+func stream(key):
+	assert(paths.has(key), "音频资源不存在: " + str(key))
+	if not streams.has(key): streams[key] = AudioStreamWAV.load_from_file(paths[key])
+	return streams[key]
+
+func create(key, volume = 1.0, loop = false):
+	var sound = preload("res://game/presentation/audio/original_sound.gd").new(self, key, volume, loop)
+	sounds.append(sound)
+	return sound
+
+func stopAll():
+	for sound in sounds: sound.stop()
+
+func destroy():
+	for sound in sounds: sound.destroy()
+	sounds.clear()

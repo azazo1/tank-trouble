@@ -41,7 +41,7 @@ func original_own_fields():
 func original_is_weak_field(key):
 	return ["roundModel","evtContext"].has(key) or super.original_is_weak_field(key)
 
-func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var _scope0: Dictionary = {"projectileState": _arg0, "lifetime": _arg1, "timeoutWindow": _arg2, "timeoutBounceCount": _arg3, "roundModel": _arg4, "evtHandler": _arg5, "evtContext": _arg6}
 	JS.invoke_method(self, "setProjectileState", [_scope0["projectileState"]])
 	JS.set_property(self, "timeAlive", 0)
@@ -58,7 +58,7 @@ func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _
 	JS.set_property(self, "evtContext", _scope0["evtContext"])
 	JS.set_property(self, "log", JS.invoke_method(JS.module("Log"), "create", ["Projectile"]))
 	return null
-static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null, _arg16 = null, _arg17 = null, _arg18 = null, _arg19 = null, _arg20 = null, _arg21 = null, _arg22 = null, _arg23 = null):
 	var instance = load("res://game/ported/combat/projectile.gd").new()
 	instance._construct_create(_arg0, _arg1, _arg2, _arg3, _arg4, _arg5, _arg6)
 	return instance

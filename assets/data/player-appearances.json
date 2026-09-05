@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "captured_at": "2026-09-05T08:37:28.772Z",
+  "source": "tanktrouble.getPlayerDetails / tanktrouble.account.createGuests",
+  "sha256": "5fb8607fc857a60fb58e16cde39abfd4b4a9486e1fd1e99dfeed688c1ba779f3",
+  "ai": {
+    "playerId": "6148530",
+    "username": "Laika",
+    "baseColour": {
+      "type": "numeric",
+      "rawValue": "0x4c4c4c",
+      "numericValue": 5000268,
+      "imageValue": ""
+    },
+    "turretColour": {
+      "type": "numeric",
+      "rawValue": "0x4c4c4c",
+      "numericValue": 5000268,
+      "imageValue": ""
+    },
+    "treadColour": {
+      "type": "numeric",
+      "rawValue": "0xcccccc",
+      "numericValue": 13421772,
+      "imageValue": ""
+    },
+    "turretAccessory": "0",
+    "barrelAccessory": "0",
+    "frontAccessory": "7",
+    "backAccessory": "0",
+    "treadAccessory": "0",
+    "backgroundAccessory": "0",
+    "badge": "0"
+  },
+  "guests": [
+    {
+      "playerId": "22703327",
+      "username": "WaterproofGiantTooth",
+      "baseColour": {
+        "type": "numeric",
+        "rawValue": "0x00ff00",
+        "numericValue": 65280,
+        "imageValue": ""
+      },
+      "turretColour": {
+        "type": "numeric",
+        "rawValue": "0x8000ff",
+        "numericValue": 8388863,
+        "imageValue": ""
+      },
+      "treadColour": {
+        "type": "numeric",
+        "rawValue": "0xff8000",
+        "numericValue": 16744448,
+        "imageValue": ""
+      },
+      "turretAccessory": "0",
+      "barrelAccessory": "0",
+      "frontAccessory": "0",
+      "backAccessory": "0",
+      "treadAccessory": "0",
+      "backgroundAccessory": "0",
+      "badge": "0"
+    },
+    {
+      "playerId": "22703328",
+      "username": "DeadlyRazorSergeant",
+      "baseColour": {
+        "type": "numeric",
+        "rawValue": "0xff1000",
+        "numericValue": 16715776,
+        "imageValue": ""
+      },
+      "turretColour": {
+        "type": "numeric",
+        "rawValue": "0xa5ff03",
+        "numericValue": 10878723,
+        "imageValue": ""
+      },
+      "treadColour": {
+        "type": "numeric",
+        "rawValue": "0xffff00",
+        "numericValue": 16776960,
+        "imageValue": ""
+      },
+      "turretAccessory": "0",
+      "barrelAccessory": "0",
+      "frontAccessory": "0",
+      "backAccessory": "0",
+      "treadAccessory": "0",
+      "backgroundAccessory": "0",
+      "badge": "0"
+    },
+    {
+      "playerId": "22703329",
+      "username": "WaterproofGiantMyth",
+      "baseColour": {
+        "type": "numeric",
+        "rawValue": "0xa5ff03",
+        "numericValue": 10878723,
+        "imageValue": ""
+      },
+      "turretColour": {
+        "type": "numeric",
+        "rawValue": "0xffff00",
+        "numericValue": 16776960,
+        "imageValue": ""
+      },
+      "treadColour": {
+        "type": "numeric",
+        "rawValue": "0x804000",
+        "numericValue": 8404992,
+        "imageValue": ""
+      },
+      "turretAccessory": "0",
+      "barrelAccessory": "0",
+      "frontAccessory": "0",
+      "backAccessory": "0",
+      "treadAccessory": "0",
+      "backgroundAccessory": "0",
+      "badge": "0"
+    }
+  ]
+}

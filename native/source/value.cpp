@@ -331,7 +331,10 @@ Runtime::Runtime() {
     array_prototype->prototype = object_prototype;
     function_prototype = allocate();
     function_prototype->prototype = object_prototype;
-    globals["Object"] = host([](Runtime &r, Value, const Arguments &) { return r.object(); });
+    globals["Object"] = host([](Runtime &r, Value, const Arguments &args) {
+        const auto value = argument(args, 0);
+        return value.kind == Value::OBJECT ? value : r.object();
+    });
     set(globals["Object"], "defineProperty", host([](Runtime &r, Value, const Arguments &args) {
         auto object = argument(args, 0), key = argument(args, 1), descriptor = argument(args, 2);
         for (const char *kind : {"get", "set"}) {
