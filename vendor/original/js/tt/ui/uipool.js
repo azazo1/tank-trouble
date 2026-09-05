@@ -1,0 +1,1 @@
+var UIPool=Classy.newClass();UIPool.fields({items:[]});UIPool.methods({add:function(item){this.items.push(item);},getFirstExists:function(exists){for(var i=0;i<this.items.length;i++){if(this.items[i]["exists"]===exists){return this.items[i];}}return null;}});
