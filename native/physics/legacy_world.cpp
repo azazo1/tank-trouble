@@ -248,6 +248,7 @@ void TTLegacyWorld::ray_cast(const Callable &callback, double x1, double y1, dou
         return Value(static_cast<double>(callback.call(static_cast<int64_t>(runtime.number(call(args[0], "GetUserData"))), point(args[1]), point(args[2]), runtime.number(args[3]))));
     });
     call(world, "RayCast", {ray, vector(x1, y1), vector(x2, y2)});
+    ray.node->host = {};
 }
 
 void TTLegacyWorld::query_shape(const Callable &callback, const Dictionary &definition, double x, double y, double angle) {
@@ -257,6 +258,7 @@ void TTLegacyWorld::query_shape(const Callable &callback, const Dictionary &defi
     const auto rotation = call(path("Common.Math.b2Mat22"), "FromAngle", {Value(angle)});
     const auto transform = runtime.construct(path("Common.Math.b2Transform"), {vector(x, y), rotation});
     call(world, "QueryShape", {query, make_shape(definition), transform});
+    query.node->host = {};
 }
 
 }

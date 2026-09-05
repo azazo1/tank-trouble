@@ -112,11 +112,17 @@ static func bitwise(operation, a, b):
 static func signed_int(value):
 	return value if value < 0x80000000 else value - 0x100000000
 
+static func weak(value):
+	return weakref(value) if value is Object and not value is Script else value
+
+static func dereference(value):
+	return value.get_ref() if value is WeakRef else value
+
 static func get_property(object, key):
 	if object == null: return null
 	if object is Dictionary:
 		if object.has("@set") and key == "size": return object["@set"].size()
-		return object.get(text(key))
+		return dereference(object.get(text(key)))
 	if object is Array:
 		if key is String and key == "length": return object.size()
 		var index = int(key)
@@ -140,7 +146,7 @@ static func get_property(object, key):
 	if object is Object:
 		if object.has_method("original_" + str(key)): return Callable(object, "original_" + str(key))
 		if object.has_method(str(key)): return Callable(object, str(key))
-		return object.get(str(key))
+		return dereference(object.get(str(key)))
 	return null
 
 static func set_property(object, key, value):
@@ -152,7 +158,8 @@ static func set_property(object, key, value):
 			if index >= object.size(): object.resize(index + 1)
 			object[index] = value
 	elif object is Script: object.original_static_set(key, value)
-	elif object is Object: object.set(str(key), value)
+	elif object is Object:
+		object.set(str(key), weak(value) if object.has_method("original_is_weak_field") and object.original_is_weak_field(key) else value)
 	else: assert(false, "不能设置属性: " + str(key))
 	return value
 
@@ -191,6 +198,8 @@ static func invoke(callable, args: Array):
 	return null
 
 static func invoke_method(object, method, args: Array):
+	if object is Callable and method == "call": return invoke(object, args.slice(1))
+	if object is Callable and method == "apply": return invoke(object, args[1] if args.size() > 1 else [])
 	if object is String and object.begins_with("@"):
 		return builtin_call(object, method, args)
 	if object is Array: return array_call(object, method, args)
@@ -211,6 +220,9 @@ static func invoke_method(object, method, args: Array):
 	if object is Dictionary: return invoke(object[method], args)
 	if object is Object and object.has_method("original_" + str(method)):
 		return invoke(Callable(object, "original_" + str(method)), args)
+	if object is Object:
+		var member = get_property(object, method)
+		if member is Callable: return invoke(member, args)
 	assert(object is Object and object.has_method(str(method)), "缺少方法: " + str(method))
 	return invoke(Callable(object, str(method)), args)
 
@@ -290,7 +302,7 @@ static func builtin_call(object, method, args: Array):
 	if object == "@Object" and method == "keys": return keys(args[0])
 	if object == "@Array" and method == "isArray": return args[0] is Array
 	if object == "@JSON":
-		if method == "stringify": return JSON.stringify(args[0])
+		if method == "stringify": return JSON.stringify(args[0], "", false, true)
 		if method == "parse": return JSON.parse_string(args[0])
 	assert(false, "未移植的内建方法: " + str(object) + "." + str(method))
 	return null
@@ -313,7 +325,7 @@ static func construct(type, args: Array):
 				return result
 			return args.duplicate()
 		if type == "@Date": return load("res://game/runtime/original_date.gd").new(args[0] if args.size() else null)
-	if type is Script: return type.callv("new", args)
+	if type is Script: return type.callv("create" if type.has_method("create") else "new", args)
 	assert(false, "未移植的构造类型: " + str(type))
 	return null
 

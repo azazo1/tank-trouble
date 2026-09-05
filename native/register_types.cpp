@@ -1,8 +1,14 @@
 #include "physics/legacy_world.h"
+#include "physics/original_p2.h"
+#include "animation/original_spine.h"
 #include <godot_cpp/godot.hpp>
 
 static void initialize(godot::ModuleInitializationLevel level) {
-    if (level == godot::MODULE_INITIALIZATION_LEVEL_SCENE) godot::ClassDB::register_class<tank_trouble::TTLegacyWorld>();
+    if (level == godot::MODULE_INITIALIZATION_LEVEL_SCENE) {
+        godot::ClassDB::register_class<tank_trouble::TTLegacyWorld>();
+        godot::ClassDB::register_class<tank_trouble::TTOriginalP2>();
+        godot::ClassDB::register_class<tank_trouble::TTOriginalSpine>();
+    }
 }
 
 static void uninitialize(godot::ModuleInitializationLevel) {}

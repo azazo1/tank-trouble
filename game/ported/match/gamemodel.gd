@@ -439,7 +439,7 @@ func original__removePlayerFromActive(_arg0 = null, _arg1 = null):
 
 func original_addEventListener(_arg0 = null, _arg1 = null, _arg2 = null):
 	var _scope51: Dictionary = {"callback": _arg0, "context": _arg1, "gameId": _arg2}
-	JS.invoke_method(JS.get_property(self, "eventListeners"), "push", [{"cb": _scope51["callback"], "ctxt": _scope51["context"], "gameId": _scope51["gameId"]}])
+	JS.invoke_method(JS.get_property(self, "eventListeners"), "push", [{"cb": _scope51["callback"], "ctxt": JS.weak(_scope51["context"]), "gameId": _scope51["gameId"]}])
 	return null
 
 func original_removeEventListener(_arg0 = null, _arg1 = null):

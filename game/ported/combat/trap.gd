@@ -30,6 +30,8 @@ static func original_static_set(key, value):
 	return value
 func original_own_fields():
 	return ["id","playerId","type","x","y","speedX","speedY","b2dbody","roundModel","timeAlive","evtHandler","evtContext","log"]
+func original_is_weak_field(key):
+	return ["roundModel","evtContext"].has(key) or super.original_is_weak_field(key)
 
 func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
 	var _scope0: Dictionary = {"trapState": _arg0, "roundModel": _arg1, "evtHandler": _arg2, "evtContext": _arg3}

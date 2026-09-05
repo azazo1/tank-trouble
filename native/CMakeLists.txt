@@ -21,11 +21,13 @@ message(STATUS "准备 godot-cpp 4.4.1: 首次下载并校验归档, 后续复�
 FetchContent_MakeAvailable(godot_cpp)
 
 file(GLOB BOX2D_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/../build/original-box2d/*.cpp")
-add_library(original_box2d STATIC ${BOX2D_SOURCES} source/value.cpp)
+file(GLOB SPINE_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/../build/original-spine/*.cpp")
+file(GLOB P2_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/../build/original-p2/*.cpp")
+add_library(original_box2d STATIC ${BOX2D_SOURCES} ${SPINE_SOURCES} ${P2_SOURCES} source/value.cpp source/spine_builtins.cpp)
 target_include_directories(original_box2d PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/source")
 target_compile_options(original_box2d PRIVATE -ffp-contract=off -O1)
 
-add_library(tank_trouble_native SHARED physics/legacy_world.cpp register_types.cpp)
+add_library(tank_trouble_native SHARED physics/legacy_world.cpp physics/original_p2.cpp animation/original_spine.cpp register_types.cpp)
 target_link_libraries(tank_trouble_native PRIVATE godot::cpp original_box2d)
 target_compile_options(tank_trouble_native PRIVATE -ffp-contract=off)
 set_target_properties(tank_trouble_native PROPERTIES

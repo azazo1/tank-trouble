@@ -17,7 +17,9 @@ func GetAngle():
 
 func GetLinearVelocity():
 	var state = world.get_ref().native.read_body(id)
-	return Vec.Make(state.vx, state.vy)
+	var result = Vec.Make(state.vx, state.vy)
+	result.changed = func(x, y): world.get_ref().native.set_velocity(id, x, y)
+	return result
 
 func GetAngularVelocity():
 	return world.get_ref().native.read_body(id).angularVelocity

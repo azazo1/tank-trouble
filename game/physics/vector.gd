@@ -1,7 +1,14 @@
 extends RefCounted
 
-var x: float
-var y: float
+var changed: Callable
+var x: float:
+	set(value):
+		x = value
+		if changed.is_valid(): changed.call(x, y)
+var y: float:
+	set(value):
+		y = value
+		if changed.is_valid(): changed.call(x, y)
 
 func _init(px = 0.0, py = 0.0):
 	x = px

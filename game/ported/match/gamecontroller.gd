@@ -981,7 +981,7 @@ func original_removeGameEventListener(_arg0 = null, _arg1 = null):
 
 func original_addRoundEventListener(_arg0 = null, _arg1 = null):
 	var _scope136: Dictionary = {"callback": _arg0, "context": _arg1}
-	JS.invoke_method(JS.get_property(self, "roundEventListeners"), "push", [{"cb": _scope136["callback"], "ctxt": _scope136["context"]}])
+	JS.invoke_method(JS.get_property(self, "roundEventListeners"), "push", [{"cb": _scope136["callback"], "ctxt": JS.weak(_scope136["context"])}])
 	if JS.truthy(JS.get_property(self, "roundController")):
 		JS.invoke_method(JS.get_property(self, "roundController"), "addEventListener", [_scope136["callback"], _scope136["context"], JS.get_property(self, "id")])
 	return null

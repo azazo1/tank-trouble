@@ -5,3 +5,6 @@ func _construct_create(_a = null, _b = null, _c = null, _d = null, _e = null, _f
 
 func original_own_fields():
 	return []
+
+func original_is_weak_field(_key):
+	return false

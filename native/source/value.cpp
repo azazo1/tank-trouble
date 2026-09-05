@@ -82,6 +82,8 @@ Value Runtime::get(Value object, Value key) const {
     if (object.kind == Value::STRING) {
         if (name == "length") return Value(static_cast<double>(object.string.size()));
         if (name == "indexOf") return globals.at("@stringIndexOf");
+        auto method = globals.find("@string:" + name);
+        if (method != globals.end()) return method->second;
         size_t index;
         if (index_key(name, index) && index < object.string.size()) return Value(object.string.substr(index, 1));
         return Value();
@@ -89,9 +91,12 @@ Value Runtime::get(Value object, Value key) const {
     if (object.kind != Value::OBJECT) throw std::runtime_error("不能读取原生属性: " + name + " (" + text(object) + ")");
     auto node = object.node;
     if (node->array) {
-        if (name == "length") return Value(static_cast<double>(node->elements.size()));
+        if (name == "length") {
+            auto length = node->fields.find("@length");
+            return length != node->fields.end() ? length->second : Value(static_cast<double>(node->elements.size()));
+        }
         size_t index;
-        if (index_key(name, index)) return index < node->elements.size() ? node->elements[index] : Value();
+        if (index_key(name, index) && index < node->elements.size()) return node->elements[index];
     }
     for (; node; node = node->prototype) {
         auto getter = node->fields.find("@get:" + name);
@@ -111,14 +116,41 @@ Value Runtime::set(Value object, Value key, Value value) {
         if (setter != prototype->fields.end()) { invoke(setter->second, object, {value}); return value; }
     }
     if (node->array) {
-        if (name == "length") { node->elements.resize(static_cast<size_t>(number(value))); return value; }
+        if (name == "length") {
+            const auto length = static_cast<size_t>(number(value));
+            if (length > 65536 && node->array_type == 0) node->fields["@length"] = value;
+            else {
+                node->fields.erase("@length");
+                node->elements.resize(length);
+            }
+            for (auto it = node->fields.begin(); it != node->fields.end();) {
+                size_t index;
+                if (index_key(it->first, index) && index >= length) it = node->fields.erase(it);
+                else ++it;
+            }
+            return value;
+        }
         size_t index;
         if (index_key(name, index)) {
+            if (node->array_type != 0 && index >= node->elements.size()) return value;
+            if (index >= 65536 && node->array_type == 0) {
+                const auto length = get(object, "length");
+                node->fields["@length"] = Value(std::max(number(length), static_cast<double>(index + 1)));
+                if (!node->fields.count(name)) node->property_order.push_back(name);
+                node->fields[name] = value;
+                return value;
+            }
             if (index >= node->elements.size()) node->elements.resize(index + 1);
-            node->elements[index] = value;
+            if (node->array_type == 1) node->elements[index] = Value(static_cast<double>(static_cast<float>(number(value))));
+            else if (node->array_type == 2) node->elements[index] = Value(static_cast<double>(static_cast<int16_t>(number(value))));
+            else if (node->array_type == 3) node->elements[index] = Value(static_cast<double>(static_cast<uint16_t>(number(value))));
+            else if (node->array_type == 4) node->elements[index] = Value(static_cast<double>(static_cast<uint32_t>(number(value))));
+            else if (node->array_type == 5) node->elements[index] = Value(static_cast<double>(static_cast<int32_t>(number(value))));
+            else node->elements[index] = value;
             return value;
         }
     }
+    if (!node->fields.count(name)) node->property_order.push_back(name);
     node->fields[name] = value;
     return value;
 }
@@ -135,7 +167,9 @@ Value Runtime::invoke(Value function, Value receiver, const Arguments &arguments
     try {
         return node->function(*this, receiver, arguments, node->closure, function);
     } catch (const std::exception &error) {
-        throw std::runtime_error("Box2D " + std::to_string(box2d_function_id(node->function)) + ": " + error.what());
+        const auto found = function_names.find(node->function);
+        const auto label = found == function_names.end() ? "Box2D " + std::to_string(box2d_function_id(node->function)) : found->second;
+        throw std::runtime_error(label + ": " + error.what());
     }
 }
 
@@ -197,6 +231,13 @@ static uint32_t uint32_number(double number) {
 }
 
 Value Runtime::binary(const std::string &operation, Value left, Value right) const {
+    if (operation == "in") {
+        if (right.kind != Value::OBJECT) return Value(false);
+        auto name = text(left);
+        for (auto node = right.node; node; node = node->prototype) if (node->fields.count(name)) return Value(true);
+        size_t index;
+        return Value(right.node->array && index_key(name, index) && index < right.node->elements.size());
+    }
     if (operation == "==" || operation == "===") return Value(equal(left, right, operation == "==="));
     if (operation == "!=" || operation == "!==") return Value(!equal(left, right, operation == "!=="));
     if (operation == "+" && (left.kind == Value::STRING || right.kind == Value::STRING)) return Value(text(left) + text(right));
@@ -205,6 +246,16 @@ Value Runtime::binary(const std::string &operation, Value left, Value right) con
         const auto prototype = get(right, "prototype");
         for (auto node = left.node->prototype; node; node = node->prototype) if (prototype.node == node) return Value(true);
         return Value(false);
+    }
+    if (operation == "<" || operation == "<=" || operation == ">" || operation == ">=") {
+        if (left.kind == Value::OBJECT) left = Value(text(left));
+        if (right.kind == Value::OBJECT) right = Value(text(right));
+        if (left.kind == Value::STRING && right.kind == Value::STRING) {
+            if (operation == "<") return Value(left.string < right.string);
+            if (operation == "<=") return Value(left.string <= right.string);
+            if (operation == ">") return Value(left.string > right.string);
+            return Value(left.string >= right.string);
+        }
     }
     const double a = number(left), b = number(right);
     if (operation == "+") return Value(a + b);
@@ -313,6 +364,13 @@ Runtime::Runtime() {
         self.node->elements.insert(self.node->elements.end(), args.begin(), args.end());
         return Value(static_cast<double>(self.node->elements.size()));
     });
+    array_prototype->fields["indexOf"] = host([](Runtime &r, Value self, const Arguments &args) {
+        const auto &items = self.node->elements;
+        int start = args.size() > 1 ? static_cast<int>(r.number(args[1])) : 0;
+        if (start < 0) start = std::max(0, static_cast<int>(items.size()) + start);
+        for (size_t i = static_cast<size_t>(start); i < items.size(); ++i) if (r.equal(items[i], argument(args, 0), true)) return Value(static_cast<double>(i));
+        return Value(-1.0);
+    });
     array_prototype->fields["splice"] = host([](Runtime &r, Value self, const Arguments &args) {
         auto &items = self.node->elements;
         int start = static_cast<int>(r.number(argument(args, 0))), size = static_cast<int>(items.size());
@@ -325,7 +383,8 @@ Runtime::Runtime() {
         return removed;
     });
     globals["@stringIndexOf"] = host([](Runtime &r, Value self, const Arguments &args) {
-        const auto found = self.string.find(r.text(argument(args, 0)));
+        const auto start = args.size() > 1 ? static_cast<size_t>(std::max(0.0, r.number(args[1]))) : 0;
+        const auto found = self.string.find(r.text(argument(args, 0)), start);
         return Value(found == std::string::npos ? -1.0 : static_cast<double>(found));
     });
     globals["Number"] = host([](Runtime &r, Value, const Arguments &args) { return Value(r.number(argument(args, 0))); });

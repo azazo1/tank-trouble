@@ -37,8 +37,10 @@ struct Node {
     bool marked = false;
     bool array = false;
     bool callable = false;
+    int array_type = 0;
     Node *prototype = nullptr;
     std::unordered_map<std::string, Value> fields;
+    std::vector<std::string> property_order;
     Arguments elements;
     Environment *closure = nullptr;
     Function function = nullptr;
@@ -64,9 +66,16 @@ class Runtime {
     Node *allocate();
 
 public:
+    uint64_t instruction_budget = 0;
+    void checkpoint(int function, int offset);
+    std::unordered_map<Function, std::string> function_names;
     Runtime();
     Environment *environment(Environment *parent, size_t count);
     Value global(const std::string &name) const;
+    void set_global(const std::string &name, Value value) { globals[name] = value; }
+    void install_spine_builtins();
+    Value regexp(const std::string &pattern, const std::string &flags);
+    std::vector<std::string> keys(Value object) const;
     Value object();
     Value array(const Arguments &items = {});
     Value function(Function function, Environment *closure);
@@ -86,6 +95,7 @@ public:
 };
 
 Value initialize_box2d(Runtime &runtime);
+Value initialize_spine(Runtime &runtime);
 Function box2d_function(size_t index);
 int box2d_function_id(Function function);
 

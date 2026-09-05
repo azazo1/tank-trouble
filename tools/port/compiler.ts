@@ -5,6 +5,7 @@ type Scope = { id: number; names: Set<string>; parent?: Scope };
 
 export interface PortClass {
   name: string;
+  reference?: string;
   base?: string;
   fields: Node[];
   staticFields: Node[];
@@ -14,31 +15,55 @@ export interface PortClass {
   trailing: Node[];
 }
 
+function referenceName(node: Node): string | undefined {
+  if (node?.type === "Identifier") return node.name;
+  if (node?.type === "MemberExpression" && !node.computed) {
+    const parent = referenceName(node.object);
+    if (parent) return `${parent}.${node.property.name}`;
+  }
+}
+
 export function classDefinition(source: string): PortClass {
   const ast = parse(source, { ecmaVersion: "latest" }) as Node;
   const definition: PortClass = { name: "", fields: [], staticFields: [], methods: [], staticMethods: [], constructors: [], trailing: [] };
   for (const node of ast.body) {
-    const items = node.type === "VariableDeclaration" ? node.declarations : node.type === "ExpressionStatement" && node.expression.type === "AssignmentExpression" && node.expression.left.type === "Identifier" ? [{ id: node.expression.left, init: node.expression.right }] : [];
+    const items = node.type === "VariableDeclaration" ? node.declarations : node.type === "ExpressionStatement" && node.expression.type === "AssignmentExpression" ? [{ id: node.expression.left, init: node.expression.right }] : [];
     for (const item of items) {
       let init = item.init;
       while (init?.type === "CallExpression" && init.callee?.property?.name === "name") init = init.callee.object;
       if (init?.type !== "CallExpression" || !["newClass", "subclass"].includes(init.callee?.property?.name)) continue;
-      definition.name = item.id.name;
-      if (init.callee.property.name === "subclass") definition.base = init.callee.object.name;
+      definition.reference = referenceName(item.id);
+      definition.name = definition.reference!.split(".").at(-1)!;
+      if (init.callee.property.name === "subclass") definition.base = referenceName(init.callee.object);
     }
   }
-  if (!definition.name) throw new Error("没有找到 Classy 类定义");
+  if (!definition.name) {
+    for (const node of ast.body) {
+      const expr = node.expression;
+      if (expr?.type === "AssignmentExpression" && expr.left.type === "Identifier" && expr.right.type === "FunctionExpression") {
+        definition.name = definition.reference = expr.left.name;
+        definition.constructors.push({ name: "create", fn: expr.right });
+        break;
+      }
+    }
+  }
+  if (!definition.name) throw new Error("没有找到原版类定义");
   for (const node of ast.body) {
     if (node.type !== "ExpressionStatement") continue;
     const expr = node.expression;
-    if (expr.type === "CallExpression" && expr.callee.object?.name === definition.name) {
+    if (expr.type === "CallExpression" && referenceName(expr.callee.object) === definition.reference) {
       const method = expr.callee.property.name;
       const targets = new Map<string, Node[]>([["fields", definition.fields], ["classFields", definition.staticFields], ["methods", definition.methods], ["classMethods", definition.staticMethods]]);
       const target = targets.get(method);
       if (target) target.push(...expr.arguments[0].properties);
       else if (method === "constructor") definition.constructors.push({ name: expr.arguments.length === 1 ? "create" : expr.arguments[0].value, fn: expr.arguments.at(-1) });
       else throw new Error(`不支持的 Classy 声明: ${method}`);
-    } else if (expr.type === "AssignmentExpression" && expr.left.object?.name === definition.name) {
+    } else if (expr.type === "AssignmentExpression" && referenceName(expr.left.object) === `${definition.reference}.prototype`) {
+      if (expr.left.property.name !== "constructor") definition.methods.push({ key: expr.left.property, value: expr.right });
+    } else if (expr.type === "AssignmentExpression" && referenceName(expr.left) === `${definition.reference}.prototype`) {
+      const prototype = expr.right.arguments?.[0];
+      if (prototype?.property?.name === "prototype") definition.base = referenceName(prototype.object);
+    } else if (expr.type === "AssignmentExpression" && referenceName(expr.left.object) === definition.reference) {
       const property = { key: expr.left.property, value: expr.right };
       if (expr.right.type === "FunctionExpression") definition.staticMethods.push(property);
       else definition.staticFields.push(property);
@@ -57,6 +82,7 @@ export class Compiler {
   private loops: (Node | null)[] = [];
   private staticContext = false;
   private initializingStatic = false;
+  private methodName = "_construct_create";
   private implicitGlobals = new Set<string>();
   private lines: string[] = [];
   private indentation = 0;
@@ -106,6 +132,13 @@ export class Compiler {
     this.indentation++;
     this.line(`return ${JSON.stringify(d.fields.map((p) => this.key(p)))}`);
     this.indentation--;
+    const weakFields = d.fields.map((p) => this.key(p)).filter((key) => ["roundModel", "evtContext", "gameController"].includes(key) || d.name === "GameMode" && key === "roundController");
+    if (weakFields.length) {
+      this.line("func original_is_weak_field(key):");
+      this.indentation++;
+      this.line(`return ${JSON.stringify(weakFields)}.has(key) or super.original_is_weak_field(key)`);
+      this.indentation--;
+    }
 
     for (const item of d.constructors) {
       this.method(`_construct_${item.name}`, item.fn, false);
@@ -156,6 +189,8 @@ export class Compiler {
   private method(name: string, fn: Node, isStatic: boolean) {
     const oldScope = this.scope;
     const oldStatic = this.staticContext;
+    const oldMethod = this.methodName;
+    this.methodName = name;
     this.scope = this.localScope(fn);
     this.staticContext = isStatic;
     this.line("");
@@ -167,6 +202,7 @@ export class Compiler {
     this.indentation--;
     this.scope = oldScope;
     this.staticContext = oldStatic;
+    this.methodName = oldMethod;
   }
   private initializeScope(fn: Node) {
     const values = [...this.scope!.names].map((name) => {
@@ -271,13 +307,22 @@ export class Compiler {
       case "Identifier": return this.variable(n.name);
       case "ThisExpression": return this.staticContext ? `JS.module(${JSON.stringify(this.definition.name)})` : "self";
       case "ArrayExpression": return `[${n.elements.map((v: Node) => v ? this.expr(v) : "null").join(", ")}]`;
-      case "ObjectExpression": return `{${n.properties.map((p: Node) => `${JSON.stringify(this.key(p))}: ${this.expr(p.value)}`).join(", ")}}`;
+      case "ObjectExpression": return `{${n.properties.map((p: Node) => `${JSON.stringify(this.key(p))}: ${this.key(p) === "ctxt" ? `JS.weak(${this.expr(p.value)})` : this.expr(p.value)}`).join(", ")}}`;
       case "MemberExpression":
+        if (this.modules[referenceName(n) ?? ""]) return `JS.module(${JSON.stringify(referenceName(n))})`;
         if (this.initializingStatic && n.object.type === "Identifier" && n.object.name === this.definition.name) return `JS.get_property(_static_${this.definition.name}, ${this.property(n)})`;
         return `JS.get_property(${this.expr(n.object)}, ${this.property(n)})`;
       case "CallExpression": {
         const args = n.arguments.map((a: Node) => this.expr(a)).join(", ");
-        if (n.callee.type === "MemberExpression" && n.callee.object.type === "ThisExpression" && n.callee.property.name === "_super") return `super._construct_create(${args})`;
+        if (n.callee.property?.name === "call" && n.arguments[0]?.type === "ThisExpression") {
+          const called = referenceName(n.callee.object);
+          const parent = this.definition.base;
+          if (parent && (called === parent || called?.startsWith(parent + ".prototype."))) {
+            const method = called === parent ? "_construct_create" : `original_${called!.slice(parent.length + 11)}`;
+            return `super.${method}(${n.arguments.slice(1).map((a: Node) => this.expr(a)).join(", ")})`;
+          }
+        }
+        if (n.callee.type === "MemberExpression" && n.callee.object.type === "ThisExpression" && n.callee.property.name === "_super") return `super.${this.methodName.startsWith("_construct_") ? this.methodName : `original_${this.methodName}`}(${args})`;
         if (this.initializingStatic && n.callee.type === "MemberExpression" && n.callee.object.name === this.definition.name && n.callee.property.name === "create") return `create(${args})`;
         if (n.callee.type === "MemberExpression") return `JS.invoke_method(${this.expr(n.callee.object)}, ${this.property(n.callee)}, [${args}])`;
         if (n.callee.type === "Identifier" && ["parseInt", "parseFloat", "isNaN"].includes(n.callee.name)) return `JS.global_call(${JSON.stringify(n.callee.name)}, [${args}])`;

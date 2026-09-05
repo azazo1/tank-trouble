@@ -77,5 +77,19 @@
   "AI": "res://game/ported/ai/ai.gd",
   "AIManager": "res://game/ported/ai/aimanager.gd",
   "AIUtils": "res://game/ported/ai/aiutils.gd",
-  "B2DUtils": "res://game/ported/physics/b2dutils.gd"
+  "B2DUtils": "res://game/ported/physics/b2dutils.gd",
+  "Phaser.Group": "res://game/presentation/bridge/group.gd",
+  "PhaserSpine.Spine": "res://game/presentation/animation/spine_actor.gd",
+  "Phaser.Text": "res://game/presentation/bridge/text.gd",
+  "PhaserNineSlice.NineSlice": "res://game/presentation/bridge/nine_slice.gd",
+  "Phaser": "res://game/presentation/bridge/phaser.gd",
+  "GameManager": "res://game/presentation/bridge/game_events.gd",
+  "UIConstants": "res://game/ported/presentation/uiconstants.gd",
+  "UILaikaSpine": "res://game/ported/presentation/uilaikaspine.gd",
+  "UIDimitriSpine": "res://game/ported/presentation/uidimitrispine.gd",
+  "UIButtonGroup": "res://game/ported/presentation/uibuttongroup.gd",
+  "UIMenuBackgroundGroup": "res://game/ported/presentation/game/uimenubackgroundgroup.gd",
+  "UIUtils": "res://game/presentation/bridge/ui_utils.gd",
+  "UIMenuState": "res://game/ported/presentation/game/uimenustate.gd",
+  "Game.UIMenuState": "res://game/ported/presentation/game/uimenustate.gd"
 }

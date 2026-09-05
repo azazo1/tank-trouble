@@ -23,12 +23,12 @@ static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4
 
 func original_hitShield():
 	var _scope0: Dictionary = {}
-	super._construct_create()
+	super.original_hitShield()
 	JS.set_property(self, "timeAlive", JS.invoke_method("@Math", "max", [JS.get_property(self, "timeAlive"), (JS.number(JS.get_property(JS.module("Constants"), "SHOTGUN_MAX_LIFETIME")) - JS.number(JS.get_property(JS.module("Constants"), "SHOTGUN_LIFETIME_AFTER_MAZE_HIT")))]))
 	return null
 
 func original_hitMaze():
 	var _scope1: Dictionary = {}
-	super._construct_create()
+	super.original_hitMaze()
 	JS.set_property(self, "timeAlive", JS.invoke_method("@Math", "max", [JS.get_property(self, "timeAlive"), (JS.number(JS.get_property(JS.module("Constants"), "SHOTGUN_MAX_LIFETIME")) - JS.number(JS.get_property(JS.module("Constants"), "SHOTGUN_LIFETIME_AFTER_MAZE_HIT")))]))
 	return null

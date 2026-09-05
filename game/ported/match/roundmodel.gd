@@ -1279,7 +1279,7 @@ func original__removeDestroyed():
 
 func original_addEventListener(_arg0 = null, _arg1 = null, _arg2 = null):
 	var _scope139: Dictionary = {"callback": _arg0, "context": _arg1, "gameId": _arg2}
-	JS.invoke_method(JS.get_property(self, "eventListeners"), "push", [{"cb": _scope139["callback"], "ctxt": _scope139["context"], "gameId": _scope139["gameId"]}])
+	JS.invoke_method(JS.get_property(self, "eventListeners"), "push", [{"cb": _scope139["callback"], "ctxt": JS.weak(_scope139["context"]), "gameId": _scope139["gameId"]}])
 	return null
 
 func original_removeEventListener(_arg0 = null, _arg1 = null):
