@@ -1,0 +1,733 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "path": "assets/original/audio/BulletBounce00.wav",
+      "source": "assets/original/audio/BulletBounce00.m4a",
+      "source_sha256": "36d996ecc6917d47759b711f9eff8db1d7b9a2f03ea6b29737c85fabf908d282",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce00.m4a",
+      "sha256": "d857f6a616166f3d21c1b17520b3b2a97705896f845f108ac14776be8a56bb6a",
+      "bytes": 159566
+    },
+    {
+      "path": "assets/original/audio/BulletBounce01.wav",
+      "source": "assets/original/audio/BulletBounce01.m4a",
+      "source_sha256": "85bc216c96a9ff94fd3484b67c05b76e5a93f87ce0b13c85b5c8505de9df3ed4",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce01.m4a",
+      "sha256": "0bfe370168194381296997a583fc092f89f375b78915d9bd914513ac019a6523",
+      "bytes": 126798
+    },
+    {
+      "path": "assets/original/audio/BulletBounce02.wav",
+      "source": "assets/original/audio/BulletBounce02.m4a",
+      "source_sha256": "7fd7d87472792386c924abf76f3191075b30a5f411b953b7fbc4f5ee5cdbf91f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce02.m4a",
+      "sha256": "c87e759683d4d29dc8ad601b147b9cfd836053f010f3eda8e404a74e5fae2ede",
+      "bytes": 139086
+    },
+    {
+      "path": "assets/original/audio/BulletBounce03.wav",
+      "source": "assets/original/audio/BulletBounce03.m4a",
+      "source_sha256": "a19626a737e96ea1d3dd8b3966c39cbb1c98053880f8ac002a69489c252c4780",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce03.m4a",
+      "sha256": "3695fc20867917bbf99e5a59e6424e2230fbcdb5fb7152d6dd455aaa749f6441",
+      "bytes": 143182
+    },
+    {
+      "path": "assets/original/audio/BulletBounce04.wav",
+      "source": "assets/original/audio/BulletBounce04.m4a",
+      "source_sha256": "52fd93c5d229593d9ac79db0e991a124c4b16d8a6ce45201b481ac22b3435336",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce04.m4a",
+      "sha256": "ad125b740fcb75e80b2f1dcdb6f3a1225d6745a3054edceb7db4185b291f3397",
+      "bytes": 163662
+    },
+    {
+      "path": "assets/original/audio/BulletBounce05.wav",
+      "source": "assets/original/audio/BulletBounce05.m4a",
+      "source_sha256": "c50fe144ee92d71b614fb3e3cdec375ac7fe80eb1af1b270cb2ef935723b9708",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce05.m4a",
+      "sha256": "90d47ab01df1ac1c142ba392ed35b7f1bce6a7d3b1f5ed91ccd56c6921c7db42",
+      "bytes": 147278
+    },
+    {
+      "path": "assets/original/audio/BulletBounce06.wav",
+      "source": "assets/original/audio/BulletBounce06.m4a",
+      "source_sha256": "29ae46a630252a9b5753763f1dbcb3e553ea3be6a87f664fc6a7ac3f213ebfaf",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce06.m4a",
+      "sha256": "82a84f0db78f7ec9bb0fc1b0493dae81fbace1361c4463924a033bb77834957e",
+      "bytes": 147278
+    },
+    {
+      "path": "assets/original/audio/BulletBounce07.wav",
+      "source": "assets/original/audio/BulletBounce07.m4a",
+      "source_sha256": "73cc959b0e175426ec0fe104caf25cc69eb1c1a094631b0a5cd2d63521235102",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce07.m4a",
+      "sha256": "052ddd07b0c4b3633eb7531ca87200671584fec65d853363d91cfb653c0fabbe",
+      "bytes": 163662
+    },
+    {
+      "path": "assets/original/audio/BulletBounce08.wav",
+      "source": "assets/original/audio/BulletBounce08.m4a",
+      "source_sha256": "e7a7cc070ffc09409085233263d356be9d5c2bfca855ea7b0a7856b577f1e328",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce08.m4a",
+      "sha256": "a53ef50a188a71dfc73f9c1947a3ec11e41ef6009f3543ca9c039e2cc0fca85f",
+      "bytes": 155470
+    },
+    {
+      "path": "assets/original/audio/BulletBounce09.wav",
+      "source": "assets/original/audio/BulletBounce09.m4a",
+      "source_sha256": "66b544c1814980347b6d4aefa78d92607de139821078b6dd7971b5f06345896c",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce09.m4a",
+      "sha256": "9c29e00043ae05ac6335c18364a2aaf6ae3bb6b9b6ade0a6ffe95249ad60d83f",
+      "bytes": 163662
+    },
+    {
+      "path": "assets/original/audio/BulletBounce10.wav",
+      "source": "assets/original/audio/BulletBounce10.m4a",
+      "source_sha256": "838c9d046fe004db57343413459213c5cacf71543468b5c578d8a4b0aefa6738",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce10.m4a",
+      "sha256": "4402eb3f4999c7911de6a97bc735252ed0ccbc401205acdaf01802d63cf0f761",
+      "bytes": 159566
+    },
+    {
+      "path": "assets/original/audio/BulletBounce11.wav",
+      "source": "assets/original/audio/BulletBounce11.m4a",
+      "source_sha256": "ecde97d10d36a0390cb8184b420fde916d6431f1f23aa4dd1afda569cd1e1f2f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletBounce11.m4a",
+      "sha256": "e06b8b3c8cc3c852800091d3193b51e9b1006b1bb26774cbb3bc25f18a70fc33",
+      "bytes": 163662
+    },
+    {
+      "path": "assets/original/audio/BulletPuff00.wav",
+      "source": "assets/original/audio/BulletPuff00.m4a",
+      "source_sha256": "2817516e22d327f4968060d2f56c5c179abfd0104d9dbedd09a9484373eb596e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletPuff00.m4a",
+      "sha256": "395faac301fb139e7a9facd7eb8013dca52482d66d52be9c911c681780c2ad45",
+      "bytes": 347982
+    },
+    {
+      "path": "assets/original/audio/BulletPuff01.wav",
+      "source": "assets/original/audio/BulletPuff01.m4a",
+      "source_sha256": "7b8319a3f46f60f9bb38c9f7c3bdee260e032ebc3f46e69daf0c7dfe834c1d0d",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletPuff01.m4a",
+      "sha256": "5b316b513cf4d1345b21430c8aee6a779a0cd52ef872bb902fc6bcb9ebe55d22",
+      "bytes": 319310
+    },
+    {
+      "path": "assets/original/audio/BulletPuff02.wav",
+      "source": "assets/original/audio/BulletPuff02.m4a",
+      "source_sha256": "05ea47a17c6bd448973ac773c242d5b8d043645e0ddc6462f4aac5c9a8954e39",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/BulletPuff02.m4a",
+      "sha256": "2e455433159aa26a1f1418622d1e80a7e67f8b8cda0f6ca551f189838b6f1dc6",
+      "bytes": 302926
+    },
+    {
+      "path": "assets/original/audio/ChargeGatlingGun.wav",
+      "source": "assets/original/audio/ChargeGatlingGun.m4a",
+      "source_sha256": "5bccf74272ea886cd6f56484d9ca48a1b303a2c5db63b5dae67f6a95514505cc",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ChargeGatlingGun.m4a",
+      "sha256": "0c19452ef3d4d403c203fa56de3a33a94977a0a8bafe80c5aa07041e3683f105",
+      "bytes": 110414
+    },
+    {
+      "path": "assets/original/audio/ChickenOut.wav",
+      "source": "assets/original/audio/ChickenOut.m4a",
+      "source_sha256": "6368ecf77ade01708941546371648efc07d935cd4d7c8cbe97cdaa2f616d6982",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ChickenOut.m4a",
+      "sha256": "3e3ae7c4ce87a9825e829cd56e2f8ecb3311063856a0d53cbb942285d095d36d",
+      "bytes": 524110
+    },
+    {
+      "path": "assets/original/audio/CountDown00.wav",
+      "source": "assets/original/audio/CountDown00.m4a",
+      "source_sha256": "f226887f367c23817c1e6b8b271ff072d9badfc9ab5066bcfa900ebe9a17ec59",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/CountDown00.m4a",
+      "sha256": "1a2faa860e5efe3d1c612f7ecaa1f081783adccafccba7b434a162e11c3a0f2b",
+      "bytes": 532302
+    },
+    {
+      "path": "assets/original/audio/CountDown01.wav",
+      "source": "assets/original/audio/CountDown01.m4a",
+      "source_sha256": "f0799ddeddc2163b663b02a5ab817b5ec3410e3bff6ec9b931ee0bf58c435171",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/CountDown01.m4a",
+      "sha256": "1cb5a94c03542cf77a80abdd137fe46e3bdc14281cb1a0b8b78291913bda969d",
+      "bytes": 94030
+    },
+    {
+      "path": "assets/original/audio/CountDown02.wav",
+      "source": "assets/original/audio/CountDown02.m4a",
+      "source_sha256": "ee3b2546a1773804d67ce5f638d5530bcb881d77a317ffbcfea8e8796b8ef032",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/CountDown02.m4a",
+      "sha256": "90cbdb06f86cec1c97948bac70e35da1669ecc8e998dd8a338ee453e7e5e2846",
+      "bytes": 89934
+    },
+    {
+      "path": "assets/original/audio/CountDown03.wav",
+      "source": "assets/original/audio/CountDown03.m4a",
+      "source_sha256": "e352aac34dee9cb9ed4d78c52502f8666991f0ed5611027183c427861fdc3556",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/CountDown03.m4a",
+      "sha256": "84c31709bf84061385ff594730fef3979791a1f2fb15bdb60b734c9dd487740c",
+      "bytes": 85838
+    },
+    {
+      "path": "assets/original/audio/CrateLand.wav",
+      "source": "assets/original/audio/CrateLand.m4a",
+      "source_sha256": "0a986fd407f35d4c61bed1eac3ed8e683194cba589d68f1c1f9d8b467128751b",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/CrateLand.m4a",
+      "sha256": "6da977861f45022f2e3e5eab3e525ea7786048afa188224b44a4dbede743d0f9",
+      "bytes": 458574
+    },
+    {
+      "path": "assets/original/audio/CrateSpawn.wav",
+      "source": "assets/original/audio/CrateSpawn.m4a",
+      "source_sha256": "b0bb1a2e3b8735f145741e483bd4876c558db6d92b670827443c4d33c42daa14",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/CrateSpawn.m4a",
+      "sha256": "1cbb938454f9120437abe480dea5e06bf5bf4c94974e9537c1133aa0c118bcab",
+      "bytes": 118606
+    },
+    {
+      "path": "assets/original/audio/DiamondSpawn.wav",
+      "source": "assets/original/audio/DiamondSpawn.m4a",
+      "source_sha256": "29b3b78fa2b1fcfb0ddd41df0a898eb49966cf5219c78d6f20eb8cfa54942ec0",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/DiamondSpawn.m4a",
+      "sha256": "fa705a1dbfa43d07ac605a574db9e541ead6e38ae1943c9ff8d405e0e209f3fa",
+      "bytes": 708430
+    },
+    {
+      "path": "assets/original/audio/DischargeGatlingGun.wav",
+      "source": "assets/original/audio/DischargeGatlingGun.m4a",
+      "source_sha256": "7603752580400c6b8d1e2f9aa8f66a1d2c79bb72858129f2a0b778426c7223af",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/DischargeGatlingGun.m4a",
+      "sha256": "062b90855023ed0104e47112a5b562ac06b6583016c9748b6a13a9be41b3c713",
+      "bytes": 495438
+    },
+    {
+      "path": "assets/original/audio/DoubleBarrelPickup.wav",
+      "source": "assets/original/audio/DoubleBarrelPickup.m4a",
+      "source_sha256": "13b0c6d2f8c1d1c933121d6caa68713e54460ca4c180cd0cdeafa69fac96ee48",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/DoubleBarrelPickup.m4a",
+      "sha256": "aa8fce91398514b4a1b6327e3fe4c0750a3769a9e88ffc3dd45ab920218b1629",
+      "bytes": 216910
+    },
+    {
+      "path": "assets/original/audio/EmptyBarrel00.wav",
+      "source": "assets/original/audio/EmptyBarrel00.m4a",
+      "source_sha256": "f810ba2b2f19877b830368a5dc1aadef5092763796862f7f6e12dcf34fb16544",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/EmptyBarrel00.m4a",
+      "sha256": "4f8f193548daf8afa66d020dac81a33d17f11cfca78deb912ef68c7425215831",
+      "bytes": 114510
+    },
+    {
+      "path": "assets/original/audio/EmptyBarrel01.wav",
+      "source": "assets/original/audio/EmptyBarrel01.m4a",
+      "source_sha256": "4840ddcf631d5734cbc25155e47e0404645a07c7805fd5dd7606117295c7833c",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/EmptyBarrel01.m4a",
+      "sha256": "c8f6181f446202b8b40fe39a7127dc5592dd3519f6e374b2db3eb22a395dc2aa",
+      "bytes": 114510
+    },
+    {
+      "path": "assets/original/audio/EmptyBarrel02.wav",
+      "source": "assets/original/audio/EmptyBarrel02.m4a",
+      "source_sha256": "2b55ff65fe3a55d6bd6e2ca2007b9edfcaadf805eadb5dc961eec55b0386209d",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/EmptyBarrel02.m4a",
+      "sha256": "0e6436486696440b7b5f832382ab18548582504a0494da5b928fda022b0ec5ea",
+      "bytes": 118606
+    },
+    {
+      "path": "assets/original/audio/EmptyBarrel03.wav",
+      "source": "assets/original/audio/EmptyBarrel03.m4a",
+      "source_sha256": "3a2d15c7baa487a8867227900dd6da7b26d44a6dc49e59eb4e8daaf03859f827",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/EmptyBarrel03.m4a",
+      "sha256": "f84c3cfc6e673b2c9c85f455744e8a668fd31935dc669770d71338e8a7eaf7b0",
+      "bytes": 102222
+    },
+    {
+      "path": "assets/original/audio/FireBullet00.wav",
+      "source": "assets/original/audio/FireBullet00.m4a",
+      "source_sha256": "4599ae3119cc5fcddd5c6b4ab5d6370c8b188a11df1a9b73f84590d41ae3b052",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/FireBullet00.m4a",
+      "sha256": "6f7cd0a90bdfe27d5e29edc953d7319abf75acca03396078bda03da8d4a8a0cf",
+      "bytes": 356174
+    },
+    {
+      "path": "assets/original/audio/FireBullet01.wav",
+      "source": "assets/original/audio/FireBullet01.m4a",
+      "source_sha256": "618cba3b005a78e5282553e10d8d01a02eaf272662f9d51f93732fcbf7b4693e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/FireBullet01.m4a",
+      "sha256": "6d5aedd53808d66a5efcc8fc386936d5c45780ddd8c5ef80ec5859d118addef1",
+      "bytes": 356174
+    },
+    {
+      "path": "assets/original/audio/FireLaser.wav",
+      "source": "assets/original/audio/FireLaser.m4a",
+      "source_sha256": "a082074c752090123f1157aa78ca3122ccb1bd3a911e54eb53626edcdce5de2f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/FireLaser.m4a",
+      "sha256": "d1dc79e48cf0857b4b7fc0c7fd81bac498e938d093f0f46911c3ea4c78e8aa9b",
+      "bytes": 1060686
+    },
+    {
+      "path": "assets/original/audio/FireMine.wav",
+      "source": "assets/original/audio/FireMine.m4a",
+      "source_sha256": "1c4583e820c4ee8f1eca75bf2dba89eebddf2f4b300e40f3243a08952217c0f7",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/FireMine.m4a",
+      "sha256": "4fa95d4ef724ef3f41f3caf9c5f67b769e37c5f702d196d7d11423f043406589",
+      "bytes": 372558
+    },
+    {
+      "path": "assets/original/audio/FireMissile.wav",
+      "source": "assets/original/audio/FireMissile.m4a",
+      "source_sha256": "c5ed3256c09205d901fde35b8d170f86c7d86c342be9c31240859943d2318c53",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/FireMissile.m4a",
+      "sha256": "00b8c2e6925ec7c2695e93c2fa638004413ae0cba130f39be2abf07dc9c20e6d",
+      "bytes": 769870
+    },
+    {
+      "path": "assets/original/audio/FireShotgun.wav",
+      "source": "assets/original/audio/FireShotgun.m4a",
+      "source_sha256": "c739773c5553a34b6a35c0d9f95c0d86b87fe69e345e01e980bc5f17b80d32c8",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/FireShotgun.m4a",
+      "sha256": "d17cc45758ad65df932c249cf5c204c28e8cea93ed6b541d6fdcd8d291a5e375",
+      "bytes": 671566
+    },
+    {
+      "path": "assets/original/audio/GatlingGunPickup.wav",
+      "source": "assets/original/audio/GatlingGunPickup.m4a",
+      "source_sha256": "2feb3b5e2d2b53e0206de80a59b9a7c60ca613613b3e51baa9fa62a7ce47fe5c",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/GatlingGunPickup.m4a",
+      "sha256": "2d7bb0afe551d77405a95b489be1e3db73f70c508fa66381041b65df5ed6630d",
+      "bytes": 380750
+    },
+    {
+      "path": "assets/original/audio/GoldSpawn.wav",
+      "source": "assets/original/audio/GoldSpawn.m4a",
+      "source_sha256": "cbc40535d7acb4eb2d32b88e8936adedf68bdb984e12337417bb669e89f3f86b",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/GoldSpawn.m4a",
+      "sha256": "5aeb2fd8640b035f54c993c109ed61205cf822bb456edeaf4911b9ee62595e50",
+      "bytes": 618318
+    },
+    {
+      "path": "assets/original/audio/HoldGatlingGun.wav",
+      "source": "assets/original/audio/HoldGatlingGun.m4a",
+      "source_sha256": "435ff2d96ee1adff78694ad94e5a2d48f8c4c1a6adc8d9bdc5862ac9eccef76a",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HoldGatlingGun.m4a",
+      "sha256": "9cdc8a635d6aa13795309a204d99ad1a6d926ebdbf34b356590a2f1bb98b9057",
+      "bytes": 524110
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargetChange.wav",
+      "source": "assets/original/audio/HomingMissileTargetChange.m4a",
+      "source_sha256": "384f92b2160397dee9a216a0992b9fc1b772c0f2570418c90bca7a60bebfa66d",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargetChange.m4a",
+      "sha256": "25deb3c7079fa1d36849807a82f0cd3e8e61767347dc9d324e192cb8a91f47cc",
+      "bytes": 507726
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting00.wav",
+      "source": "assets/original/audio/HomingMissileTargeting00.m4a",
+      "source_sha256": "ceb0251a5a1fe040cec3a3e051e399ed30e06ac41fc78a404c2c8e9dc679c79b",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting00.m4a",
+      "sha256": "1a11942dca73a17929d1396706dc1b25e3ba5b57910fbc378f68b64ffc75c10f",
+      "bytes": 188238
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting01.wav",
+      "source": "assets/original/audio/HomingMissileTargeting01.m4a",
+      "source_sha256": "477ddf1b7c44eef9d0569e0980b9c267e22de7a34bd4e757906c525707eea986",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting01.m4a",
+      "sha256": "a0a98da1ca936c9494bc54010e22d1ea36b5593219dd9607a2733ff154fd5ca7",
+      "bytes": 200526
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting02.wav",
+      "source": "assets/original/audio/HomingMissileTargeting02.m4a",
+      "source_sha256": "a18389210589b9ade01222508d123b5d7720cce0c6c10b93daee53bf43c9fd35",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting02.m4a",
+      "sha256": "348075da674690d1062d3b6bf810a529832765cec5a54c705e64351af2b8eb3d",
+      "bytes": 188238
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting03.wav",
+      "source": "assets/original/audio/HomingMissileTargeting03.m4a",
+      "source_sha256": "b95249fa38db69a947fbc7ba0dfd3f8b033915569c55afaec8fb004a67caff2a",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting03.m4a",
+      "sha256": "b8102bcd43ff0b0772ecae9ac1378505d319c09355953ac0f1e60929e3e623ac",
+      "bytes": 196430
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting04.wav",
+      "source": "assets/original/audio/HomingMissileTargeting04.m4a",
+      "source_sha256": "49653c16146e8251419aea03f659c37d5280dbb7d98c452abf8e4cb6ca089434",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting04.m4a",
+      "sha256": "37d998074106ab82f86afab2c1b6c6b7683d0d914ba13fa4e4f528e72879445b",
+      "bytes": 204622
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting05.wav",
+      "source": "assets/original/audio/HomingMissileTargeting05.m4a",
+      "source_sha256": "8b6f2b5dc29d49ead6ec217ed1777c353933fc4fd56ca3f02a018bbb5edca13a",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting05.m4a",
+      "sha256": "e3a93b88483d698b0433e939f504f96735296b75b055ffa4d1dc62ba671f79a5",
+      "bytes": 200526
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting06.wav",
+      "source": "assets/original/audio/HomingMissileTargeting06.m4a",
+      "source_sha256": "d18cd75264872555a02aa8b134a1af22a78d89f1233e3aca0823a0f01a92d7b2",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting06.m4a",
+      "sha256": "ee70b2ea6c6735284371373992e5658d28044f2669a1d20272d761f40f966fc9",
+      "bytes": 204622
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting07.wav",
+      "source": "assets/original/audio/HomingMissileTargeting07.m4a",
+      "source_sha256": "86b280b64498df08b93a50497a393c340aa94e347066780076e40647006254a0",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting07.m4a",
+      "sha256": "7c4c76ba2d813fd4ee16654fddd48fb8f50e9cff59c6ece40fac6e4e63270e14",
+      "bytes": 208718
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting08.wav",
+      "source": "assets/original/audio/HomingMissileTargeting08.m4a",
+      "source_sha256": "6f3cd0ee0b5e6bc083b898e281d743ef31f72ceb8d747c13c1d12851ee5f4a85",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting08.m4a",
+      "sha256": "f72b6fba339c29e3f08b930f7c85caebc3731fd7c9863602341c699ef28ba9f5",
+      "bytes": 192334
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting09.wav",
+      "source": "assets/original/audio/HomingMissileTargeting09.m4a",
+      "source_sha256": "472bf9cfcf318ac9bee4d440041ff8c7afe61a61ac39ec149665b9c90a9f3743",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting09.m4a",
+      "sha256": "31f00e0a33511ad327e54bf436f214e9419df0a5fe466ff6bc9f9749b4f36097",
+      "bytes": 200526
+    },
+    {
+      "path": "assets/original/audio/HomingMissileTargeting10.wav",
+      "source": "assets/original/audio/HomingMissileTargeting10.m4a",
+      "source_sha256": "18ee389efe3557feddc0e44bb6e6419bcada71d198df44402c8efa8bba8af48e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/HomingMissileTargeting10.m4a",
+      "sha256": "19fc153fed6cb1ffd5bc9a1bf1b0acdf40ace89219c3566aaa4792482e310331",
+      "bytes": 204622
+    },
+    {
+      "path": "assets/original/audio/LaikaGrowl.wav",
+      "source": "assets/original/audio/LaikaGrowl.m4a",
+      "source_sha256": "2038123cbe09a1ef0bec844e2880399cf3307ce3e88f47ca22bae542a986c46f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/LaikaGrowl.m4a",
+      "sha256": "b23f3beec4dd053e0ec6390c28fd8efa31684d2d8e99d52aeb812ec6370815b0",
+      "bytes": 765774
+    },
+    {
+      "path": "assets/original/audio/LaikaHowl00.wav",
+      "source": "assets/original/audio/LaikaHowl00.m4a",
+      "source_sha256": "7d970057a592e4b16708398a02db1f3c308603c9f36fa9ece85491affdad7c58",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/LaikaHowl00.m4a",
+      "sha256": "b1f1ac9266916692e8dfbbd356422174fcada61fa133f0e160a64538cdd44d9b",
+      "bytes": 753486
+    },
+    {
+      "path": "assets/original/audio/LaikaHowl01.wav",
+      "source": "assets/original/audio/LaikaHowl01.m4a",
+      "source_sha256": "d9f9d2d4d8675b3bfb19fde1e6ea77add1fb62e6593818a6b34c6436f246281e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/LaikaHowl01.m4a",
+      "sha256": "42fc4ca86180e48eedb212086dc78aecf7c7c5bb3cb631111d2555cf112afb1c",
+      "bytes": 573262
+    },
+    {
+      "path": "assets/original/audio/LaikaWhine.wav",
+      "source": "assets/original/audio/LaikaWhine.m4a",
+      "source_sha256": "f7f58682cb16efb59c3bb45d91e128b8dd626afa89f2542e1489c3c60bc4edf8",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/LaikaWhine.m4a",
+      "sha256": "61c6df0f644810a0a29950aedeb93712d081da9b095cf951ef254f9e0c168dcb",
+      "bytes": 487246
+    },
+    {
+      "path": "assets/original/audio/LaserPickup.wav",
+      "source": "assets/original/audio/LaserPickup.m4a",
+      "source_sha256": "7d6caa33a11c19608b6e4f45d10b867cccd08c8aedce3acb042a16a29069835f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/LaserPickup.m4a",
+      "sha256": "d0e0ed9143143d3f9db70fc809fdb167ea8cb00fa1c1b310454d74dda2989fbd",
+      "bytes": 741198
+    },
+    {
+      "path": "assets/original/audio/MineActivate.wav",
+      "source": "assets/original/audio/MineActivate.m4a",
+      "source_sha256": "1f8a6bab43bd0f6a45c3090a0dc1303c478ba04782d2a2cc3c34125cdef67875",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MineActivate.m4a",
+      "sha256": "5378bb78f5eb17bf81de9f11faf9095af9a9255d5f744fd26abd1e4842df3402",
+      "bytes": 397134
+    },
+    {
+      "path": "assets/original/audio/MineDetonate.wav",
+      "source": "assets/original/audio/MineDetonate.m4a",
+      "source_sha256": "91e98e0b99f2d6bcf2c96eda4b183428d2830d73bdcd6c8c77704b24150f335c",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MineDetonate.m4a",
+      "sha256": "1067e3561de977269bf3789e2c052ddeb61aa7f888cc8669d3bcc2da9dc03eb9",
+      "bytes": 487246
+    },
+    {
+      "path": "assets/original/audio/MineExplosion00.wav",
+      "source": "assets/original/audio/MineExplosion00.m4a",
+      "source_sha256": "af5fe12dabbf49f569309dd4098d33c4a7f890f0426c1bbc0246b4600d779008",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MineExplosion00.m4a",
+      "sha256": "aeb0d8bb62f0ec6439b0d9486eb819f1cc280a9fdd0eb995b4f13e1104126c15",
+      "bytes": 683854
+    },
+    {
+      "path": "assets/original/audio/MineExplosion01.wav",
+      "source": "assets/original/audio/MineExplosion01.m4a",
+      "source_sha256": "378aba2f74a81b9824ddd577d43e76b6be3f27666a38194baa37b5ebee0d3fac",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MineExplosion01.m4a",
+      "sha256": "da13e242d1c39b487ac1d0e1b22ff59035e9b8e2fb2cde20979f2eb0cf71e351",
+      "bytes": 610126
+    },
+    {
+      "path": "assets/original/audio/MineExplosion02.wav",
+      "source": "assets/original/audio/MineExplosion02.m4a",
+      "source_sha256": "02a1bdcdabb25d112cca5d5bca05c83dcf119f65b7038d56b6a8003a1b922dc5",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MineExplosion02.m4a",
+      "sha256": "5548c2f62a82720894e92ba75e707029b511ff5545e5f35861b19b5bfa867282",
+      "bytes": 642894
+    },
+    {
+      "path": "assets/original/audio/MinePickup.wav",
+      "source": "assets/original/audio/MinePickup.m4a",
+      "source_sha256": "630c1e7e7c3f1788ca782dbf6d6ae587fa4244bb540e46a7037410282e6d913b",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MinePickup.m4a",
+      "sha256": "ac37860d5768346ca4f912b0d8feac1a5478f8876b3658301463ba42cf8f4e16",
+      "bytes": 794446
+    },
+    {
+      "path": "assets/original/audio/MineTrip.wav",
+      "source": "assets/original/audio/MineTrip.m4a",
+      "source_sha256": "06eecd54ce55defd1424160381eaebb0bdcf1007c5919189fc88a1aa68cb80fd",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MineTrip.m4a",
+      "sha256": "4d1709ca5cb4eb3d1caf9e1910b0d34e05f382d1039ca02c41380b2f0ad2f2d0",
+      "bytes": 577358
+    },
+    {
+      "path": "assets/original/audio/MissilePickup.wav",
+      "source": "assets/original/audio/MissilePickup.m4a",
+      "source_sha256": "8f55a541d4b7e96bca510fc831708a3932874b36b7590cb373ed2a3339766917",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/MissilePickup.m4a",
+      "sha256": "ed19c584969996fdeb1093573aeef7fedbf69983ce7f8c25996d997750abc651",
+      "bytes": 532302
+    },
+    {
+      "path": "assets/original/audio/PanzerPolka.wav",
+      "source": "assets/original/audio/PanzerPolka.m4a",
+      "source_sha256": "792bb7917c99037ff8b738c013182c2bd3696217f4603096d8d6d573bcb08177",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/PanzerPolka.m4a",
+      "sha256": "1eb52157c5b023ea9028c67a89457c9fe921150d40d0cdccebdaa234e54cd37c",
+      "bytes": 47013710
+    },
+    {
+      "path": "assets/original/audio/PanzerPolkaFiltered.wav",
+      "source": "assets/original/audio/PanzerPolkaFiltered.m4a",
+      "source_sha256": "b646f7f14c08e0c162a362e9d9bb832bcce3278b4207bdefb21d861f2de1d2c1",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/PanzerPolkaFiltered.m4a",
+      "sha256": "53dabf76e0a4ab68e6879c738f337bbc45d27739feef3f4affa34afa316ba821",
+      "bytes": 47013710
+    },
+    {
+      "path": "assets/original/audio/ShieldActivate.wav",
+      "source": "assets/original/audio/ShieldActivate.m4a",
+      "source_sha256": "e428a4bcd90104bdf38705f822ae2499499728415b2bb68df118660847261be1",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldActivate.m4a",
+      "sha256": "96165917ef2e410bef8f199121c88327f9b0ddc698968c525320dbc3232689f6",
+      "bytes": 311118
+    },
+    {
+      "path": "assets/original/audio/ShieldEnd.wav",
+      "source": "assets/original/audio/ShieldEnd.m4a",
+      "source_sha256": "2a3b7f47dfe298b82e21100b952c3c644435d1fcf764ad761cb513673b8a501e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldEnd.m4a",
+      "sha256": "cf54dd599d98fecdbe0204c0fb6173ae22bfdf719c91b9c21e47ce8ca84f3840",
+      "bytes": 384846
+    },
+    {
+      "path": "assets/original/audio/ShieldImpact00.wav",
+      "source": "assets/original/audio/ShieldImpact00.m4a",
+      "source_sha256": "355c4f104b4196bb2a52d4d58c64e5121aa3bc25a3ade5069344e107442928df",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldImpact00.m4a",
+      "sha256": "6106bbcbf92682415e3e3c51ea528cc7b650deac9b33651bc44ef32c7f1e6af1",
+      "bytes": 245582
+    },
+    {
+      "path": "assets/original/audio/ShieldImpact01.wav",
+      "source": "assets/original/audio/ShieldImpact01.m4a",
+      "source_sha256": "c24b2b2aede204d3b6f55dddb45be6184a1f8034983d02db77ca15aed9c44e9e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldImpact01.m4a",
+      "sha256": "303a8316c9d29b0021b80c53640878c66b438b0442559cc63c7962f9ceab75c8",
+      "bytes": 225102
+    },
+    {
+      "path": "assets/original/audio/ShieldImpact02.wav",
+      "source": "assets/original/audio/ShieldImpact02.m4a",
+      "source_sha256": "f59241a8f162b7d8b92da9ea9b20859a65313563d89843698263c32d73935bb0",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldImpact02.m4a",
+      "sha256": "9f495e53962fab0e71d38f25966f96d3eedd4c77f52b00983d8b1493cf0fa07a",
+      "bytes": 237390
+    },
+    {
+      "path": "assets/original/audio/ShieldPickup.wav",
+      "source": "assets/original/audio/ShieldPickup.m4a",
+      "source_sha256": "d141c12db264383cc5f44ceb7a5322b088bfd89912152ad1fc23e20c27c64e5e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldPickup.m4a",
+      "sha256": "feb1d67be36993e452e20eb9642f6520ec9be77ab4f1c6d61d908f1cf55940bf",
+      "bytes": 368462
+    },
+    {
+      "path": "assets/original/audio/ShieldWeakened.wav",
+      "source": "assets/original/audio/ShieldWeakened.m4a",
+      "source_sha256": "b127df08c0917243b6b2e6ef558f8d075c71682acccb239cc5a7000fadc45e0e",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShieldWeakened.m4a",
+      "sha256": "8447b0738f87a41111ab18dedad727ba8a36d03418cc7686366029abfc3894e8",
+      "bytes": 1113934
+    },
+    {
+      "path": "assets/original/audio/ShotgunPickup.wav",
+      "source": "assets/original/audio/ShotgunPickup.m4a",
+      "source_sha256": "7528f20f70b683e66b0b9977c156d9d1595a5d0bcbcadde71d9ddcf2787da458",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShotgunPickup.m4a",
+      "sha256": "a512a9769063a0a60e3457817104c218c84f578a3c62322cab1658234f1a8b8c",
+      "bytes": 565070
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit00.wav",
+      "source": "assets/original/audio/ShrapnelHit00.m4a",
+      "source_sha256": "0ef7a5c3f40aa808b7c3d7d9082fb80509195c76d625c60eea5207e47251459c",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit00.m4a",
+      "sha256": "ab98d498f4f77152d458d295ffdf2122bcae9ee97e71496f8736451841af6257",
+      "bytes": 196430
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit01.wav",
+      "source": "assets/original/audio/ShrapnelHit01.m4a",
+      "source_sha256": "d346e959957282a69570100418940f69e2143f4a5816ab3a5a9d7b1203514546",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit01.m4a",
+      "sha256": "ed22f74048dba6905379e1ed04fb974fbe37369e44d43b6e344edacb767ce027",
+      "bytes": 208718
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit02.wav",
+      "source": "assets/original/audio/ShrapnelHit02.m4a",
+      "source_sha256": "82636d318f4834f0fe55476915354e0090d2bb818907643e7a2f2b7c9b3bdd18",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit02.m4a",
+      "sha256": "6a8f79a7bf5b20dd8d413950fb6eb74748925ac70a89270232d77de74e876ee0",
+      "bytes": 212814
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit03.wav",
+      "source": "assets/original/audio/ShrapnelHit03.m4a",
+      "source_sha256": "934bdc10fa08c4667a4ad7d11216967b92feb0d91fd1600905b9476822e8c30a",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit03.m4a",
+      "sha256": "06439e7c682cc53e073b443bef7161033ac3b95667ec0d4d76ff95ab5711ace1",
+      "bytes": 212814
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit04.wav",
+      "source": "assets/original/audio/ShrapnelHit04.m4a",
+      "source_sha256": "a86e5ba36c8808db8a74603a284308a06b65354696fde69fa04cba9887b6260f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit04.m4a",
+      "sha256": "7c654d6aaafbd887776db6f239b34517ebf8c304d4f37222099dab81c4d3528a",
+      "bytes": 208718
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit05.wav",
+      "source": "assets/original/audio/ShrapnelHit05.m4a",
+      "source_sha256": "27c81e8066f62d5dc0dd7b37c40915b595b3405b53aef6ac291add28963cd5b6",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit05.m4a",
+      "sha256": "61d1d9a39b385528c8a4275b7ade7fa10b907de572bd4ed08c633ff81be493ed",
+      "bytes": 196430
+    },
+    {
+      "path": "assets/original/audio/ShrapnelHit06.wav",
+      "source": "assets/original/audio/ShrapnelHit06.m4a",
+      "source_sha256": "073bc8bb543671866b7fdee52048817f9e5f26ed7f80fd231ddcd38fcbe4e6f6",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/ShrapnelHit06.m4a",
+      "sha256": "47b3408f95505e29bd64cc3b4445816a5e85d2e975d2fce4a3e7dda4bf3dcb33",
+      "bytes": 212814
+    },
+    {
+      "path": "assets/original/audio/SpawnZoneCollapse.wav",
+      "source": "assets/original/audio/SpawnZoneCollapse.m4a",
+      "source_sha256": "785c185c6fdf2ce8e0a694d98f687f250946aafd3fccb8d77b06ee638e925be3",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/SpawnZoneCollapse.m4a",
+      "sha256": "d8fff74c3cfa1aabcd970eb51a8fe276c263e7026575a26295a8bb5b29bd140f",
+      "bytes": 442190
+    },
+    {
+      "path": "assets/original/audio/SpawnZoneOpen.wav",
+      "source": "assets/original/audio/SpawnZoneOpen.m4a",
+      "source_sha256": "7857cdec6f2a9a6d98fd1458bd703977b961b1d3e665121a1ea0339f89afe562",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/SpawnZoneOpen.m4a",
+      "sha256": "1518efbe2469dddd924382a3a648077ef867b4b7b5e7160c642a1bf71d2f2d58",
+      "bytes": 663374
+    },
+    {
+      "path": "assets/original/audio/SpawnZoneTear.wav",
+      "source": "assets/original/audio/SpawnZoneTear.m4a",
+      "source_sha256": "a5f7435131d994b41fb4e1602559029f176e89d6b850de33bd2ed28d0abd1a50",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/SpawnZoneTear.m4a",
+      "sha256": "2c2fd72fd49ae2ead94396b688d73ab4c1ad65be4ecfa7355e66de43068507b5",
+      "bytes": 540494
+    },
+    {
+      "path": "assets/original/audio/SpawnZoneUnstable.wav",
+      "source": "assets/original/audio/SpawnZoneUnstable.m4a",
+      "source_sha256": "a07a766dad859d4cbc1beb0fe4b19e2f8539c647ad59c45ec102e8ae326e1b72",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/SpawnZoneUnstable.m4a",
+      "sha256": "6001f2d719e992b021246bea9028465f2508395af0e2d119f558a8ab053d13bf",
+      "bytes": 1077070
+    },
+    {
+      "path": "assets/original/audio/TankExplosion00.wav",
+      "source": "assets/original/audio/TankExplosion00.m4a",
+      "source_sha256": "5af45ad2a77f1b080d62630f9f08215ab76c13e50a5ee54333f33e63d65dd0b5",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/TankExplosion00.m4a",
+      "sha256": "47fa696747b8fb47f7c55d3a69358c5bcd3503183c245c99dc739b87f900b3e7",
+      "bytes": 753486
+    },
+    {
+      "path": "assets/original/audio/TankExplosion01.wav",
+      "source": "assets/original/audio/TankExplosion01.m4a",
+      "source_sha256": "6929bb9d9679bddf9ba65972cb6f181dcdeb7c32f529d72732147a165d402607",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/TankExplosion01.m4a",
+      "sha256": "6d5b785c3f264687ab302a85b0b0968829285abb917b9db852e36b67cacad222",
+      "bytes": 540494
+    },
+    {
+      "path": "assets/original/audio/TankExplosion02.wav",
+      "source": "assets/original/audio/TankExplosion02.m4a",
+      "source_sha256": "6fb3d71dd2a74228c3e16ef4f108e6e3c603374bcd24202e281844f4fbc9120f",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/TankExplosion02.m4a",
+      "sha256": "73b532b00b328ddd50b9fa4731469ee1cb9549a24bfdb3382d8962f4e0734e01",
+      "bytes": 720718
+    },
+    {
+      "path": "assets/original/audio/TankLand.wav",
+      "source": "assets/original/audio/TankLand.m4a",
+      "source_sha256": "ca548ae9de637b31a102b999872eb875cfcf11914d98a7bd568b5baa967f5e3d",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/TankLand.m4a",
+      "sha256": "0efa6bbd88dc688ad7fde7e9eea9e5c979391ebf65e32c1cf7506576d5dfa667",
+      "bytes": 368462
+    },
+    {
+      "path": "assets/original/audio/WeaponLoad.wav",
+      "source": "assets/original/audio/WeaponLoad.m4a",
+      "source_sha256": "02332018769ec6087cc039e5c0b6fae9c7a641b446817963cb5b72d487276c0b",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/WeaponLoad.m4a",
+      "sha256": "743abfe0a8fa7e374c3ba2e57c36f8ee7ff04a488cb529a0e209c846d1f61ab0",
+      "bytes": 343886
+    },
+    {
+      "path": "assets/original/audio/WinnerCelebration.wav",
+      "source": "assets/original/audio/WinnerCelebration.m4a",
+      "source_sha256": "4dd5add6ee880ddba0946b9670657dfc7aa3ee097a8c4d4af3cbe7af5b79a645",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/audio/WinnerCelebration.m4a",
+      "sha256": "6992db39aa82e902eae74ce7b99a30a5e5baab467b6133f2b2d2357aa7ce3aba",
+      "bytes": 532302
+    }
+  ]
+}

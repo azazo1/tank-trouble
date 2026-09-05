@@ -4,4 +4,7 @@
 *.har
 build/
 dist/
-
+node_modules/
+.DS_Store
+game/native/bin/
+vendor/

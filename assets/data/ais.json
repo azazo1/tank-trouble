@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "ais": [
+    {
+      "id": "6148530",
+      "name": "Laika",
+      "dexterity": 0.6,
+      "cleverness": 0.4,
+      "boldness": 0.9,
+      "greediness": 0.2,
+      "determination": 0.6,
+      "aggressiveness": 0.9,
+      "vengefulness": 0.8
+    }
+  ]
+}

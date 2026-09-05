@@ -1,0 +1,48 @@
+# 由原版 PlayerKick 的 AST 转译, 请修改转译器或单独维护的适配模块.
+extends "res://game/runtime/original_object.gd"
+const JS = preload("res://game/runtime/js_support.gd")
+
+var playerIds = []
+var messageType = null
+var reason = null
+static var _static_PlayerKick: Dictionary = {}
+static var _initialized_PlayerKick = false
+static func initialize_original_static():
+	if _initialized_PlayerKick: return
+	_initialized_PlayerKick = true
+	_static_PlayerKick["MESSAGE_TYPES"] = {"NOTIFICATION": "notification", "WARNING": "warning"}
+static func original_static_get(key):
+	initialize_original_static()
+	if _static_PlayerKick.has(key): return _static_PlayerKick[key]
+	return null
+static func original_static_set(key, value):
+	_static_PlayerKick[key] = value
+	return value
+func original_own_fields():
+	return ["playerIds","messageType","reason"]
+
+func _construct_create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+	var _scope0: Dictionary = {"playerIds": _arg0, "messageType": _arg1, "reason": _arg2}
+	JS.set_property(self, "playerIds", _scope0["playerIds"])
+	JS.set_property(self, "messageType", _scope0["messageType"])
+	JS.set_property(self, "reason", _scope0["reason"])
+	return null
+static func create(_arg0 = null, _arg1 = null, _arg2 = null, _arg3 = null, _arg4 = null, _arg5 = null, _arg6 = null, _arg7 = null, _arg8 = null, _arg9 = null, _arg10 = null, _arg11 = null, _arg12 = null, _arg13 = null, _arg14 = null, _arg15 = null):
+	var instance = load("res://game/ported/events/playerkick.gd").new()
+	instance._construct_create(_arg0, _arg1, _arg2)
+	return instance
+
+func original_getPlayerIds():
+	var _scope1: Dictionary = {}
+	return JS.get_property(self, "playerIds")
+	return null
+
+func original_getMessageType():
+	var _scope2: Dictionary = {}
+	return JS.get_property(self, "messageType")
+	return null
+
+func original_getReason():
+	var _scope3: Dictionary = {}
+	return JS.get_property(self, "reason")
+	return null

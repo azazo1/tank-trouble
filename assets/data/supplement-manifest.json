@@ -1,0 +1,528 @@
+{
+  "schema_version": 1,
+  "release": "RELEASE-2026-08-31-01",
+  "files": [
+    {
+      "path": "assets/original/images/buttons/24Disabled.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/24Disabled.png",
+      "sha256": "13f8bbd4ec4e2aa5404f3695124e1f92d20d5eb987c935fe046d65b1d29d5477",
+      "bytes": 682
+    },
+    {
+      "path": "assets/original/images/buttons/34Disabled.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/34Disabled.png",
+      "sha256": "09c870264a885b8977e62e02393b7193ca5fca7e69fd27e1a775b3b7fc907224",
+      "bytes": 689
+    },
+    {
+      "path": "assets/original/images/buttons/52Disabled.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/52Disabled.png",
+      "sha256": "f08a6c83df9d760dff05d11516429d6de98635f33b3982c132ff5fdd3543f6df",
+      "bytes": 705
+    },
+    {
+      "path": "assets/original/images/buttons/standard24.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/standard24.png",
+      "sha256": "34165b8d2ad92efc504023bc11853993cc1fb39fc39f46ad0ed7bea759d1fea6",
+      "bytes": 697
+    },
+    {
+      "path": "assets/original/images/buttons/standard24Active.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/standard24Active.png",
+      "sha256": "5c7317ec36bfc949193168077f0c62826f9430bc9fb1d3ebdcb75a1b2ab0a68e",
+      "bytes": 668
+    },
+    {
+      "path": "assets/original/images/buttons/standard34.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/standard34.png",
+      "sha256": "36d4a2afaa00206a9ad7f3c07b4e94d0e7f97184a0c378da1ea3dd1cb92e4887",
+      "bytes": 685
+    },
+    {
+      "path": "assets/original/images/buttons/standard34Active.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/standard34Active.png",
+      "sha256": "876fcb054220bda43e298b6ed7d484645e175aefc19e8636e4c372b6cece08a1",
+      "bytes": 675
+    },
+    {
+      "path": "assets/original/images/buttons/standard52.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/standard52.png",
+      "sha256": "6ff12371422ccdaa30d853a9e560601cedcec507ec5f8fa2b57395396ad9e088",
+      "bytes": 713
+    },
+    {
+      "path": "assets/original/images/buttons/standard52Active.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/standard52Active.png",
+      "sha256": "3ec288a33033a10b3e6cb6136ff52c2748e12a84bb3ef58250609519464262e6",
+      "bytes": 737
+    },
+    {
+      "path": "assets/original/images/buttons/warning34.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/warning34.png",
+      "sha256": "6a883d20abcb22aab1b9687a824c774275d2e1112c17aadcc426fe486ad24729",
+      "bytes": 624
+    },
+    {
+      "path": "assets/original/images/buttons/warning34Active.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/buttons/warning34Active.png",
+      "sha256": "2ef5bcac9fb4f95c77565bb754e527e99fe7be4f7f8fb4a94d2761479e0b3179",
+      "bytes": 652
+    },
+    {
+      "path": "assets/original/images/dimitri/dimitri.atlas",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/dimitri/dimitri.atlas",
+      "sha256": "38b4f4418151e7f1f9b7cd938b20bf86cbd1b9e0bafbcc606325c51e3ec393d6",
+      "bytes": 1536
+    },
+    {
+      "path": "assets/original/images/dimitri/dimitri.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/dimitri/dimitri.png",
+      "sha256": "40d76cc99f68321dd8b3aa8e85a7489e3559752d2b423961c61ae374632fd0e8",
+      "bytes": 100452
+    },
+    {
+      "path": "assets/original/images/game/celebration-physics.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/game/celebration-physics.json",
+      "sha256": "01c1d68102828d19d221db6282c0f71ba4cc0a7649e31277b053536d5549905f",
+      "bytes": 1603
+    },
+    {
+      "path": "assets/original/images/game/celebration.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/game/celebration.json",
+      "sha256": "df21789ec88cf0c5a0d97c5e0b1b8fd2208d9271a29ae4c5a698139c6308c263",
+      "bytes": 5292
+    },
+    {
+      "path": "assets/original/images/game/celebration.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/game/celebration.png",
+      "sha256": "74436bc02dc724dcff1926c50808f52b23cbc39da44855c8a0f5ace6f6596227",
+      "bytes": 45407
+    },
+    {
+      "path": "assets/original/images/game/game-physics.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/game/game-physics.json",
+      "sha256": "2b7b76f78bd82fe897d844c6f97d63d7011a6f4aec8fe8ccbdae651fd87e821c",
+      "bytes": 986
+    },
+    {
+      "path": "assets/original/images/game/game.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/game/game.json",
+      "sha256": "a66ab90322cbad22acf7db1af1e4f66c7c7f3acd749efd2243857c316b6fe008",
+      "bytes": 30413
+    },
+    {
+      "path": "assets/original/images/game/game.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/game/game.png",
+      "sha256": "1bd4c688c674c8f8099b4081f02ea6dbc35cd51606b8e9d01b9b6a76265b4560",
+      "bytes": 287960
+    },
+    {
+      "path": "assets/original/images/laika/laika.atlas",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/laika/laika.atlas",
+      "sha256": "6fb64b84030db4caaa3c80af565121039fba2024f9eaea917e17ac6a94c360fa",
+      "bytes": 4007
+    },
+    {
+      "path": "assets/original/images/laika/laika.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/laika/laika.png",
+      "sha256": "447c6cdedfa5a4e13b86bc6de5fc0af7d5a385460aabc7fdafef811e9a74aff7",
+      "bytes": 212979
+    },
+    {
+      "path": "assets/original/images/menu/background.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/menu/background.png",
+      "sha256": "1d5b677d0307829d562acfe82d9eff9348025813c85dddc232c507cb7dfd5af4",
+      "bytes": 269333
+    },
+    {
+      "path": "assets/original/images/playerPanel/playerPanel-physics.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/playerPanel/playerPanel-physics.json",
+      "sha256": "5ba32f2598b58d900ee125163357cf5a2fb4254f6a5b01ae04aa246978d36443",
+      "bytes": 614
+    },
+    {
+      "path": "assets/original/images/playerPanel/playerPanel.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/playerPanel/playerPanel.json",
+      "sha256": "d471c37b593dda18af3ac250cdca94fd13e69932073011ae3c32fa8ff5533288",
+      "bytes": 2553
+    },
+    {
+      "path": "assets/original/images/playerPanel/playerPanel.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/playerPanel/playerPanel.png",
+      "sha256": "5252bb2ef70890b14e9bd13396187438a7c1563aea8d958b8ab2a039958eb758",
+      "bytes": 6964
+    },
+    {
+      "path": "assets/original/images/ranks/ranks.json",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/ranks/ranks.json",
+      "sha256": "bf0a1047aeaba9a3ab6009ff2caf93d17e3fb8f521369bc824456e37379d39e5",
+      "bytes": 2470
+    },
+    {
+      "path": "assets/original/images/ranks/ranks.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/ranks/ranks.png",
+      "sha256": "bde2183de268271df1877a120fdba1d973f4a86dc5c0d09e4505b554a1260a99",
+      "bytes": 6602
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrel-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrel-140.png",
+      "sha256": "f88be370c6f723c1bcd327ac466604a3d43ced164c66ad3acfdb18550790c90f",
+      "bytes": 361
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrel-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrel-140@2x.png",
+      "sha256": "53e4bbbdb92d9a33dc7b3a33da0ef249ca23cc37f4603a37630ced6557979a60",
+      "bytes": 656
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrel-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrel-200.png",
+      "sha256": "727d78273b98f75dd2c63753352a83b37e85b0cf3626723b6fe0ed3a776b5749",
+      "bytes": 418
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrel-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrel-200@2x.png",
+      "sha256": "ad7df02ca2468a1cb57715b54be5d392f3ac2458d5f2d4ad8eb41ea622ca787a",
+      "bytes": 996
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrel-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrel-320.png",
+      "sha256": "64c91761f9ca3b02093f66b4fb9392ab6275678176c78229c2f2d603faed7e0b",
+      "bytes": 772
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrel-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrel-320@2x.png",
+      "sha256": "65659fe538319d5f7af58075231f67ccb38c4bdf1e7bd3986e3ae888f18a92ec",
+      "bytes": 1857
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrelShade-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrelShade-140.png",
+      "sha256": "93586f74542f6669b026901df046456e8df82fd6631a1683089c15ac8f8eb686",
+      "bytes": 562
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrelShade-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrelShade-140@2x.png",
+      "sha256": "2435685872ffd50609c0c899bee2aca21de83738f27161a7a06448ea848212c1",
+      "bytes": 1094
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrelShade-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrelShade-200.png",
+      "sha256": "9171aa858ff2f5408142a09124c681c46f12afd1be380376416e5ffdf026677d",
+      "bytes": 782
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrelShade-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrelShade-200@2x.png",
+      "sha256": "20a91756ff04f43d1c87d197ac450bcaa1dc6d0e9cacdd14f6e603bba53cef6c",
+      "bytes": 1646
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrelShade-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrelShade-320.png",
+      "sha256": "4fdf1dc2ff0f63d4e4b53733e10756c63d8e91b564b98d329558268a302318a6",
+      "bytes": 1254
+    },
+    {
+      "path": "assets/original/images/tankIcon/barrelShade-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/barrelShade-320@2x.png",
+      "sha256": "23082aa35f36bf0646cacf59eb616ffd19d3676daad55c85a71142e3efcfa649",
+      "bytes": 2918
+    },
+    {
+      "path": "assets/original/images/tankIcon/base-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/base-140.png",
+      "sha256": "05449f4838f90988423a850d87493dd1de1785716c90ab6d271a2785ac346356",
+      "bytes": 471
+    },
+    {
+      "path": "assets/original/images/tankIcon/base-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/base-140@2x.png",
+      "sha256": "88d4aeca7cdc8f78ee96c3e15614c486b273fd5933e33a0329c765275eb88816",
+      "bytes": 959
+    },
+    {
+      "path": "assets/original/images/tankIcon/base-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/base-200.png",
+      "sha256": "7604d40ac2ceb2e593cf9ae921ec901937fe4a3ded7cf8da8b5ad9563996bc34",
+      "bytes": 625
+    },
+    {
+      "path": "assets/original/images/tankIcon/base-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/base-200@2x.png",
+      "sha256": "89ff952562c737b5d393e501341ad83b50ccd08c8dc1349b2955bfd0af5cf9e0",
+      "bytes": 1425
+    },
+    {
+      "path": "assets/original/images/tankIcon/base-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/base-320.png",
+      "sha256": "a8f5719272a6c1d3f890f88835a10fbe6d3a68917897b44b2df9bbf1d0198965",
+      "bytes": 1026
+    },
+    {
+      "path": "assets/original/images/tankIcon/base-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/base-320@2x.png",
+      "sha256": "b824fe726ee2476b5329e543228a1270b254bac3d2bdb6c0f3c0b2f0e5bcec88",
+      "bytes": 2630
+    },
+    {
+      "path": "assets/original/images/tankIcon/baseShade-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/baseShade-140.png",
+      "sha256": "db142d378c8c55f67fa42885fef6419b238bbf700d19e2b8f1a7e2565f350227",
+      "bytes": 1267
+    },
+    {
+      "path": "assets/original/images/tankIcon/baseShade-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/baseShade-140@2x.png",
+      "sha256": "fcdedb70b69208e69ef75b62bcfced458d0ba1353cff4f130e266dcf2eccd246",
+      "bytes": 2671
+    },
+    {
+      "path": "assets/original/images/tankIcon/baseShade-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/baseShade-200.png",
+      "sha256": "2c10853dcfa76713afcb01e700a70d4a2d33a9ef8d32ab86b62f22ebc6e1b37b",
+      "bytes": 1831
+    },
+    {
+      "path": "assets/original/images/tankIcon/baseShade-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/baseShade-200@2x.png",
+      "sha256": "0a42fd27c2c8ac8359754eef14a40b84d5262b586b8a481fb52e42a9073b091b",
+      "bytes": 3766
+    },
+    {
+      "path": "assets/original/images/tankIcon/baseShade-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/baseShade-320.png",
+      "sha256": "9ec71e7e955ef1378e1bbb05568b565bfe954909e2e34cdfe677ee87ddbdb30e",
+      "bytes": 2911
+    },
+    {
+      "path": "assets/original/images/tankIcon/baseShade-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/baseShade-320@2x.png",
+      "sha256": "36b8ee8df827a18973f0c6c28f960af70c4e8d1038c82713185321838cee4fc2",
+      "bytes": 6418
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTread-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTread-140.png",
+      "sha256": "d720806ac8512e4b102c96622cc671fd293f605b9d569ecb32a608681d874dc0",
+      "bytes": 513
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTread-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTread-140@2x.png",
+      "sha256": "d876b594dd0ba86386413cb3cdadfb4967f244c7f1a598936946d09dad22a194",
+      "bytes": 973
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTread-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTread-200.png",
+      "sha256": "a6062c273f80fb30db3de14ed46bdbde2d42f2bde62185073c348f2d9cff61f1",
+      "bytes": 692
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTread-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTread-200@2x.png",
+      "sha256": "45ff1df4dbd6b4cdff77e622e4cc34dada585100026d328080034b07d433225c",
+      "bytes": 1490
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTread-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTread-320.png",
+      "sha256": "c8a1b455b4366194c1fdf2cc2f41f65541d2f58fcf3218dbbee8bf441d7dff94",
+      "bytes": 1185
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTread-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTread-320@2x.png",
+      "sha256": "b055725400330f77fda91ef91dbd0c4858c1bdc4049682df521bf4c5a10135c8",
+      "bytes": 2727
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTreadShade-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTreadShade-140.png",
+      "sha256": "2d5e4cdd4b8277d07344fedee818d8ee619030f7e45fa74b52164679653fbb26",
+      "bytes": 812
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTreadShade-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTreadShade-140@2x.png",
+      "sha256": "41b7ed05e0b2119792ee71d7f8cf148a12a5d92fc326b4319ba65d1cc60dad18",
+      "bytes": 1766
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTreadShade-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTreadShade-200.png",
+      "sha256": "846ac7fd4a6070537d07bcb1b022d91322191a77280256c50c8b75b0d6470339",
+      "bytes": 1205
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTreadShade-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTreadShade-200@2x.png",
+      "sha256": "b82ca774cdf4361b0f3fa190b613863cf72ce0365910bfb6fc97d0ed71a904c5",
+      "bytes": 2674
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTreadShade-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTreadShade-320.png",
+      "sha256": "ca060868fab9c1f0b575c6370874d85c8883d893a6fef9baf705be51ec6c0ff6",
+      "bytes": 2030
+    },
+    {
+      "path": "assets/original/images/tankIcon/leftTreadShade-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/leftTreadShade-320@2x.png",
+      "sha256": "e587bdce3077b6698f4ef15187cba04f5fe34469c46d4cbb7ce9b02520c84614",
+      "bytes": 4622
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTread-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-140.png",
+      "sha256": "1ed01616788ff4fd9e46efc45a31b58e0730540694b278a0606a7595230b47fb",
+      "bytes": 602
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTread-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-140@2x.png",
+      "sha256": "55fda5aefe24a20cf6b19ed37faf0317ea29d5c97ca9bab102a028d0756cd61c",
+      "bytes": 1140
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTread-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-200.png",
+      "sha256": "1ec91b37d48c6a828ac7a12fad54cb66e3669d4dc694cf5d363bd46ade541c85",
+      "bytes": 824
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTread-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-200@2x.png",
+      "sha256": "c760cb27338427640e2265890a87c148e99f3f5c3da8841234bc4412981a273c",
+      "bytes": 1804
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTread-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-320.png",
+      "sha256": "4f146d61a33ad5e155cba7bc31b4d002c7a54fb2af526e1bce729a8c32b7984a",
+      "bytes": 1362
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTread-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTread-320@2x.png",
+      "sha256": "d68e2483bd2179510dd9ae7a723c99f145f85e7ffe69fc73bdbef48c6e93f604",
+      "bytes": 3129
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTreadShade-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTreadShade-140.png",
+      "sha256": "7735a3944639b0a2a2760c8fc8e7c90c808bfbe8bb8879525e51be7dd6a2b6a8",
+      "bytes": 962
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTreadShade-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTreadShade-140@2x.png",
+      "sha256": "18b951e738e690d3efc7b5da907bc84e868dc3db168866341efd9f9921d63a17",
+      "bytes": 2099
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTreadShade-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTreadShade-200.png",
+      "sha256": "6a53a0cf57c0ff10c21db3cd048f4d0cadcae72e8b993da6bc91e5694e6361ac",
+      "bytes": 1478
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTreadShade-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTreadShade-200@2x.png",
+      "sha256": "369a7508bda11e8ac270ae7e611e5f01f2874b331c012e35690918147773f6e7",
+      "bytes": 3249
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTreadShade-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTreadShade-320.png",
+      "sha256": "978dbb943f37e5fc050cae5d48895110191589bf1de1b9323eae5b36f670f180",
+      "bytes": 2452
+    },
+    {
+      "path": "assets/original/images/tankIcon/rightTreadShade-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/rightTreadShade-320@2x.png",
+      "sha256": "5206e07c55b5f27ff2abc9dfa17ee4973cdc4ff38c3545d584f5249263ea30b7",
+      "bytes": 5417
+    },
+    {
+      "path": "assets/original/images/tankIcon/turret-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turret-140.png",
+      "sha256": "ee05177ab0b74335c15be39ced7bfcb46c8cf47e7969dc3ec4c93e2ed176c614",
+      "bytes": 346
+    },
+    {
+      "path": "assets/original/images/tankIcon/turret-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turret-140@2x.png",
+      "sha256": "703ebefce620d248ed21894f36ee3daf0975f0de3342d2db621897ebc89aeeba",
+      "bytes": 696
+    },
+    {
+      "path": "assets/original/images/tankIcon/turret-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turret-200.png",
+      "sha256": "85a3a0e9f733606125a1794d8505ce51231b5ffd64453437bb46172291d2e7f5",
+      "bytes": 479
+    },
+    {
+      "path": "assets/original/images/tankIcon/turret-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turret-200@2x.png",
+      "sha256": "0eded60e452aae8c39324f379d6d13a1385a482e6f2a376b8b73fe35109ddfa2",
+      "bytes": 1079
+    },
+    {
+      "path": "assets/original/images/tankIcon/turret-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turret-320.png",
+      "sha256": "304e014978d4471c6d5fc867669621bfd7c55f32d789720091f796557adf7c6c",
+      "bytes": 818
+    },
+    {
+      "path": "assets/original/images/tankIcon/turret-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turret-320@2x.png",
+      "sha256": "c7c3e93f3b6dd7de5dd9bcd80791a84190744c615881233c0c2702d0d6c0c485",
+      "bytes": 2015
+    },
+    {
+      "path": "assets/original/images/tankIcon/turretShade-140.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turretShade-140.png",
+      "sha256": "9ac98376d338b07fb5282ea1a0c2f12a509d48068f72d5a174f45cbadfc8bf0e",
+      "bytes": 385
+    },
+    {
+      "path": "assets/original/images/tankIcon/turretShade-140@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turretShade-140@2x.png",
+      "sha256": "e3ca60a6a09a9f307a2515ae4a431ced83b695ac21b107aaa152ad3968229b42",
+      "bytes": 766
+    },
+    {
+      "path": "assets/original/images/tankIcon/turretShade-200.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turretShade-200.png",
+      "sha256": "124ed968073906c7b0941b65c97539220dc6dc497a61b1a82b3ddab9ee62554c",
+      "bytes": 529
+    },
+    {
+      "path": "assets/original/images/tankIcon/turretShade-200@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turretShade-200@2x.png",
+      "sha256": "fe74172565f1a37637107cb0826745efc26a488d5ccd8266135bd29b0a2e7d92",
+      "bytes": 1162
+    },
+    {
+      "path": "assets/original/images/tankIcon/turretShade-320.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turretShade-320.png",
+      "sha256": "4f5a0c0fa7e82db001e05f6f1152617c2bc94c071a0dede086204ee17ec88c62",
+      "bytes": 885
+    },
+    {
+      "path": "assets/original/images/tankIcon/turretShade-320@2x.png",
+      "origin": "https://cdn.tanktrouble.com/RELEASE-2026-08-31-01/assets/images/tankIcon/turretShade-320@2x.png",
+      "sha256": "9c2ef5a47a433e6e285b4c4ca9085f80ce87735407039dd0fa08099381985089",
+      "bytes": 2157
+    }
+  ]
+}
