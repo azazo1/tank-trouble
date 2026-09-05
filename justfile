@@ -39,6 +39,10 @@ native-release: native-sources
     cmake -S native -B build/native-release -DCMAKE_BUILD_TYPE=Release -DGODOTCPP_TARGET=template_release
     cmake --build build/native-release --config Release --parallel {{build_jobs}}
 
+# 编译 debug 原生扩展并导入 Godot 资源, 供 headless 检查使用.
+import-godot: native
+    godot --headless --path . --import
+
 # 运行 Godot 原生主场景.
 run:
     godot --path .

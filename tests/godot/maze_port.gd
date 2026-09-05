@@ -4,6 +4,7 @@ func _initialize():
 	call_deferred("_run")
 
 func _run():
+	GDExtensionManager.load_extension("res://game/native/tank_trouble.gdextension")
 	var support = load("res://game/runtime/js_support.gd")
 	if support == null or not support.can_instantiate():
 		quit(1)

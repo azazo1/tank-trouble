@@ -26,6 +26,7 @@ just run
 
 ```shell
 just test-tools
+just import-godot
 just check-world
 just check-weapons
 just check-spine
