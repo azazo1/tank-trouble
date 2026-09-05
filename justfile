@@ -32,6 +32,11 @@ native:
 run:
     godot --path .
 
+# 导出 macOS Apple Silicon 应用包.
+export-macos:
+    cmake --build build/native --parallel
+    bun tools/package/export-macos.ts
+
 # 校验资源提取和原版对照环境.
 test-tools:
     bun test
@@ -45,6 +50,18 @@ check-world:
 # 对照本地对局或指定武器场景的逐帧状态.
 check-match scenario="match-17":
     bun tools/port/check-match.ts "{{scenario}}"
+
+# 对照普通炮弹, 六种特殊武器, 护盾和 Laika 决策.
+check-weapons:
+    bun tools/port/check-match.ts match-17
+    bun tools/port/check-match.ts combat-0
+    bun tools/port/check-match.ts combat-1
+    bun tools/port/check-match.ts combat-2
+    bun tools/port/check-match.ts combat-3
+    bun tools/port/check-match.ts combat-4
+    bun tools/port/check-match.ts combat-5
+    bun tools/port/check-match.ts combat-6
+    bun tools/port/check-match.ts laika
 
 # 对照原版角色动画的骨骼矩阵和网格顶点.
 check-spine:
@@ -78,3 +95,7 @@ check-application:
 check-particles:
     bun tools/oracle/export-particles.ts
     bun tools/port/check-godot.ts particles
+
+# 校验离线设置版本迁移和保存.
+check-settings:
+    bun tools/port/check-godot.ts settings

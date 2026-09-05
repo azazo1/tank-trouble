@@ -14,6 +14,7 @@ void TTOriginalSpine::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_animation", "track", "name", "loop"), &TTOriginalSpine::set_animation);
     ClassDB::bind_method(D_METHOD("add_animation", "track", "name", "loop", "delay"), &TTOriginalSpine::add_animation);
     ClassDB::bind_method(D_METHOD("clear_track", "track"), &TTOriginalSpine::clear_track);
+    ClassDB::bind_method(D_METHOD("set_flip_x", "flipped"), &TTOriginalSpine::set_flip_x);
     ClassDB::bind_method(D_METHOD("current_animation", "track"), &TTOriginalSpine::current_animation);
     ClassDB::bind_method(D_METHOD("advance", "seconds"), &TTOriginalSpine::advance);
     ClassDB::bind_method(D_METHOD("geometry"), &TTOriginalSpine::geometry);
@@ -113,6 +114,13 @@ void TTOriginalSpine::add_animation(int track, const String &name, bool loop, do
 void TTOriginalSpine::clear_track(int track) {
     try { call(state, "clearTrack", {Value(track)}); }
     catch (const std::exception &error) { UtilityFunctions::push_error(error.what()); }
+}
+
+void TTOriginalSpine::set_flip_x(bool flipped) {
+    try {
+        runtime.set(skeleton, "flipX", Value(flipped));
+        call(skeleton, "updateWorldTransform");
+    } catch (const std::exception &error) { UtilityFunctions::push_error(error.what()); }
 }
 
 String TTOriginalSpine::current_animation(int track) {

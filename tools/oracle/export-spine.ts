@@ -33,11 +33,13 @@ for (const character of ["laika", "dimitri"]) {
     if (i % 3 === 2) commands.push({ frame: i * 6 + 2, operation: "clear", track: 1 });
   }
   const frames: any[] = [];
+  commands.push({ frame: 12, operation: "flip", value: true }, { frame: 30, operation: "flip", value: false });
   for (let frame = 0; frame < names.length * 6 + 24; ++frame) {
     for (const command of commands.filter(item => item.frame === frame)) {
       if (command.operation === "set") state.setAnimation(command.track, command.name, command.loop);
       if (command.operation === "add") state.addAnimation(command.track, command.name, command.loop, command.delay);
       if (command.operation === "clear") state.clearTrack(command.track);
+      if (command.operation === "flip") skeleton.flipX = command.value;
     }
     state.update(1 / 60);
     state.apply(skeleton);

@@ -4,6 +4,7 @@ var parent: WeakRef
 var streams: Dictionary = {}
 var paths: Dictionary = {}
 var sounds: Array = []
+var one_shots: Array[WeakRef] = []
 var log = preload("res://game/runtime/original_log.gd").create("Audio")
 
 func _init(node = null):
@@ -17,11 +18,16 @@ func _init(node = null):
 
 func original_play(key, volume = 1.0, loop = false):
 	assert(paths.has(key), "音频资源不存在: " + str(key))
-	if not streams.has(key): streams[key] = AudioStreamWAV.load_from_file(paths[key])
+	if not streams.has(key): streams[key] = load(paths[key])
 	var player = AudioStreamPlayer.new()
 	player.stream = streams[key]
+	if loop:
+		player.stream = player.stream.duplicate()
+		player.stream.loop_mode = AudioStreamWAV.LOOP_FORWARD
+		player.stream.loop_end = int(player.stream.get_length() * player.stream.mix_rate)
 	player.volume_linear = volume
 	parent.get_ref().add_child(player)
+	one_shots.append(weakref(player))
 	if not loop: player.finished.connect(player.queue_free)
 	player.play()
 	log.debug("播放原版音效", {"sound": key})
@@ -29,7 +35,7 @@ func original_play(key, volume = 1.0, loop = false):
 
 func stream(key):
 	assert(paths.has(key), "音频资源不存在: " + str(key))
-	if not streams.has(key): streams[key] = AudioStreamWAV.load_from_file(paths[key])
+	if not streams.has(key): streams[key] = load(paths[key])
 	return streams[key]
 
 func create(key, volume = 1.0, loop = false):
@@ -39,7 +45,19 @@ func create(key, volume = 1.0, loop = false):
 
 func stopAll():
 	for sound in sounds: sound.stop()
+	_clear_one_shots()
+
+func _clear_one_shots():
+	for reference in one_shots:
+		var player = reference.get_ref()
+		if player == null: continue
+		player.stop()
+		player.stream = null
+		player.queue_free()
+	one_shots.clear()
 
 func destroy():
 	for sound in sounds: sound.destroy()
 	sounds.clear()
+	_clear_one_shots()
+	streams.clear()

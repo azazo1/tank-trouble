@@ -41,11 +41,61 @@ func _run():
 				assert(particle.view.global_position.distance_to(expected) < 0.0001)
 				positions.append({"x": particle.x, "y": particle.y, "drawX": particle.view.global_position.x, "drawY": particle.view.global_position.y})
 		reports.append({"module": name, "emitX": emitter.x, "emitY": emitter.y, "particles": positions})
+	var motion = _check_motion(host, group)
+	var explosion = _check_explosion(host, group)
 	var output = FileAccess.open("res://.tmp/emitter-coordinates.actual.json", FileAccess.WRITE)
-	output.store_string(JSON.stringify({"randomSamples": oracle.samples.size(), "emitters": reports}))
+	output.store_string(JSON.stringify({"randomSamples": oracle.samples.size(), "emitters": reports, "motion": motion, "explosion": explosion}))
 	host.world.original_destroy()
 	host.sound.destroy()
 	host = null
 	node.queue_free()
 	await process_frame
 	quit(0)
+
+func _check_motion(host, group):
+	var log = preload("res://game/runtime/original_log.gd").create("ParticleCoordinates")
+	var target = host.add.image(500, 350, "game", "dust0", group)
+	var reports = []
+	for name in ["UIRubbleEmitter", "UISmokeEmitter", "UIColouredSmokeEmitter", "UIMissileLaunchEmitter"]:
+		var emitter = JS.construct(JS.module(name), [host, target, 0x888888])
+		group.addChild(emitter)
+		target.position.setTo(500, 350)
+		if name == "UIRubbleEmitter": emitter.original_emit(target.x, target.y, 0.0, 2.0)
+		elif name == "UIMissileLaunchEmitter": emitter.original_spawn(target.x, target.y, 0.0)
+		elif name == "UIColouredSmokeEmitter": emitter.original_spawn(target.x, target.y, 30, 0x888888)
+		else: emitter.original_spawn(target.x, target.y)
+		var frames = []
+		for frame in range(60):
+			target.x += 1.0
+			target.y += 0.5
+			host.advance(1.0 / 60.0)
+			for particle in emitter.children:
+				if not particle.exists: continue
+				var local = Vector2(particle.x, particle.y)
+				var expected = group.view.to_global(local)
+				assert(particle.view.global_position.distance_to(expected) < 0.0001)
+				assert(local.distance_to(Vector2(500, 350)) < 200, "烟雾离开发射区域: " + str(local))
+			if frame in [0, 1, 30, 59]:
+				var particle = emitter.children.filter(func(item): return item.exists).front()
+				frames.append({"frame": frame, "emit": [emitter.x, emitter.y], "particle": [particle.x, particle.y], "draw": [particle.view.global_position.x, particle.view.global_position.y]})
+		log.info("烟雾运动坐标", {"module": name, "frames": frames})
+		reports.append({"module": name, "frames": frames})
+		emitter.original_retire()
+	return reports
+
+func _check_explosion(host, group):
+	var fragment_group = host.add.group(group)
+	var target = host.add.image(500, 350, "game", "fragment0", fragment_group)
+	var smoke = JS.construct(JS.module("UISmokeEmitter"), [host, target])
+	fragment_group.addChild(smoke)
+	smoke.original_spawn(target.x, target.y)
+	var reports = []
+	for frame in range(12):
+		host.advance(1.0 / 60.0)
+		for particle in smoke.children:
+			if not particle.exists: continue
+			var expected = fragment_group.view.to_global(Vector2(particle.x, particle.y))
+			assert(particle.view.global_position.distance_to(expected) < 0.0001)
+		reports.append({"frame": frame, "target": [target.x, target.y], "emitter": [smoke.x, smoke.y]})
+	smoke.original_retire()
+	return reports.slice(0, 8)

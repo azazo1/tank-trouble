@@ -6,7 +6,8 @@ var owned_groups: Array = []
 func initialize(host, controller):
 	game = host
 	original_init(controller)
-	JS.module("QualityManager").original_setQuality("high")
+	if JS.module("QualityManager").original_getQuality() == null:
+		JS.module("QualityManager").original_setQuality("high")
 	var previous = host.world.children.duplicate()
 	original_create()
 	for child in host.world.children:

@@ -43,5 +43,6 @@ static func _accessory(composite, profile, part, width, suffix):
 static func _source_image(path):
 	if ResourceLoader.exists(path): return load(path).get_image()
 	var image = Image.new()
-	assert(image.load_png_from_buffer(FileAccess.get_file_as_bytes(path)) == OK, "原图解码失败: " + path)
+	var status = image.load_png_from_buffer(FileAccess.get_file_as_bytes(path))
+	if status != OK: push_error("原图解码失败: " + path)
 	return image

@@ -28,6 +28,7 @@ func _run():
 					"set": player.set_animation(command.track, command.name, command.loop)
 					"add": player.add_animation(command.track, command.name, command.loop, command.delay)
 					"clear": player.clear_track(command.track)
+					"flip": player.set_flip_x(command.value)
 			player.advance(1.0 / 60.0)
 			if frame % 6 == 0: frames.append({"frame": frame, "bones": player.bone_transforms(), "geometry": player.geometry()})
 		var output = FileAccess.open("res://.tmp/spine-%s.actual.json" % character, FileAccess.WRITE)

@@ -10,6 +10,8 @@ const scripts: Record<string, { script: string; result: string }> = {
   flow: { script: "battle_flow", result: "battle-flow" },
   application: { script: "application_flow", result: "application-flow" },
   particles: { script: "emitter_coordinates", result: "emitter-coordinates" },
+  "battle-particles": { script: "battle_particles", result: "battle-particles" },
+  settings: { script: "settings_store", result: "settings-store" },
 };
 if (!scripts[name]) throw new Error(`未知检查: ${name}`);
 await mkdir(".tmp", { recursive: true });

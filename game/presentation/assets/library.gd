@@ -8,8 +8,7 @@ var font: FontFile
 var log = preload("res://game/runtime/original_log.gd").create("Assets")
 
 func _init():
-	font = FontFile.new()
-	font.data = FileAccess.get_file_as_bytes("res://assets/original/fonts/TankTrouble.ttf")
+	font = load("res://assets/original/fonts/TankTrouble.ttf").duplicate()
 	font.multichannel_signed_distance_field = false
 	font.hinting = TextServer.HINTING_NONE
 

@@ -4,6 +4,7 @@ var native_player
 var mesh_view = preload("res://game/presentation/animation/spine_mesh.gd").new()
 var setup_bounds: Rect2
 var skeleton = {"flipX": false}
+var applied_flip_x = false
 
 func _construct_create(host = null, horizontal = null, vertical = null, key = null, _premultiplied = null, flip_x = null, _g = null, _h = null, _i = null, _j = null, _k = null, _l = null, _m = null, _n = null, _o = null, _p = null, _q = null, _r = null, _s = null, _t = null, _u = null, _v = null, _w = null, _x = null):
 	game = host
@@ -17,7 +18,11 @@ func _construct_create(host = null, horizontal = null, vertical = null, key = nu
 	var images = {resource_name + ".png": {"width": texture.get_width(), "height": texture.get_height()}}
 	var atlas = FileAccess.get_file_as_string(directory + resource_name + ".atlas")
 	var data = JSON.parse_string(FileAccess.get_file_as_string(directory + key + ".json"))
-	assert(native_player.initialize(atlas, data, images, JS.truthy(flip_x)), "Spine 资源加载失败")
+	skeleton.flipX = JS.truthy(flip_x)
+	applied_flip_x = skeleton.flipX
+	if not native_player.initialize(atlas, data, images, applied_flip_x):
+		push_error("Spine 资源加载失败: " + str(key))
+		return null
 	view.add_child(mesh_view)
 	mesh_view.geometry = native_player.geometry()
 	var first = true
@@ -52,6 +57,9 @@ func getCurrentAnimationForTrack(track):
 
 func original_update():
 	if not exists: return null
+	if applied_flip_x != JS.truthy(skeleton.flipX):
+		applied_flip_x = JS.truthy(skeleton.flipX)
+		native_player.set_flip_x(applied_flip_x)
 	native_player.advance(game.time.elapsed / 1000.0)
 	mesh_view.geometry = native_player.geometry()
 	mesh_view.queue_redraw()

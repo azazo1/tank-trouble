@@ -10,7 +10,9 @@ var game: WeakRef
 func _init(host):
 	game = weakref(host)
 	engine = ClassDB.instantiate("TTOriginalP2")
-	assert(engine.initialize())
+	if not engine.initialize():
+		push_error("P2 原生物理初始化失败")
+		return
 	var native_world = engine.create_object("World", [{"gravity": [0, 0]}])
 	world = preload("res://game/presentation/physics/p2_object.gd").from_native(self, native_world)
 	call_native(world, "on", ["beginContact", _begin_contact])

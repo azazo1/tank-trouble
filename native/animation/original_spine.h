@@ -24,6 +24,7 @@ public:
     void set_animation(int track, const godot::String &name, bool loop);
     void add_animation(int track, const godot::String &name, bool loop, double delay);
     void clear_track(int track);
+    void set_flip_x(bool flipped);
     godot::String current_animation(int track);
     void advance(double seconds);
     godot::Array geometry();

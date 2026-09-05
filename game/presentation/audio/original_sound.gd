@@ -3,6 +3,7 @@ extends RefCounted
 var bank: WeakRef
 var key
 var player: AudioStreamPlayer
+var fade_tween: Tween
 var loop = false
 var volume = 1.0:
 	set(value):
@@ -20,6 +21,7 @@ func _init(owner, sound_key, initial_volume = 1.0, looping = false):
 
 func play(_marker = "", position = 0.0, loudness = null, looping = null, force_restart = true):
 	if isPlaying and not force_restart: return self
+	_cancel_fade()
 	if loudness != null: volume = loudness
 	if looping != null: loop = looping
 	if not is_instance_valid(player):
@@ -37,6 +39,7 @@ func play(_marker = "", position = 0.0, loudness = null, looping = null, force_r
 	return self
 
 func stop():
+	_cancel_fade()
 	if is_instance_valid(player): player.stop()
 	onStop.dispatch([self])
 	return self
@@ -45,15 +48,23 @@ func _finished():
 	onStop.dispatch([self])
 
 func fadeOut(milliseconds):
+	_cancel_fade()
 	if isPlaying:
-		var tween = player.create_tween()
-		tween.tween_property(player, "volume_linear", 0.0, milliseconds / 1000.0)
-		tween.tween_callback(stop)
+		fade_tween = player.create_tween()
+		fade_tween.tween_property(player, "volume_linear", 0.0, milliseconds / 1000.0)
+		fade_tween.tween_callback(stop)
 	return self
 
+func _cancel_fade():
+	if fade_tween != null: fade_tween.kill()
+	fade_tween = null
+
 func destroy():
+	_cancel_fade()
 	onStop.removeAll()
 	if is_instance_valid(player):
+		player.stop()
+		player.stream = null
 		player.finished.disconnect(_finished)
 		player.queue_free()
 	player = null
