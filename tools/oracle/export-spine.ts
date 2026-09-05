@@ -4,10 +4,12 @@ import { mkdir } from "node:fs/promises";
 import { log } from "../shared/log";
 
 const root = join(import.meta.dir, "../..");
-const source = await Bun.file(join(root, "vendor/original/js/phaserplugins/phaser-spine.js")).text();
+const source = (await Bun.file(join(root, "vendor/original/js/phaserplugins/phaser-spine.js")).text()).replaceAll("\r\n", "\n");
+const webBoundary = source.indexOf("var spine;(function(spine){var web");
+if (webBoundary < 0) throw new Error("phaser-spine.js 缺少 web 渲染边界");
 const easing = (k: number) => { if ((k *= 2) < 1) return 0.5 * k * k; return -0.5 * (--k * (k - 2) - 1); };
 const context = createContext({ Phaser: { Easing: { Quadratic: { InOut: easing } } } });
-runInContext(source.slice(0, 183866), context);
+runInContext(source.slice(0, webBoundary), context);
 const spine = context.spine;
 await mkdir(join(root, ".tmp"), { recursive: true });
 for (const character of ["laika", "dimitri"]) {
