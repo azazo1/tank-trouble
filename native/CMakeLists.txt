@@ -4,7 +4,7 @@ project(tank_trouble_native LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(GODOTCPP_BUILD_PROFILE "${CMAKE_CURRENT_SOURCE_DIR}/build-profile.json" CACHE PATH "" FORCE)
-set(GODOTCPP_TARGET "template_debug" CACHE STRING "" FORCE)
+set(GODOTCPP_TARGET "template_debug" CACHE STRING "Godot 模板类型")
 set(GODOTCPP_DISABLE_EXCEPTIONS OFF CACHE BOOL "" FORCE)
 
 include(FetchContent)
@@ -32,5 +32,6 @@ target_link_libraries(tank_trouble_native PRIVATE godot::cpp original_box2d)
 target_compile_options(tank_trouble_native PRIVATE -ffp-contract=off)
 set_target_properties(tank_trouble_native PROPERTIES
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../game/native/bin"
+  OUTPUT_NAME "tank_trouble_native.${GODOTCPP_TARGET}"
   PREFIX "lib"
 )

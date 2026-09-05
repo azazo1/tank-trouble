@@ -2,6 +2,8 @@
 default:
     @just --list
 
+build_jobs := env("CMAKE_BUILD_PARALLEL_LEVEL", "4")
+
 # just import-har archive.har
 # 从 HAR 提取固定版本的游戏源码和原素材.
 import-har archive:
@@ -20,22 +22,35 @@ port:
     bun tools/port/generate-battle.ts
     bun tools/port/generate-panel.ts
 
-# 编译 HAR 中的 Box2D, Spine 和 P2 原函数.
-native:
+# 从原版源码生成原生模块.
+[private]
+native-sources:
     bun tools/native/compile-box2d.ts
     bun tools/native/compile-box2d.ts --module spine
     bun tools/native/compile-box2d.ts --module p2
-    cmake -S native -B build/native -DCMAKE_BUILD_TYPE=Release
-    cmake --build build/native --parallel
+
+# 编译编辑器和调试运行使用的原生扩展.
+native: native-sources
+    cmake -S native -B build/native -DCMAKE_BUILD_TYPE=Release -DGODOTCPP_TARGET=template_debug
+    cmake --build build/native --parallel {{build_jobs}}
+
+# 编译发布包使用的原生扩展.
+native-release: native-sources
+    cmake -S native -B build/native-release -DCMAKE_BUILD_TYPE=Release -DGODOTCPP_TARGET=template_release
+    cmake --build build/native-release --parallel {{build_jobs}}
 
 # 运行 Godot 原生主场景.
 run:
     godot --path .
 
 # 导出 macOS Apple Silicon 应用包.
-export-macos:
-    cmake --build build/native --parallel
+export-macos: native native-release
     bun tools/package/export-macos.ts
+
+# just check-package --headed
+# 校验发布包的架构, 签名和独立启动.
+check-package *args:
+    bun tools/package/check-macos.ts {{args}}
 
 # 校验资源提取和原版对照环境.
 test-tools:

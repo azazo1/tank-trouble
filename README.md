@@ -39,8 +39,9 @@ just check-battle-weapons
 just check-flow
 just check-settings
 just export-macos
+just check-package --headed
 ```
 
-导出目标为 `build/package/TankTrouble.app`, 面向 macOS Apple Silicon. 导出脚本从 Godot 通用模板提取 arm64 后进行本地签名, 不包含 Apple 公证. 发布包启动问题尚未完成修复与验证, 当前请使用 `just run` 运行调试端. 构建及验证的详细日志在 `.tmp/`.
+导出目标为 `build/package/TankTrouble.app`, 面向 macOS Apple Silicon. `just export-macos` 自动构建 Debug 和 Release 原生扩展, 将 Release 扩展随应用打包, 从 Godot 通用模板提取 arm64 后进行本地签名. 导出后自动校验架构, 签名和独立启动, 不包含 Apple 公证. `just check-package --headed` 使用实际窗口再次验证启动, 并在 180 帧后退出. 原生构建说明见 [构建依赖](native/dependencies.md), 导出及验证日志在 `.tmp/`.
 
 来源和第三方组件见 [第三方来源](docs/third-party.md).

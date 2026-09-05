@@ -6,5 +6,5 @@ reloadable = false
 
 [libraries]
 
-macos.debug.arm64 = "res://game/native/bin/libtank_trouble_native.dylib"
-macos.release.arm64 = "res://game/native/bin/libtank_trouble_native.dylib"
+macos.debug.arm64 = "res://game/native/bin/libtank_trouble_native.template_debug.dylib"
+macos.release.arm64 = "res://game/native/bin/libtank_trouble_native.template_release.dylib"
