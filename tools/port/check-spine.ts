@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { godotLogFailed } from "../shared/godot-log";
 import { log } from "../shared/log";
 
 const root = join(import.meta.dir, "../..");
@@ -15,7 +16,7 @@ const deadline = setTimeout(() => child.kill(), 120000);
 const [stdout, stderr, status] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
 clearInterval(progress);
 clearTimeout(deadline);
-if (status !== 0 || stderr.includes("ERROR:")) throw new Error(`Spine 重放失败 (${status}):\n${stdout}\n${stderr.slice(0, 9000)}`);
+if (status !== 0 || godotLogFailed(stdout + stderr)) throw new Error(`Spine 重放失败 (${status}):\n${stdout}\n${stderr.slice(0, 9000)}`);
 let maximum = 0;
 function compare(expected: any, actual: any, path: string) {
   if (typeof expected === "number") {

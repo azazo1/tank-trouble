@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { godotLogFailed } from "../shared/godot-log";
 import { log } from "../shared/log";
 import { parseArgs } from "node:util";
 
@@ -14,7 +15,7 @@ const progress = setInterval(() => log.info({ seconds: Math.round((performance.n
 const [stdout, stderr, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
 clearTimeout(deadline);
 clearInterval(progress);
-if (code !== 0 || stderr.includes("ERROR:")) throw new Error(`Godot 对局执行失败 (${code}):\n${stdout}\n${stderr.slice(0, 12000)}`);
+if (code !== 0 || godotLogFailed(stdout + stderr)) throw new Error(`Godot 对局执行失败 (${code}):\n${stdout}\n${stderr.slice(0, 12000)}`);
 const expected = await Bun.file(join(root, `tests/fixtures/${name}.json`)).json();
 const actual = await Bun.file(join(root, `.tmp/${name}.actual.json`)).json();
 function compare(a: any, b: any, path: string): void {

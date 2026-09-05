@@ -1,5 +1,6 @@
 import { mkdir, open } from "node:fs/promises";
 import { dirname } from "node:path";
+import { godotLogFailed } from "./godot-log";
 import { log } from "./log";
 
 export async function runProcess(command: string[], label: string, logPath: string, cwd = process.cwd(), timeout = 180000) {
@@ -19,7 +20,7 @@ export async function runProcess(command: string[], label: string, logPath: stri
     const buffer = Buffer.alloc(Math.min(size, 65536));
     await file.read(buffer, 0, buffer.length, Math.max(0, size - buffer.length));
     const output = buffer.toString("utf8");
-    if (status !== 0 || /SCRIPT ERROR:|ERROR:|WARNING:.*leak/.test(output)) {
+    if (status !== 0 || godotLogFailed(output)) {
       throw new Error(`${label} 失败 (${status}), 日志: ${logPath}\n${output.split("\n").filter(line => /ERROR:|WARNING:|failed|Leaked instance/.test(line)).slice(0, 20).join("\n")}`);
     }
     log.info({ stage: label, milliseconds: Math.round(performance.now() - started), log: logPath }, "执行完成");

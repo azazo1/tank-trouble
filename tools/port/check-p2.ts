@@ -1,4 +1,5 @@
 import { join } from "node:path";
+import { godotLogFailed } from "../shared/godot-log";
 import { log } from "../shared/log";
 
 const root = join(import.meta.dir, "../..");
@@ -11,7 +12,7 @@ const progress = setInterval(() => log.info({ seconds: Math.round((performance.n
 const [stdout, stderr, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
 clearTimeout(deadline);
 clearInterval(progress);
-if (code !== 0 || stderr.includes("ERROR:")) throw new Error(`Godot P2 执行失败 (${code}):\n${stdout}\n${stderr.slice(0, 12000)}`);
+if (code !== 0 || godotLogFailed(stdout + stderr)) throw new Error(`Godot P2 执行失败 (${code}):\n${stdout}\n${stderr.slice(0, 12000)}`);
 for (const name of ["free-fragment", "floor-fragment", "kinematic-tank"]) {
   const expected = await Bun.file(join(root, `.tmp/p2-${name}.expected.json`)).json();
   const actual = await Bun.file(join(root, `.tmp/p2-${name}.actual.json`)).json();

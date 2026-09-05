@@ -45,7 +45,6 @@ set_target_properties(tank_trouble_native PROPERTIES
   ARCHIVE_OUTPUT_DIRECTORY "${native_output_dir}"
   OUTPUT_NAME "tank_trouble_native.${GODOTCPP_TARGET}"
   PREFIX "lib"
-  RUNTIME_OUTPUT_NAME "libtank_trouble_native.${GODOTCPP_TARGET}"
 )
 foreach(config DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
   set_target_properties(tank_trouble_native PROPERTIES

@@ -2,7 +2,8 @@
 .tmp/
 .references/
 *.har
-build/
+build/*
+!build/.gdignore
 release-artifacts/
 dist/
 node_modules/

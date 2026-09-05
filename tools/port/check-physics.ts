@@ -1,5 +1,6 @@
 import { mkdir } from "node:fs/promises";
 import { join } from "node:path";
+import { godotLogFailed } from "../shared/godot-log";
 import { log } from "../shared/log";
 
 const root = join(import.meta.dir, "../..");
@@ -8,7 +9,7 @@ const child = Bun.spawn(["godot", "--headless", "--path", root, "--script", "tes
 const timer = setTimeout(() => child.kill(), 30000);
 const [stdout, stderr, code] = await Promise.all([new Response(child.stdout).text(), new Response(child.stderr).text(), child.exited]);
 clearTimeout(timer);
-if (code !== 0 || stderr.includes("ERROR:")) throw new Error(`Godot 物理对照执行失败 (${code}):\n${stdout}\n${stderr.slice(0, 10000)}`);
+if (code !== 0 || godotLogFailed(stdout + stderr)) throw new Error(`Godot 物理对照执行失败 (${code}):\n${stdout}\n${stderr.slice(0, 10000)}`);
 let failures = 0;
 for await (const path of new Bun.Glob("physics-*.json").scan(join(root, "tests/fixtures"))) {
   const expected = await Bun.file(join(root, "tests/fixtures", path)).json();

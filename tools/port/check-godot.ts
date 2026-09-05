@@ -1,6 +1,7 @@
 import { mkdir, unlink } from "node:fs/promises";
 import { resolve } from "node:path";
 import { parseArgs } from "node:util";
+import { godotLogFailed } from "../shared/godot-log";
 import { log } from "../shared/log";
 
 const name = process.argv[2];
@@ -31,7 +32,7 @@ const progress = setInterval(() => log.info({ check: name, seconds: Math.round((
 const [code, stdout, stderr] = await Promise.all([processHandle.exited, new Response(processHandle.stdout).text(), new Response(processHandle.stderr).text()]);
 clearInterval(progress);
 await Bun.write(`.tmp/${name}.log`, stdout + stderr);
-if (code !== 0 || /SCRIPT ERROR:|ERROR:|WARNING:.*leak/.test(stdout + stderr)) throw new Error(`Godot ${name} 检查失败, 详见 .tmp/${name}.log\n${(stdout + stderr).slice(0, 6500)}`);
+if (code !== 0 || godotLogFailed(stdout + stderr)) throw new Error(`Godot ${name} 检查失败, 详见 .tmp/${name}.log\n${(stdout + stderr).slice(0, 6500)}`);
 if (!await Bun.file(output).exists()) throw new Error(`Godot 未生成完成记录: ${output}`);
 const result = await Bun.file(output).json();
 log.info({ check: name, milliseconds: Math.round(performance.now() - started), result }, "Godot 集成检查通过");
