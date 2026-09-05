@@ -75,6 +75,7 @@ func getLocalBounds():
 	var bounds = Rect2(-anchor.value() * intrinsic_size, intrinsic_size)
 	var populated = intrinsic_size != Vector2.ZERO
 	for child in children:
+		if not child.visible: continue
 		var local = child.getLocalBounds()
 		var source = Rect2(local.x, local.y, local.width, local.height)
 		var transform = Transform2D(child.rotation, child.scale.value(), 0.0, child.position.value())

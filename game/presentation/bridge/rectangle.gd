@@ -6,6 +6,23 @@ var width = 0.0
 var height = 0.0
 var empty:
 	get: return width <= 0 or height <= 0
+var right:
+	get: return x + width
+var top:
+	get: return y
+var bottom:
+	get: return y + height
+
+func setTo(horizontal, vertical, horizontal_size, vertical_size):
+	x = horizontal
+	y = vertical
+	width = horizontal_size
+	height = vertical_size
+	return self
+
+func floor():
+	x = floorf(x)
+	y = floorf(y)
 
 static func create(horizontal = 0, vertical = 0, horizontal_size = 0, vertical_size = 0):
 	var result = load("res://game/presentation/bridge/rectangle.gd").new()

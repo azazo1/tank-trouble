@@ -1,8 +1,49 @@
 extends SceneTree
 
 const JS = preload("res://game/runtime/js_support.gd")
+var log = preload("res://game/runtime/original_log.gd").create("ApplicationFlow")
 
 func _initialize(): call_deferred("_run")
+
+func _check_input_pause(application):
+	var host = application.host
+	var tanks = application.session.human_ids.map(func(id): return application.session.controller.original_getTank(id))
+	for code in [KEY_W, KEY_Q, KEY_UP, KEY_SPACE]:
+		var event = InputEventKey.new()
+		event.physical_keycode = code
+		event.pressed = true
+		host.handle_input(event)
+	var sprite = application.battle.tankSprites[application.session.human_ids[2]]
+	var click = InputEventMouseButton.new()
+	click.position = sprite.view.to_global(Vector2(0, -200))
+	click.button_index = MOUSE_BUTTON_LEFT
+	click.pressed = true
+	host.handle_input(click)
+	JS.module("Inputs").original_update()
+	assert(tanks.all(func(tank): return tank.forward and tank.fireDown))
+	application._show_settings()
+	var paused_time = host.time.deltaTotal
+	JS.clock_milliseconds += 5000.0
+	application._process(5.0)
+	assert(host.time.deltaTotal == paused_time)
+	application.settings_window.dismiss()
+	assert(application.session.controller.lastUpdate == floor(JS.clock_milliseconds))
+	JS.module("Inputs").original_update()
+	var states = tanks.map(func(tank): return {"forward": tank.forward, "fire": tank.fireDown})
+	log.info("检查设置恢复后的输入释放", {"states": states})
+	assert(tanks.all(func(tank): return not tank.forward and not tank.fireDown), JSON.stringify(states))
+	host.handle_input(click)
+	JS.module("Inputs").original_update()
+	assert(tanks[2].fireDown)
+	application._notification(Node.NOTIFICATION_WM_WINDOW_FOCUS_OUT)
+	assert(not tanks[2].fireDown and not tanks[2].forward)
+	var quality = JS.module("QualityManager")
+	quality.original_setQuality("auto")
+	for frame in range(3):
+		JS.clock_milliseconds += 1000.0 / 60.0
+		application._process(1.0 / 60.0)
+	assert(quality.original_static_get("numFpsSamples") == 2)
+	assert(quality.original_static_get("avgFps") > 0)
 
 func _run():
 	root.size = Vector2i(1000, 760)
@@ -11,6 +52,14 @@ func _run():
 	root.add_child(application)
 	application.set_process(false)
 	JS.clock_milliseconds = 1788609600000.0
+	application._select_players(3)
+	var cancel = InputEventKey.new()
+	cancel.physical_keycode = KEY_ESCAPE
+	cancel.pressed = false
+	application.controls._input(cancel)
+	await process_frame
+	assert(application.controls == null and application.menu != null)
+	assert(application.session == null)
 	var scenarios = []
 	for count in [1, 2, 3]:
 		application.menu.original__addGuests(count)
@@ -33,6 +82,7 @@ func _run():
 			JS.clock_milliseconds += 1000.0 / 60.0
 			application._process(1.0 / 60.0)
 		assert(application.battle.maze != null)
+		if count == 3: _check_input_pause(application)
 		if count == 1:
 			var avatar = application.panel.onlineTankIcons.values()[0].avatar.avatarSpine
 			assert(avatar != null and not avatar.mesh_view.geometry.is_empty())

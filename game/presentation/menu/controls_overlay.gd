@@ -1,6 +1,7 @@
 extends Control
 
 signal completed(assignments)
+signal canceled
 const JS = preload("res://game/runtime/js_support.gd")
 var host: WeakRef
 var count = 1
@@ -9,6 +10,8 @@ var options: Dictionary = {}
 var headline: Label
 var username: Label
 var icon: Control
+var shade: ColorRect
+var stack: VBoxContainer
 var selected = ""
 var down = false
 var elapsed = 0.0
@@ -19,16 +22,15 @@ func initialize(game, player_count):
 	host = weakref(game)
 	count = player_count
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	var shade = ColorRect.new()
+	shade = ColorRect.new()
 	shade.color = Color(0, 0, 0, 0.8)
 	shade.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	add_child(shade)
-	var center = CenterContainer.new()
-	center.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
-	add_child(center)
-	var stack = VBoxContainer.new()
+	stack = VBoxContainer.new()
 	stack.add_theme_constant_override("separation", 10)
-	center.add_child(stack)
+	add_child(stack)
+	resized.connect(_layout)
+	stack.minimum_size_changed.connect(_layout, CONNECT_DEFERRED)
 	var font = SystemFont.new()
 	font.font_names = PackedStringArray(["Arial"])
 	stack.add_theme_font_override("font", font)
@@ -55,7 +57,17 @@ func initialize(game, player_count):
 		row.add_child(option)
 		options[id] = option
 	_show_player()
+	call_deferred("_layout")
 	log.info("打开原版操作选择", {"players": count})
+
+func _layout():
+	if stack == null: return
+	var content_size = stack.get_combined_minimum_size()
+	var available = (size - Vector2(32, 32)).max(Vector2.ONE)
+	var content_scale = minf(1.0, minf(available.x / maxf(content_size.x, 1.0), available.y / maxf(content_size.y, 1.0)))
+	stack.size = content_size
+	stack.scale = Vector2.ONE * content_scale
+	stack.position = (size - content_size * content_scale) * 0.5
 
 func _label(parent, contents, font_size):
 	var label = Label.new()
@@ -100,6 +112,13 @@ func _select(id):
 
 func _input(event):
 	if not event is InputEventKey or event.echo: return
+	if assignments.size() == count: return
+	if event.physical_keycode == KEY_ESCAPE and not event.pressed:
+		set_process(false)
+		set_process_input(false)
+		get_viewport().set_input_as_handled()
+		canceled.emit()
+		return
 	var id = "WASDKeys" if event.physical_keycode == KEY_Q else ("arrowKeys" if event.physical_keycode == KEY_SPACE else "")
 	if id.is_empty() or assignments.has(id) or not selected.is_empty(): return
 	options[id].set_pressed_no_signal(event.pressed)

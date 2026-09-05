@@ -6,7 +6,7 @@
 
 ## 开发
 
-需要 Godot 4.7.1 及对应 macOS 导出模板, Bun, CMake, Xcode Command Line Tools, FFmpeg 和 just.
+需要 Godot 4.7.1, Bun, CMake, Xcode Command Line Tools, FFmpeg 和 just. macOS 导出模板仅在导出应用时需要.
 
 ```shell
 bun install
@@ -30,7 +30,11 @@ just check-world
 just check-weapons
 just check-spine
 just check-p2
+just check-frame
+just check-camera
+just check-local
 just check-application
+just check-battle-weapons
 just check-flow
 just check-settings
 just export-macos

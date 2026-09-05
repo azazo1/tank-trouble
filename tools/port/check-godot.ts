@@ -11,7 +11,11 @@ const scripts: Record<string, { script: string; result: string }> = {
   application: { script: "application_flow", result: "application-flow" },
   particles: { script: "emitter_coordinates", result: "emitter-coordinates" },
   "battle-particles": { script: "battle_particles", result: "battle-particles" },
+  "battle-weapons": { script: "battle_weapons", result: "battle-weapons" },
   settings: { script: "settings_store", result: "settings-store" },
+  camera: { script: "camera_port", result: "camera" },
+  frame: { script: "frame_order", result: "frame" },
+  resize: { script: "resize_layout", result: "resize-layout" },
 };
 if (!scripts[name]) throw new Error(`未知检查: ${name}`);
 await mkdir(".tmp", { recursive: true });

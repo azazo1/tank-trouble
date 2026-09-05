@@ -1,6 +1,9 @@
 extends "res://game/presentation/bridge/display_object.gd"
 
 var cursor_index = 0
+var updateOnlyExistingChildren = false
+var fixedToCamera = false
+var cameraOffset = Point.new()
 var length:
 	get: return children.size()
 
@@ -29,6 +32,24 @@ func next():
 func countLiving():
 	return children.filter(func(child): return child.alive).size()
 
+func original_update():
+	# Phaser.Group.update 从末尾开始, 每次回调后重新检查子项数量.
+	var index = children.size() - 1
+	while index >= 0:
+		index = mini(index, children.size() - 1)
+		if index < 0: break
+		var child = children[index]
+		if not updateOnlyExistingChildren or child.exists: JS.invoke_method(child, "update", [])
+		index -= 1
+	return null
+
+func original_postUpdate():
+	if fixedToCamera:
+		x = (game.camera.view.x + cameraOffset.x) / game.camera.scale.x
+		y = (game.camera.view.y + cameraOffset.y) / game.camera.scale.y
+	for child in children: JS.invoke_method(child, "postUpdate", [])
+	return null
+
 func forEach(callback, context = null):
 	for child in children: JS.invoke_context(callback, context, [child])
 
@@ -39,8 +60,9 @@ func setAll(property, value):
 			child.original_destroy()
 		else: JS.set_property(child, property, value)
 
-func setBounds(horizontal, vertical, _width, _height):
-	view.position = Vector2(-horizontal, -vertical)
+func setBounds(horizontal, vertical, horizontal_size, vertical_size):
+	position.setTo(horizontal, vertical)
+	game.camera.set_world_bounds(horizontal, vertical, horizontal_size, vertical_size)
 
 func callAll(method, _context = null, argument = null):
 	for child in children: JS.invoke_method(child, method, [argument])

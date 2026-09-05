@@ -31,5 +31,6 @@ export async function phaserCore() {
   emitter.base = "PhaserEmitterBase";
   const random = extract("PhaserRandom", "X.RandomDataGenerator", null, ["sow", "hash", "rnd", "frac", "integer", "integerInRange", "realInRange", "between", "pick"]);
   random.fields = ["c", "s0", "s1", "s2"].map(name => ({ key: { type: "Identifier", name }, value: { type: "Literal", value: 0 } }));
-  return [emitter, random];
+  const camera = extract("PhaserCamera", "X.Camera", null, ["checkBounds", "update"], false);
+  return [emitter, random, camera];
 }

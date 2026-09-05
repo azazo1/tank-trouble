@@ -164,5 +164,6 @@
   "UIScoreExplosionEmitter": "res://game/ported/presentation/panel/uiscoreexplosionemitter.gd",
   "UIScoreExplosionParticle": "res://game/ported/presentation/panel/uiscoreexplosionparticle.gd",
   "UIScoreExplosionFragmentSprite": "res://game/ported/presentation/panel/uiscoreexplosionfragmentsprite.gd",
-  "UILocalPanelLayout": "res://game/ported/presentation/panel/uilocalpanellayout.gd"
+  "UILocalPanelLayout": "res://game/ported/presentation/panel/uilocalpanellayout.gd",
+  "PhaserCamera": "res://game/ported/presentation/engine/phasercamera.gd"
 }

@@ -14,4 +14,5 @@ func shutdown():
 	for item in [backgroundGroup, onePlayerButton, twoPlayerButton, threePlayerButton]:
 		game.world.removeChild(item)
 		item.original_destroy()
+	game.camera.reset()
 	original_destroy()

@@ -299,6 +299,7 @@ static func array_call(array: Array, method, args: Array):
 	return null
 
 static func builtin_call(object, method, args: Array):
+	if object == "@Date" and method == "now": return load("res://game/runtime/original_date.gd").new().getTime()
 	if object == "@Math":
 		var x = args[0] if args.size() else 0
 		match method:

@@ -61,6 +61,8 @@ func resize():
 	game.canvas_size.x = host.width
 	panel_node.position.y = host.height
 	original__onSizeChangeHandler()
+	game.camera.resize()
+	game.world.sync_view()
 
 func advance(delta):
 	game.advance(delta)

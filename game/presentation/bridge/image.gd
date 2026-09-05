@@ -47,6 +47,9 @@ func _set_texture(texture):
 	sprite.texture = texture
 	intrinsic_size = texture.get_size()
 
+func getLocalBounds():
+	return {"x": -anchor.x * intrinsic_size.x, "y": -anchor.y * intrinsic_size.y, "width": intrinsic_size.x, "height": intrinsic_size.y}
+
 func sync_view():
 	super.sync_view()
 	sprite.position = -anchor.value() * intrinsic_size

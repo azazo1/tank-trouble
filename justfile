@@ -83,6 +83,10 @@ check-menu:
 check-battle:
     bun tools/port/check-godot.ts battle
 
+# 校验特殊武器与护盾的拾取, 开火和原版战斗表现.
+check-battle-weapons:
+    bun tools/port/check-godot.ts battle-weapons
+
 # 校验原版战斗事件, 动画, 音效和连续回合.
 check-flow:
     bun tools/port/check-godot.ts flow
@@ -91,10 +95,24 @@ check-flow:
 check-application:
     bun tools/port/check-godot.ts application
 
+# 校验窗口缩放后的菜单, 操作选择, 战斗布局和玩家面板.
+check-resize:
+    bun tools/port/check-godot.ts resize
+
 # 校验原版发射点, 粒子坐标和 Godot 绘制坐标的对应关系.
 check-particles:
     bun tools/oracle/export-particles.ts
     bun tools/port/check-godot.ts particles
+
+# 对照原版爆炸震屏的相机边界, 取整和归位.
+check-camera:
+    bun tools/oracle/export-camera.ts
+    bun tools/port/check-godot.ts camera
+
+# 对照原版定时器, 游戏状态, 子对象, 补间和表现物理的执行顺序.
+check-frame:
+    bun tools/oracle/export-frame.ts
+    bun tools/port/check-godot.ts frame
 
 # 校验离线设置版本迁移和保存.
 check-settings:

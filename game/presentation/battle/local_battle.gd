@@ -30,4 +30,5 @@ func shutdown():
 	game.physics.p2.clear()
 	game.physics.erase("p2")
 	game.reset_input()
+	game.camera.reset()
 	original_destroy()

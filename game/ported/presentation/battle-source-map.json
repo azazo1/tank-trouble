@@ -277,6 +277,14 @@
       ]
     },
     {
+      "module": "PhaserCamera",
+      "source": "vendor/original/js/phaser/phaser.min.js",
+      "destination": "game/ported/presentation/engine/phasercamera.gd",
+      "changes": [
+        "仅提取原版表现使用的引擎方法, 绘制和场景管理由 Godot 接入"
+      ]
+    },
+    {
       "module": "UIGameState",
       "source": "vendor/original/js/tt/ui/game/uigamestate.js",
       "destination": "game/ported/presentation/battle/uibattleentities.gd",

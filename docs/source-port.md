@@ -33,4 +33,8 @@ just native
 
 `just check-weapons` 对照普通炮弹, 六种特殊武器, 护盾及 Laika 的输入, 目标和动作. Spine 对照包含动画混合, 骨骼矩阵, 网格顶点及运行时镜像.
 
+`just check-frame` 从捕获的 `Phaser.Game.updateLogic`, `Phaser.Stage` 和 `Phaser.Group` 原函数生成执行记录, 对照定时器, 子对象, 补间, P2 和相机的先后顺序. `just check-camera` 对照 `Phaser.World.setBounds` 及 `Phaser.Camera.update` 的连续震屏坐标, 边界限制和像素取整. 相机计算位于转译模块 `PhaserCamera`, Godot 桥负责画布尺寸和场景切换时的复位.
+
+`just check-battle-weapons` 在完整本地战斗场景中验证六种特殊武器和护盾的拾取与表现对象. `just check-application` 同时覆盖操作选择取消, 三种输入方案, 设置暂停恢复, 窗口失焦后的输入释放和自动画质采样.
+
 自动数值和流程检查不能代替视觉验收. 菜单, 地图主题, 玩家面板, 各类战斗效果和音效还需对照同版本原游戏, 使用一致的窗口尺寸与像素密度.

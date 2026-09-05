@@ -3,6 +3,7 @@ extends RefCounted
 const JS = preload("res://game/runtime/js_support.gd")
 var root: WeakRef
 var world
+var camera
 var assets = preload("res://game/presentation/assets/library.gd").new()
 var pixel_ratio = 1.0
 var add
@@ -35,6 +36,7 @@ func _init(node = null, primary = true):
 	if primary: JS.module("UIConstants").original_scaleForHighDensity(pixel_ratio)
 	world = preload("res://game/presentation/bridge/group.gd").create(self)
 	node.add_child(world.view)
+	camera = preload("res://game/presentation/bridge/camera.gd").new(self)
 	add = preload("res://game/presentation/bridge/factory.gd").new(self)
 	sound = preload("res://game/presentation/audio/sound_bank.gd").new(node)
 	rnd = JS.module("PhaserRandom").create([str(Time.get_ticks_usec())])
@@ -43,14 +45,16 @@ func advance(delta):
 	time.delta = delta * 1000.0
 	time.elapsed = time.delta
 	time.deltaTotal += time.delta
-	world.pre_update(time.delta)
-	if physics.has("p2"): physics.p2.advance()
 	time.events.advance(time.delta)
+	world.pre_update(time.delta)
+	if active_state != null: active_state.original_update()
+	world.original_update()
 	for tween in tweens.duplicate():
 		tween.advance(time.delta)
 		if not tween.active: tweens.erase(tween)
-	if active_state != null: active_state.original_update()
-	world.original_update()
+	if physics.has("p2"): physics.p2.advance()
+	camera.resize()
+	camera.original_update()
 	world.original_postUpdate()
 	if physics.has("p2"): physics.p2.post_update()
 	world.sync_view()
@@ -58,7 +62,7 @@ func advance(delta):
 func handle_input(event):
 	input.keyboard.handle(event)
 	var mouse = JS.module("MouseInputManager")
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion or (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT):
 		mouse.original_static_set("mouseActivated", true)
 		mouse.original_static_set("mousePageX", event.position.x)
 		mouse.original_static_set("mousePageY", event.position.y)
@@ -86,4 +90,13 @@ func reset_input():
 	input.keyboard.reset()
 	input.mousePointer.leftButton.isDown = false
 	JS.module("MouseInputManager").original_static_set("mouseDown", false)
+	var enabled = input.enabled
+	input.enabled = false
+	# 先发送释放状态, 再清除原版输入管理器的变化检测缓存.
+	JS.module("Inputs").original_update()
+	input.enabled = enabled
 	JS.module("Inputs").original_reset()
+	if pressed_button != null:
+		var button = pressed_button.get_ref()
+		pressed_button = null
+		if button != null and button.on_released.is_valid(): JS.invoke(button.on_released, [button.callback_context.get_ref()])

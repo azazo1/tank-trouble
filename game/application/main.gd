@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 const JS = preload("res://game/runtime/js_support.gd")
 var host
@@ -14,6 +14,8 @@ var log = preload("res://game/runtime/original_log.gd").create("Application")
 
 func _ready():
 	var started = Time.get_ticks_msec()
+	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
+	mouse_filter = Control.MOUSE_FILTER_IGNORE
 	RenderingServer.set_default_clear_color(Color.WHITE)
 	GDExtensionManager.load_extension("res://game/native/tank_trouble.gdextension")
 	JS.strict_random = false
@@ -47,10 +49,18 @@ func _input(event):
 	if host != null: host.handle_input(event)
 	if battle != null and event is InputEventKey and event.physical_keycode == KEY_ESCAPE and not event.pressed: call_deferred("_leave_battle")
 
+func _notification(what):
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT and host != null:
+		host.reset_input()
+		log.debug("窗口失焦, 释放本地输入")
+
 func _resize():
 	if menu != null: menu.original__onSizeChangeHandler()
 	if battle != null and battle.maze != null: battle.original__onSizeChangeHandler()
 	if panel != null: panel.resize()
+	if host != null:
+		host.camera.resize()
+		host.world.sync_view()
 
 func _select_players(count):
 	if controls != null: return
@@ -59,7 +69,16 @@ func _select_players(count):
 	add_child(controls)
 	controls.initialize(host, count)
 	controls.completed.connect(_start_battle, CONNECT_DEFERRED)
+	controls.canceled.connect(_cancel_controls, CONNECT_DEFERRED)
 	desktop_menu.update_state(false, true)
+
+func _cancel_controls():
+	if controls == null: return
+	controls.queue_free()
+	controls = null
+	host.reset_input()
+	desktop_menu.update_state(false, false)
+	log.info("取消操作选择, 返回人数菜单")
 
 func _show_menu():
 	menu = preload("res://game/presentation/menu/local_menu.gd").new()
