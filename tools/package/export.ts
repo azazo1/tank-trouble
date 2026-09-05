@@ -22,7 +22,7 @@ await mkdir(packageDir, { recursive: true });
 if (platform === "macos") {
   const app = resolve(packageDir, "TankTrouble.app");
   const dmg = resolve(packageDir, "TankTrouble-macos-arm64.dmg");
-  await runProcess(["godot", "--headless", "--path", ".", "--export-release", "macOS", app], "导出 macOS arm64 应用", resolve(".tmp/export-macos.log"));
+  await runProcess(["godot", "--headless", "--path", ".", "--export-release", "macOS", app], "导出 macOS 应用", resolve(".tmp/export-macos.log"));
   await runProcess(["codesign", "--force", "--deep", "--sign", "-", app], "签名 macOS 应用", resolve(".tmp/export-sign.log"));
   await checkMacosApp(app);
   await rm(dmg, { force: true });

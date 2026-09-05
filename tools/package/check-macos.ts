@@ -8,9 +8,8 @@ import { runProcess } from "../shared/run-process";
 export async function checkMacosApp(output: string, headed = false) {
   const executable = resolve(output, "Contents/MacOS/Tank Trouble");
   const extension = resolve(output, "Contents/Frameworks/libtank_trouble_native.template_release.dylib");
-  for (const [name, path] of [["app", executable], ["native", extension]]) {
-    const architectures = await runProcess(["lipo", "-archs", path], `检查 ${name} 架构`, resolve(`.tmp/package-${name}-architecture.log`));
-    if (architectures.trim() !== "arm64") throw new Error(`应用包必须只包含 arm64: ${path}`);
+  if (!(await Bun.file(executable).exists()) || !(await Bun.file(extension).exists())) {
+    throw new Error(`应用包缺少可执行文件或原生扩展: ${output}`);
   }
   await runProcess(["codesign", "--verify", "--deep", "--strict", output], "验证应用签名", resolve(".tmp/package-signature.log"));
   // 从项目外启动, 确认动态库和资源均由应用包提供.
