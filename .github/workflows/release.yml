@@ -1,0 +1,455 @@
+name: 持续集成与发布
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "v*"
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "要发布的已有 tag, 留空时不创建 release"
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event_name == 'workflow_dispatch' && inputs.tag != '' && format('refs/tags/{0}', inputs.tag) || github.ref }}
+  cancel-in-progress: false
+
+env:
+  GODOT_VERSION: 4.7.1
+
+jobs:
+  version:
+    name: 解析构建与发布版本
+    runs-on: ubuntu-latest
+    outputs:
+      is_release: ${{ steps.release_context.outputs.is_release }}
+      tag_name: ${{ steps.release_context.outputs.tag_name }}
+      source_ref: ${{ steps.release_context.outputs.source_ref }}
+      version: ${{ steps.release_version.outputs.version }}
+      build_version: ${{ steps.build_version.outputs.build_version }}
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 解析发布上下文
+        id: release_context
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          CURRENT_REF: ${{ github.ref }}
+          CURRENT_REF_NAME: ${{ github.ref_name }}
+          CURRENT_SHA: ${{ github.sha }}
+          DISPATCH_TAG: ${{ inputs.tag }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          is_release=false
+          tag_name=""
+          source_ref="$CURRENT_SHA"
+
+          if [[ "$EVENT_NAME" == "push" && "$CURRENT_REF" == refs/tags/* ]]; then
+            is_release=true
+            tag_name="$CURRENT_REF_NAME"
+            source_ref="refs/tags/$tag_name"
+          elif [[ "$EVENT_NAME" == "workflow_dispatch" && -n "$DISPATCH_TAG" ]]; then
+            git check-ref-format "refs/tags/$DISPATCH_TAG"
+            is_release=true
+            tag_name="$DISPATCH_TAG"
+            source_ref="refs/tags/$tag_name"
+          fi
+
+          if [[ "$is_release" == true ]]; then
+            git check-ref-format "$source_ref"
+            git fetch --force origin "$source_ref:$source_ref"
+            git show-ref --verify --quiet "$source_ref"
+          fi
+
+          echo "is_release=$is_release" >> "$GITHUB_OUTPUT"
+          echo "tag_name=$tag_name" >> "$GITHUB_OUTPUT"
+          echo "source_ref=$source_ref" >> "$GITHUB_OUTPUT"
+
+      - name: 校验发布版本
+        id: release_version
+        if: steps.release_context.outputs.is_release == 'true'
+        env:
+          TAG_NAME: ${{ steps.release_context.outputs.tag_name }}
+          SOURCE_REF: ${{ steps.release_context.outputs.source_ref }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git checkout --detach "$SOURCE_REF"
+          version="${TAG_NAME#v}"
+          if [[ ! "$TAG_NAME" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)(-[0-9A-Za-z.-]+)?(\+[0-9A-Za-z.-]+)?$ ]]; then
+            echo "tag 必须使用 semver 格式: $TAG_NAME" >&2
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - name: 解析构建版本
+        id: build_version
+        env:
+          IS_RELEASE: ${{ steps.release_context.outputs.is_release }}
+          RELEASE_VERSION: ${{ steps.release_version.outputs.version }}
+          CURRENT_SHA: ${{ github.sha }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$IS_RELEASE" == true ]]; then
+            build_version="$RELEASE_VERSION"
+          else
+            latest_tag="$(git describe --tags --match 'v[0-9]*' --abbrev=0 2>/dev/null || true)"
+            latest_version="${latest_tag#v}"
+            if [[ -z "$latest_version" ]]; then latest_version="0.0.0"; fi
+            short_sha="$(git rev-parse --short=7 "$CURRENT_SHA")"
+            build_version="$latest_version-$short_sha"
+          fi
+          echo "build_version=$build_version" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: 构建并校验 ${{ matrix.platform }} ${{ matrix.arch }}
+    needs: version
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: macos
+            arch: arm64
+            runner: macos-14
+            archive: TankTrouble-macos-arm64.dmg
+            suffix: dmg
+          - platform: linux
+            arch: x86_64
+            runner: ubuntu-24.04
+            archive: tank-trouble-linux-x86_64.tar.gz
+            suffix: tar.gz
+          - platform: windows
+            arch: x86_64
+            runner: windows-2022
+            archive: tank-trouble-windows-x86_64.zip
+            suffix: zip
+    steps:
+      - name: 检出目标提交
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.version.outputs.source_ref }}
+          fetch-depth: 0
+
+      - name: 安装 Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.3.0
+
+      - name: 安装 Godot 和导出模板 (macOS)
+        if: matrix.platform == 'macos'
+        env:
+          GODOT_VERSION: ${{ env.GODOT_VERSION }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot_dir="$RUNNER_TEMP/godot"
+          mkdir -p "$godot_dir"
+          curl --fail --location --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_macos.universal.zip" \
+            --output "$RUNNER_TEMP/godot-editor.zip"
+          unzip -q "$RUNNER_TEMP/godot-editor.zip" -d "$godot_dir"
+          mkdir -p "$godot_dir/bin"
+          mv "$godot_dir/Godot.app" "$godot_dir/bin/Godot.app"
+          ln -s "$godot_dir/bin/Godot.app/Contents/MacOS/Godot" "$godot_dir/bin/godot"
+          echo "$godot_dir/bin" >> "$GITHUB_PATH"
+
+          curl --fail --location --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" \
+            --output "$RUNNER_TEMP/godot-templates.tpz"
+          template_dir="$HOME/Library/Application Support/Godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$template_dir"
+          unzip -q "$RUNNER_TEMP/godot-templates.tpz" -d "$RUNNER_TEMP/godot-templates"
+          cp -R "$RUNNER_TEMP/godot-templates/templates/." "$template_dir/"
+          godot --version
+
+      - name: 安装 Godot 和导出模板 (Linux)
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          godot_dir="$RUNNER_TEMP/godot"
+          mkdir -p "$godot_dir/bin"
+          curl --fail --location --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" \
+            --output "$RUNNER_TEMP/godot-editor.zip"
+          unzip -q "$RUNNER_TEMP/godot-editor.zip" -d "$godot_dir/bin"
+          mv "$godot_dir/bin/Godot_v${GODOT_VERSION}-stable_linux.x86_64" "$godot_dir/bin/godot"
+          chmod +x "$godot_dir/bin/godot"
+          echo "$godot_dir/bin" >> "$GITHUB_PATH"
+          curl --fail --location --retry 3 \
+            "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" \
+            --output "$RUNNER_TEMP/godot-templates.tpz"
+          template_dir="$HOME/.local/share/godot/export_templates/${GODOT_VERSION}.stable"
+          mkdir -p "$template_dir"
+          unzip -q "$RUNNER_TEMP/godot-templates.tpz" -d "$RUNNER_TEMP/godot-templates"
+          cp -R "$RUNNER_TEMP/godot-templates/templates/." "$template_dir/"
+          godot --version
+
+      - name: 安装 Godot 和导出模板 (Windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $godotDir = Join-Path $env:RUNNER_TEMP 'godot'
+          New-Item -ItemType Directory -Force -Path $godotDir | Out-Null
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/$env:GODOT_VERSION-stable/Godot_v$env:GODOT_VERSION-stable_win64.exe" -OutFile (Join-Path $godotDir 'godot.exe')
+          $godotDir | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
+          $templateDir = Join-Path $env:APPDATA "Godot/export_templates/$env:GODOT_VERSION.stable"
+          New-Item -ItemType Directory -Force -Path $templateDir | Out-Null
+          $templateArchive = Join-Path $env:RUNNER_TEMP 'godot-templates.zip'
+          Invoke-WebRequest -Uri "https://github.com/godotengine/godot/releases/download/$env:GODOT_VERSION-stable/Godot_v$env:GODOT_VERSION-stable_export_templates.tpz" -OutFile $templateArchive
+          $templateExtract = Join-Path $env:RUNNER_TEMP 'godot-templates'
+          Expand-Archive -LiteralPath $templateArchive -DestinationPath $templateExtract -Force
+          Copy-Item -Path (Join-Path $templateExtract 'templates/*') -Destination $templateDir -Recurse -Force
+          & (Join-Path $godotDir 'godot.exe') --version
+
+      - name: 安装 just (macOS)
+        if: matrix.platform == 'macos'
+        shell: bash
+        run: |
+          set -euo pipefail
+          if ! command -v just >/dev/null 2>&1; then brew install just; fi
+          just --version
+
+      - name: 安装 just (Linux)
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --yes just
+          just --version
+
+      - name: 安装 just (Windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          choco install just --yes --no-progress
+          just --version
+
+      - name: 恢复依赖和原生构建缓存 (Unix)
+        if: matrix.platform != 'windows'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.bun/install/cache
+            build/native/_deps
+            build/native-release/_deps
+          key: ${{ runner.os }}-${{ matrix.arch }}-${{ hashFiles('bun.lock', 'native/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.arch }}-
+
+      - name: 恢复依赖和原生构建缓存 (Windows)
+        if: matrix.platform == 'windows'
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~\AppData\Local\bun\install\cache
+            build/native/_deps
+            build/native-release/_deps
+          key: ${{ runner.os }}-${{ matrix.arch }}-${{ hashFiles('bun.lock', 'native/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.arch }}-
+
+      - name: 安装 JavaScript 依赖 (Unix)
+        if: matrix.platform != 'windows'
+        run: bun install --frozen-lockfile
+
+      - name: 安装 JavaScript 依赖 (Windows)
+        if: matrix.platform == 'windows'
+        shell: pwsh
+        run: bun install --frozen-lockfile
+
+      - name: 执行项目检查并构建发布包
+        shell: bash
+        run: |
+          set -euo pipefail
+          just test-tools
+          just check-world
+          just check-weapons
+          just check-particles
+          just check-spine
+          just check-p2
+          just check-frame
+          just check-camera
+          just check-local
+          just check-menu
+          just check-battle
+          just check-battle-weapons
+          just check-flow
+          just check-application
+          just check-resize
+          just check-shield
+          just check-settings
+          just dist
+          just check-package
+
+      - name: 准备发布产物
+        env:
+          BUILD_VERSION: ${{ needs.version.outputs.build_version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p release-artifacts
+          source_file="build/package/${{ matrix.archive }}"
+          test -s "$source_file"
+          cp "$source_file" "release-artifacts/tank-trouble-${BUILD_VERSION}-${{ matrix.platform }}-${{ matrix.arch }}.${{ matrix.suffix }}"
+
+      - name: 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: tank-trouble-${{ needs.version.outputs.build_version }}-${{ matrix.platform }}-${{ matrix.arch }}
+          path: release-artifacts/*
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: 创建 GitHub Release
+    if: needs.version.outputs.is_release == 'true'
+    needs: [version, build]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: 检出目标 tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.version.outputs.source_ref }}
+          fetch-depth: 0
+
+      - name: 重新获取 annotated tag
+        env:
+          TAG_NAME: ${{ needs.version.outputs.tag_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          git check-ref-format "refs/tags/$TAG_NAME"
+          git fetch --force origin "refs/tags/$TAG_NAME:refs/tags/$TAG_NAME"
+
+      - name: 校验 tag annotation 和发布说明
+        env:
+          TAG_NAME: ${{ needs.version.outputs.tag_name }}
+          VERSION: ${{ needs.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          tag_ref="refs/tags/$TAG_NAME"
+          manual_notes="docs/changelog/$VERSION.md"
+          if [[ ! -s "$manual_notes" ]]; then
+            echo "缺少 release notes: $manual_notes" >&2
+            exit 1
+          fi
+          if [[ "$(git cat-file -t "$tag_ref")" != tag ]]; then
+            echo "发布 tag 必须是 annotated tag: $TAG_NAME" >&2
+            exit 1
+          fi
+          git cat-file tag "$tag_ref" | sed '1,/^$/d' > tag-notes.md
+          if ! grep -q '[^[:space:]]' tag-notes.md; then
+            echo "发布 tag 的 annotation 不能为空: $TAG_NAME" >&2
+            exit 1
+          fi
+          if ! cmp -s "$manual_notes" tag-notes.md; then
+            echo "发布 tag 的 annotation 与 $manual_notes 不一致" >&2
+            diff -u "$manual_notes" tag-notes.md || true
+            exit 1
+          fi
+
+      - name: 生成发布说明
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ needs.version.outputs.tag_name }}
+          VERSION: ${{ needs.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          manual_notes="docs/changelog/$VERSION.md"
+          base_tag_file="docs/changelog/$VERSION-base.txt"
+          target_sha="$(git rev-parse HEAD)"
+          api_args=(--method POST "repos/$GITHUB_REPOSITORY/releases/generate-notes" -f "tag_name=$TAG_NAME" -f "target_commitish=$target_sha")
+          if [[ -s "$base_tag_file" ]]; then
+            base_tag="$(<"$base_tag_file")"
+            git check-ref-format "refs/tags/$base_tag"
+            api_args+=(-f "previous_tag_name=$base_tag")
+          fi
+          gh api "${api_args[@]}" --jq '.body // empty' > generated-notes.md
+          cp "$manual_notes" release-notes.md
+          if [[ -s generated-notes.md ]]; then
+            printf '\n---\n\n' >> release-notes.md
+            cat generated-notes.md >> release-notes.md
+          fi
+
+      - name: 下载构建产物
+        uses: actions/download-artifact@v4
+        with:
+          pattern: tank-trouble-${{ needs.version.outputs.version }}-*
+          merge-multiple: true
+          path: release-artifacts
+
+      - name: 生成校验和
+        env:
+          VERSION: ${{ needs.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          archives=(
+            "release-artifacts/tank-trouble-${VERSION}-macos-arm64.dmg"
+            "release-artifacts/tank-trouble-${VERSION}-linux-x86_64.tar.gz"
+            "release-artifacts/tank-trouble-${VERSION}-windows-x86_64.zip"
+          )
+          for archive in "${archives[@]}"; do test -s "$archive"; done
+          if (( ${#archives[@]} != 3 )); then
+            echo "预期 3 个平台归档, 实际找到 ${#archives[@]} 个" >&2
+            exit 1
+          fi
+          (cd release-artifacts && sha256sum "${archives[@]##*/}" > SHA256SUMS)
+
+      - name: 创建或更新 GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG_NAME: ${{ needs.version.outputs.tag_name }}
+          VERSION: ${{ needs.version.outputs.version }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          assets=(
+            "release-artifacts/tank-trouble-${VERSION}-macos-arm64.dmg"
+            "release-artifacts/tank-trouble-${VERSION}-linux-x86_64.tar.gz"
+            "release-artifacts/tank-trouble-${VERSION}-windows-x86_64.zip"
+            release-artifacts/SHA256SUMS
+          )
+          if (( ${#assets[@]} != 4 )); then
+            echo "预期 4 个发布文件, 实际找到 ${#assets[@]} 个" >&2
+            exit 1
+          fi
+          prerelease_args=()
+          if [[ "$VERSION" == *-* ]]; then prerelease_args+=(--prerelease); fi
+          if gh release view "$TAG_NAME" >/dev/null 2>&1; then
+            gh release edit "$TAG_NAME" \
+              --verify-tag \
+              --title "Tank Trouble v$VERSION" \
+              --notes-file release-notes.md \
+              "${prerelease_args[@]}"
+            gh release upload "$TAG_NAME" "${assets[@]}" --clobber
+          else
+            gh release create "$TAG_NAME" "${assets[@]}" \
+              --verify-tag \
+              --title "Tank Trouble v$VERSION" \
+              --notes-file release-notes.md \
+              "${prerelease_args[@]}"
+          fi

@@ -25,13 +25,32 @@ file(GLOB SPINE_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/../build/
 file(GLOB P2_SOURCES CONFIGURE_DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/../build/original-p2/*.cpp")
 add_library(original_box2d STATIC ${BOX2D_SOURCES} ${SPINE_SOURCES} ${P2_SOURCES} source/value.cpp source/spine_builtins.cpp)
 target_include_directories(original_box2d PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/source")
-target_compile_options(original_box2d PRIVATE -ffp-contract=off -O1)
+if(MSVC)
+  target_compile_options(original_box2d PRIVATE /fp:precise /O1)
+else()
+  target_compile_options(original_box2d PRIVATE -ffp-contract=off -O1)
+endif()
 
 add_library(tank_trouble_native SHARED physics/legacy_world.cpp physics/original_p2.cpp animation/original_spine.cpp source/javascript_values.cpp register_types.cpp)
 target_link_libraries(tank_trouble_native PRIVATE godot::cpp original_box2d)
-target_compile_options(tank_trouble_native PRIVATE -ffp-contract=off)
+if(MSVC)
+  target_compile_options(tank_trouble_native PRIVATE /fp:precise)
+else()
+  target_compile_options(tank_trouble_native PRIVATE -ffp-contract=off)
+endif()
+set(native_output_dir "${CMAKE_CURRENT_SOURCE_DIR}/../game/native/bin")
 set_target_properties(tank_trouble_native PROPERTIES
-  LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/../game/native/bin"
+  LIBRARY_OUTPUT_DIRECTORY "${native_output_dir}"
+  RUNTIME_OUTPUT_DIRECTORY "${native_output_dir}"
+  ARCHIVE_OUTPUT_DIRECTORY "${native_output_dir}"
   OUTPUT_NAME "tank_trouble_native.${GODOTCPP_TARGET}"
   PREFIX "lib"
+  RUNTIME_OUTPUT_NAME "libtank_trouble_native.${GODOTCPP_TARGET}"
 )
+foreach(config DEBUG RELEASE RELWITHDEBINFO MINSIZEREL)
+  set_target_properties(tank_trouble_native PROPERTIES
+    LIBRARY_OUTPUT_DIRECTORY_${config} "${native_output_dir}"
+    RUNTIME_OUTPUT_DIRECTORY_${config} "${native_output_dir}"
+    ARCHIVE_OUTPUT_DIRECTORY_${config} "${native_output_dir}"
+  )
+endforeach()

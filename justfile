@@ -32,25 +32,25 @@ native-sources:
 # 编译编辑器和调试运行使用的原生扩展.
 native: native-sources
     cmake -S native -B build/native -DCMAKE_BUILD_TYPE=Release -DGODOTCPP_TARGET=template_debug
-    cmake --build build/native --parallel {{build_jobs}}
+    cmake --build build/native --config Release --parallel {{build_jobs}}
 
 # 编译发布包使用的原生扩展.
 native-release: native-sources
     cmake -S native -B build/native-release -DCMAKE_BUILD_TYPE=Release -DGODOTCPP_TARGET=template_release
-    cmake --build build/native-release --parallel {{build_jobs}}
+    cmake --build build/native-release --config Release --parallel {{build_jobs}}
 
 # 运行 Godot 原生主场景.
 run:
     godot --path .
 
-# 导出 macOS Apple Silicon 应用包.
-export-macos: native native-release
-    bun tools/package/export-macos.ts
+# just dist
+# 根据当前平台生成发布归档.
+dist: native native-release
+    bun tools/package/export.ts
 
-# just check-package --headed
-# 校验发布包的架构, 签名和独立启动.
-check-package *args:
-    bun tools/package/check-macos.ts {{args}}
+# 校验当前平台发布包的架构, 签名和独立启动.
+check-package:
+    bun tools/package/check.ts
 
 # 校验资源提取和原版对照环境.
 test-tools:

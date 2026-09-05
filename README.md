@@ -6,7 +6,7 @@
 
 ## 开发
 
-需要 Godot 4.7.1, Bun, CMake, Xcode Command Line Tools, FFmpeg 和 just. macOS 导出模板仅在导出应用时需要.
+需要 Godot 4.7.1, Bun, CMake, FFmpeg 和 just. 各平台导出模板仅在生成发布包时需要.
 
 ```shell
 bun install
@@ -38,10 +38,19 @@ just check-resize --headed
 just check-battle-weapons
 just check-flow
 just check-settings
-just export-macos
-just check-package --headed
+just dist
+just check-package
 ```
 
-导出目标为 `build/package/TankTrouble.app`, 面向 macOS Apple Silicon. `just export-macos` 自动构建 Debug 和 Release 原生扩展, 将 Release 扩展随应用打包, 从 Godot 通用模板提取 arm64 后进行本地签名. 导出后自动校验架构, 签名和独立启动, 不包含 Apple 公证. `just check-package --headed` 使用实际窗口再次验证启动, 并在 180 帧后退出. 原生构建说明见 [构建依赖](native/dependencies.md), 导出及验证日志在 `.tmp/`.
+导出目标包括 macOS Apple Silicon, Linux x86_64 和 Windows x86_64. `just dist` 根据当前平台生成对应归档, macOS 产物为 DMG, Linux 产物为 tar.gz, Windows 产物为 zip. `just check-package` 校验当前平台的架构和独立启动. 原生构建说明见 [构建依赖](native/dependencies.md), 导出及验证日志在 `.tmp/`.
+
+发布工作流位于 `.github/workflows/release.yml`. 发布前先提交 `docs/changelog/VERSION.md`, 再使用同一文件创建 annotated tag:
+
+```shell
+git tag -a "v1.2.3" --cleanup=verbatim -F "docs/changelog/1.2.3.md"
+git push origin "v1.2.3"
+```
+
+工作流也支持手动填写已有 tag. 留空时只运行检查并上传 Actions 构建产物.
 
 来源和第三方组件见 [第三方来源](docs/third-party.md).

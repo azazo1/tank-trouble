@@ -8,3 +8,7 @@ reloadable = false
 
 macos.debug.arm64 = "res://game/native/bin/libtank_trouble_native.template_debug.dylib"
 macos.release.arm64 = "res://game/native/bin/libtank_trouble_native.template_release.dylib"
+linux.debug.x86_64 = "res://game/native/bin/libtank_trouble_native.template_debug.so"
+linux.release.x86_64 = "res://game/native/bin/libtank_trouble_native.template_release.so"
+windows.debug.x86_64 = "res://game/native/bin/libtank_trouble_native.template_debug.dll"
+windows.release.x86_64 = "res://game/native/bin/libtank_trouble_native.template_release.dll"

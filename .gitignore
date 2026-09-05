@@ -3,6 +3,7 @@
 .references/
 *.har
 build/
+release-artifacts/
 dist/
 node_modules/
 .DS_Store
